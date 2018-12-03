@@ -1,23 +1,47 @@
 import React, { Component } from 'react';
+
+import Login from './components/Login';
+import logo from './logo.svg';
+import Profile from './components/Profile';
 import './App.css';
 
-class App extends Component {
+const LS_KEY = 'frontrow_auth';
 
-   constructor(props){
-    super(props);
-    this.state = {
-      
-    };
-  }  
+class App extends Component {
+  componentWillMount() {
+    const auth = JSON.parse(localStorage.getItem(LS_KEY));
+    this.setState({
+      auth
+    });
+  }
+
+  handleLoggedIn = auth => {
+    localStorage.setItem(LS_KEY, JSON.stringify(auth));
+    this.setState({ auth });
+  };
+
+  handleLoggedOut = () => {
+    localStorage.removeItem(LS_KEY);
+    this.setState({ auth: undefined });
+  };
 
   render() {
-    console.log(this.state);
-  
-  return (
-      <div>
-        HOME
-      </div> 
-   );
+    const { auth } = this.state;
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to Login with MetaMask Demo</h1>
+        </header>
+        <div className="App-intro">
+          {auth ? (
+            <Profile auth={auth} onLoggedOut={this.handleLoggedOut} />
+          ) : (
+            <Login onLoggedIn={this.handleLoggedIn} />
+          )}
+        </div>
+      </div>
+    );
   }
 }
 
