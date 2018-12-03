@@ -11,14 +11,15 @@ class App extends Component {
   componentWillMount() {
     const auth = JSON.parse(localStorage.getItem(LS_KEY));
     this.setState({
-      auth
+      auth: undefined
     });
   }
 
-  handleLoggedIn = auth => {
-    localStorage.setItem(LS_KEY, JSON.stringify(auth));
-    this.setState({ auth });
-  };
+  // handleLoggedIn = auth => {
+  //   alert("auth: " + auth)
+  //   //localStorage.setItem(LS_KEY, JSON.stringify(auth));
+  //   this.setState({ auth: auth  });
+  // };
 
   handleLoggedOut = () => {
     localStorage.removeItem(LS_KEY);
@@ -37,7 +38,7 @@ class App extends Component {
           {auth ? (
             <Profile auth={auth} onLoggedOut={this.handleLoggedOut} />
           ) : (
-            <Login onLoggedIn={this.handleLoggedIn} />
+            <Login />
           )}
         </div>
       </div>

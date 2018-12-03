@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Web3 from 'web3';
 
 var web3 = null;  
+var add = "";
 class Login extends Component {
 
    constructor(props){
@@ -11,15 +12,22 @@ class Login extends Component {
     };
 
     this.Login = this.Login.bind(this);
+    this.Init = this.Init.bind(this);
+  }
 
+  componentDidMount() {
+    this.Init();
+  }
+
+  Init = async () => {
+    window.web3 = new Web3(window.ethereum);
+    add = await window.ethereum.enable();
   }
   
     Login = async () => {
 
     const { onLoggedIn } = this.props;
-
-    window.web3 = new Web3(window.ethereum);
-    var add = await window.ethereum.enable();
+   
     
     if (!window.web3) {
       window.alert('Please install MetaMask first.');
@@ -36,21 +44,28 @@ class Login extends Component {
     fetch(`http://localhost:7000/users?publicAddress=${publicAddress}`)
       .then(response => response.json())
       .then(
-        data => (data.users.length!=0 ? alert("User present") :  this.handleSignup(publicAddress)
+        data => (
+        data.users.length!=0 ?   console.log(data.users.nonce)
+         :  this.handleSignup(publicAddress)
         .then(function(data){
             return data.nonce
         }) )
       )
        .then(nonce =>this.handleSignMessage(publicAddress,nonce))
-       .then(data => alert("Final: " + data))
-    //   .then(this.handleAuthenticate)
-    //   .then(onLoggedIn)
+       .then(sig => this.handleAuthenticate(publicAddress,sig))
+       .then(token => this.handleLoggedIn(token))
       .catch(err => {
         window.alert(err);
         this.setState({ loading: false });
       });
 
   }
+
+  handleLoggedIn = auth => {
+    alert("auth: " + auth)
+    //localStorage.setItem(LS_KEY, JSON.stringify(auth));
+    this.setState({ auth: auth  });
+  };
 
   handleSignup = publicAddress =>
     fetch(`http://localhost:7000/users`, {
@@ -62,7 +77,6 @@ class Login extends Component {
     }).then(response => response.json());
 
   handleSignMessage = ( publicAddress, nonce ) => {
-      alert("Data: " + nonce + " " + publicAddress)
     return new Promise((resolve, reject) =>
         web3.eth.personal.sign(
             web3.utils.fromUtf8(`I am signing my one-time nonce: ` + nonce),
@@ -71,20 +85,22 @@ class Login extends Component {
             if (err) {
                 return reject(err);
                 }
-            return resolve( publicAddress, signature );
+            return resolve( signature );
             }
       )
     );
   };
 
-  handleAuthenticate = ({ publicAddress, signature }) =>
+  handleAuthenticate = (publicAddress, signature ) => {
     fetch(`http://localhost:7000/auth`, {
-      body: JSON.stringify({ publicAddress, signature }),
+      body: JSON.stringify({ publicAddress: publicAddress, signature: signature }),
       headers: {
         'Content-Type': 'application/json'
       },
       method: 'POST'
-    }).then(response => response.json());
+    }).then(response => response.json()).then(data => {return data.token} );
+  }
+    
 
   render() {
     console.log(this.state);
