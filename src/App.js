@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 
 import Login from './components/Login';
 import logo from './logo.svg';
 import Profile from './components/Profile';
+
 import './App.css';
 
-const LS_KEY = 'frontrow_auth';
+const LS_KEY = 'frontrow';
 
 class App extends Component {
-  componentWillMount() {
-    const auth = JSON.parse(localStorage.getItem(LS_KEY));
-    this.setState({
-      auth: undefined
-    });
-  }
 
-  // handleLoggedIn = auth => {
-  //   alert("auth: " + auth)
-  //   //localStorage.setItem(LS_KEY, JSON.stringify(auth));
-  //   this.setState({ auth: auth  });
-  // };
+  constructor(props){
+    super(props);
+    this.state = {
+      loading: false,
+      auth: localStorage.getItem(LS_KEY)
+    };
+  }
 
   handleLoggedOut = () => {
     localStorage.removeItem(LS_KEY);
@@ -27,20 +25,15 @@ class App extends Component {
   };
 
   render() {
-    const { auth } = this.state;
+    if(!this.state.auth) { 
+      return <Redirect to={{pathname: "/login"}} />;
+    } else {
+      alert(this.state.auth)
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Login with MetaMask Demo</h1>
-        </header>
-        <div className="App-intro">
-          {auth ? (
-            <Profile auth={auth} onLoggedOut={this.handleLoggedOut} />
-          ) : (
-            <Login />
-          )}
-        </div>
+      ssdcsdcsd
+            <Profile auth={this.state.auth} onLoggedOut={this.handleLoggedOut} />
       </div>
     );
   }

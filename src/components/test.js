@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
-import { Redirect } from 'react-router';
 
 var web3 = null;  
 var add = "";
-var LS_KEY = "frontrow"
 class Login extends Component {
 
    constructor(props){
     super(props);
     this.state = {
       loading: false,
-      auth: localStorage.getItem(LS_KEY) || undefined
     };
 
     this.Login = this.Login.bind(this);
@@ -40,35 +37,40 @@ class Login extends Component {
       web3 = new Web3(window.web3.currentProvider);
     }
 
-    this.setState({ loading: true });
-    
-    try {
-      var nonce = ""
-      alert(add[0])
-      var response = await fetch(`http://localhost:7000/users?publicAddress=${add[0]}`)
-      var data = await response.json()
-      if(data.users.length!==0) {
-        nonce = await data.users[0].nonce;
-      } else {
-        nonce = await this.handleSignup(add[0])
-        nonce = await nonce.nonce
-      }
-      
-      var sig = await this.handleSignMessage(add[0],nonce);
-      var token = await this.handleAuthenticate(add[0],sig)
-      var auth = await token.token
-      var login = await this.handleLoggedIn(auth)
-      await this.setState({loading: false})
+    var publicAddress = add[0];
 
-    } catch(e) {
-        window.alert(e);
-        this.setState({ loading: false });
+    this.setState({ loading: true });
+
+    try {
+
+      var response = await fetch(`http://localhost:7000/users?publicAddress=${publicAddress}`);
+      response = response.json();
+      
+      if(response.users.length!=0) 
+        data =   data.users
+      else data = await this.handleSignup(publicAddress)
+        
+      nonce = data.nonce;
+      
+      sig =  await this.handleSignMessage(publicAddress,nonce)
+      
+      token = await  this.handleAuthenticate(publicAddress,sig)
+      
+      this.handleLoggedIn(token)
+
     }
-    
+    catch {
+      window.alert(err);
+        this.setState({ loading: false });
+      
+    }    
+      
+
   }
 
   handleLoggedIn = auth => {
-    localStorage.setItem(LS_KEY, JSON.stringify(auth));
+    alert("auth: " + auth)
+    //localStorage.setItem(LS_KEY, JSON.stringify(auth));
     this.setState({ auth: auth  });
   };
 
@@ -97,24 +99,19 @@ class Login extends Component {
   };
 
   handleAuthenticate = (publicAddress, signature ) => {
-
-    return fetch(`http://localhost:7000/auth`, {
+    fetch(`http://localhost:7000/auth`, {
       body: JSON.stringify({ publicAddress: publicAddress, signature: signature }),
       headers: {
         'Content-Type': 'application/json'
       },
       method: 'POST'
-    }).then(response => { return response.json(); });
-
+    }).then(response => response.json()).then(data => {return data.token} );
   }
     
 
   render() {
-   
-    if (this.state.auth) {
-      return <Redirect to={{pathname: "/profile", state:{id: this.state.auth}} } />;
-    }
-    
+    console.log(this.state);
+  
   return (
       <div>
         

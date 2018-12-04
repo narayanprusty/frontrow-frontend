@@ -1,43 +1,60 @@
 import React, { Component } from 'react';
 import Blockies from 'react-blockies';
 import jwtDecode from 'jwt-decode';
+import { Redirect } from 'react-router';
+
+const LS_KEY = 'frontrow';
 
 class Profile extends Component {
-  state = {
-    loading: false,
-    user: null,
+  constructor(props){
+    super(props);
+    this.state = {
+      loading: false,
+      auth: localStorage.getItem(LS_KEY),
+      user: ""
     };
+  }
 
   componentWillMount() {
-    const { auth: { accessToken } } = this.props;
-    const { payload: { id } } = jwtDecode(accessToken);
-    fetch(`http://localhost/users/${id}`, {
+    var accesstoken = this.state.auth
+    accesstoken = accesstoken.replace(/\"/g,"");
+    const { payload: { id } } = jwtDecode(accesstoken);
+    fetch(`http://localhost:7000/users/${id}`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accesstoken}`
       }
     })
       .then(response => response.json())
-      .then(user => this.setState({ user }))
+      .then(user =>  this.setState({ user: JSON.stringify(user.data) }) )
       .catch(window.alert);
   }
 
+  handleLoggedOut = () => {
+    localStorage.removeItem(LS_KEY);
+    this.setState({ auth: null });
+  };
+
   render() {
-    const { auth: { accessToken }, onLoggedOut } = this.props;
-    const { payload: { publicAddress } } = jwtDecode(accessToken);
+    const { payload: { publicAddress } } = jwtDecode(this.state.auth);
+    
+    if(!this.state.auth || this.state.auth==null) { 
+      return <Redirect to={{pathname: "/login"}} />;
+    }
     
     return (
       <div>
         <p>
           Logged in as <Blockies seed={publicAddress} />
         </p>
-        
+        {this.state.user}
+
         <div>
           My publicAddress is <pre>{publicAddress}</pre>
         </div>
-        
-        <p>
-          <button onClick={onLoggedOut}>Logout</button>
-        </p>
+
+        {/* <p>
+          <button onClick={this.handleLoggedOut}>Logout</button>
+        </p> */}
       
       </div>
     );
