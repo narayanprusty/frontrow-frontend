@@ -41,7 +41,7 @@ class Login extends Component {
 
     this.setState({ loading: true });
 
-    fetch(`http://localhost:7000/users?publicAddress=${publicAddress}`)
+    zfetch(`http://localhost:7000/users?publicAddress=${publicAddress}`)
       .then(response => response.json())
       .then(
         data => (
