@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Blockies from 'react-blockies';
 import jwtDecode from 'jwt-decode';
 import { Redirect } from 'react-router';
+import "tabler-react/dist/Tabler.css";
+import { Button,Container,Form } from "tabler-react";
 
 const LS_KEY = 'frontrow';
 
@@ -10,53 +12,35 @@ class Profile extends Component {
     super(props);
     this.state = {
       loading: false,
-      auth: localStorage.getItem(LS_KEY),
-      user: ""
+      username: "",
+      age: "",
+      location: "",
+      interests: []
     };
+    this.edit = this.edit.bind(this);
   }
 
-  componentWillMount() {
-    var accesstoken = this.state.auth
-    accesstoken = accesstoken.replace(/\"/g,"");
-    const { payload: { id } } = jwtDecode(accesstoken);
-    fetch(`http://localhost:7000/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${accesstoken}`
-      }
-    })
-      .then(response => response.json())
-      .then(user =>  this.setState({ user: JSON.stringify(user.data) }) )
-      .catch(window.alert);
+  edit() {
+    alert(this.state.username)      
   }
-
-  handleLoggedOut = () => {
-    localStorage.removeItem(LS_KEY);
-    this.setState({ auth: null });
-  };
 
   render() {
-    const { payload: { publicAddress } } = jwtDecode(this.state.auth);
-    
-    if(!this.state.auth || this.state.auth==null) { 
-      return <Redirect to={{pathname: "/login"}} />;
-    }
-    
     return (
-      <div>
-        <p>
-          Logged in as <Blockies seed={publicAddress} />
-        </p>
-        {this.state.user}
-
-        <div>
-          My publicAddress is <pre>{publicAddress}</pre>
-        </div>
-
-        {/* <p>
-          <button onClick={this.handleLoggedOut}>Logout</button>
-        </p> */}
-      
-      </div>
+      <Container>
+        <Form>
+            <Form.Input id='username' name='username' value={this.props.user.username} 
+                onChange={(evt) => { this.setState({username: evt.target.value});}}
+                label='Username' placeholder='Enter Username' />
+            <Form.Input id='age' name='age' label='Age' value={this.props.user.age} 
+                placeholder='Enter Age' />
+            <Form.Input id='location' name='location' label='Location' value={this.props.user.location} 
+                placeholder='Enter Location' />
+            <Form.Input id='interests' name='interests' label='Interests' value={this.props.user.interests} 
+                placeholder='Enter your Interests' />
+            <Button onClick={this.edit}
+                color='primary'>Submit</Button>
+        </Form>
+      </Container>
     );
   }
 }

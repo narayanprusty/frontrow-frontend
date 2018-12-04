@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 
 import Login from './components/Login';
 import logo from './logo.svg';
-import Profile from './components/Profile';
+import Main from './components/Main';
 
 import './App.css';
 
@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <div className="App">
       ssdcsdcsd
-            <Profile auth={this.state.auth} onLoggedOut={this.handleLoggedOut} />
+            <Main auth={this.state.auth} onLoggedOut={this.handleLoggedOut} />
       </div>
     );
   }

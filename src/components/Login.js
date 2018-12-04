@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
 import { Redirect } from 'react-router';
+import "tabler-react/dist/Tabler.css";
+import { Button,Container } from "tabler-react";
 
 var web3 = null;  
 var add = "";
@@ -11,7 +13,8 @@ class Login extends Component {
     super(props);
     this.state = {
       loading: false,
-      auth: localStorage.getItem(LS_KEY) || undefined
+      auth: localStorage.getItem(LS_KEY) || undefined,
+      address: undefined
     };
 
     this.Login = this.Login.bind(this);
@@ -25,12 +28,10 @@ class Login extends Component {
   Init = async () => {
     window.web3 = new Web3(window.ethereum);
     add = await window.ethereum.enable();
+    await this.setState({address: add[0]})
   }
   
-    Login = async () => {
-
-    const { onLoggedIn } = this.props;
-   
+    Login = async () => {   
     
     if (!window.web3) {
       window.alert('Please install MetaMask first.');
@@ -44,7 +45,6 @@ class Login extends Component {
     
     try {
       var nonce = ""
-      alert(add[0])
       var response = await fetch(`http://localhost:7000/users?publicAddress=${add[0]}`)
       var data = await response.json()
       if(data.users.length!==0) {
@@ -112,17 +112,23 @@ class Login extends Component {
   render() {
    
     if (this.state.auth) {
-      return <Redirect to={{pathname: "/profile", state:{id: this.state.auth}} } />;
+      return <Redirect to={{pathname: "/home", state:{id: this.state.auth}} } />;
     }
     
   return (
-      <div>
-        
-        <button onClick={this.Login}>
+      <Container>
+
+        {
+          this.state.address ?
+          <Button onClick={this.Login} color="primary" >
           {this.state.loading ? 'Loading...' : 'Login with MetaMask'}
-        </button>
-        
-      </div> 
+        </Button>
+           : <Button disabled color="primary" >
+          Login with MetaMask
+        </Button>
+        }
+      
+      </Container> 
    );
   }
 }
