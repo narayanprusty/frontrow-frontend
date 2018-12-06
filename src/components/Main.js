@@ -28,7 +28,8 @@ class Main extends Component {
       age: "",
       location: "",
       send: "",
-      interests: []
+      interests: [],
+      ok: false
     };
     this.edit = this.edit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -107,6 +108,7 @@ class Main extends Component {
             this.setState({age: user.age})
             this.setState({location: user.location})
             this.setState({interests: user.interests})
+            this.setState({ok: true})
           })
       })
       .catch(window.alert);
@@ -166,6 +168,8 @@ class Main extends Component {
             <TagsInput value={this.state.interests} onChange={this.handleChange} />
             <br></br>
             {
+              this.state.ok == false ? <Button disabled
+                color='primary'>Edit Profile</Button> :
               this.state.loading ? <Button disabled
                 color='primary'>Updating..</Button>
             :
