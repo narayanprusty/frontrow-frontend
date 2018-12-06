@@ -10,7 +10,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 ReactDOM.render(
 	<HashRouter>
         <Switch>
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/home" component={Main} />
         </Switch>
     </HashRouter>,

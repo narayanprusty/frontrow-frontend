@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Web3 from 'web3';
 import { Redirect } from 'react-router';
 import "tabler-react/dist/Tabler.css";
-import { Button,Container } from "tabler-react";
+import { Button,Container,Card } from "tabler-react";
 
 var web3 = null;  
 var add = "";
@@ -116,18 +116,24 @@ class Login extends Component {
     }
     
   return (
-      <Container>
-
+      <Container className="text-center col col-login mx-auto row mb-6">
+      <Card>
+        <Card.Header >
+          <Card.Title className="text-center">FrontRow</Card.Title>
+         </Card.Header>
+        <Card.Body className="p-6">
         {
-          this.state.address ?
-          <Button onClick={this.Login} color="primary" >
-          {this.state.loading ? 'Loading...' : 'Login with MetaMask'}
-        </Button>
-           : <Button disabled color="primary" >
-          Login with MetaMask
-        </Button>
+            this.state.address ?
+            <Button onClick={this.Login} color="primary" >
+            {this.state.loading ? 'Loading...' : 'Login with MetaMask'}
+          </Button>
+            : <Button disabled color="primary" >
+            Login with MetaMask
+          </Button>
         }
-      
+        </Card.Body>
+      </Card>
+
       </Container> 
    );
   }

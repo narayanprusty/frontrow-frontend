@@ -54,38 +54,33 @@ class Main extends Component {
   };
 
   render() {
-    const { payload: { publicAddress } } = jwtDecode(this.state.auth);
+    
+    var publicAddress = "";
     
     if(!this.state.auth || this.state.auth==null) { 
-      return <Redirect to={{pathname: "/login"}} />;
+      return <Redirect to={{pathname: "/"}} />;
+    } else {
+     publicAddress = jwtDecode(this.state.auth).payload.publicAddress
     }
     
     return (
       <Container>
 
-        <Nav>
-          <Nav.Item active value="FrontRow" icon="globe"></Nav.Item>
-          <Nav.Item value="My Profile" icon="user" />
+        <Nav className="header">
+          <Nav.Item value="FrontRow" icon="globe"></Nav.Item>
+          <Nav.Item active value="My Profile" icon="user"></Nav.Item>
+          <Nav.Item className="d-flex order-lg-2 ml-auto"><Button color="primary"  
+          onClick={this.handleLoggedOut}>Logout</Button></Nav.Item>
         </Nav>
-
-        <p>
-          Logged in as <Blockies seed={publicAddress} />
-        </p>
-        
-        <div>
-          My publicAddress is <pre>{publicAddress}</pre>
-        </div>
 
         <Profile {...this.state}/>
 
-
-        {/* <p>
-          <button onClick={this.handleLoggedOut}>Logout</button>
-        </p> */}
+          <br></br>        
       
       </Container>
     );
   }
 }
+
 
 export default Main;
