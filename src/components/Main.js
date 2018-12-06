@@ -3,7 +3,7 @@ import Blockies from 'react-blockies';
 import jwtDecode from 'jwt-decode';
 import { Redirect } from 'react-router';
 import "tabler-react/dist/Tabler.css";
-import { Button,Container,Nav } from "tabler-react";
+import { Button,Container,Nav,Site } from "tabler-react";
 import Profile from "./Profile";
 
 const LS_KEY = 'frontrow';
@@ -39,11 +39,25 @@ class Main extends Component {
         let user = Object.assign({},this.state.user);
         user.publicAddress = json.data.publicAddress;
         user.nonce = json.data.nonce;
-        user.username = json.data.username||undefined;
-        user.age = json.data.age||null;
-        user.location = json.data.location||null;
-        user.interests = json.data.interests||null;
-        this.setState({user})
+        
+        fetch('http://localhost:7000/user/get/'+json.data.publicAddress,{
+          method : 'POST',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              //'authorization': localStorage.getItem('jwt')
+            },
+          }).then( response => {
+            return response.json();
+          })
+          .then( json =>
+          {
+            user.username = json.data[0].username||undefined;
+            user.age = json.data[0].age||null;
+            user.location = json.data[0].location||null;
+            user.interests = json.data[0].interests||null;
+            this.setState({user})
+          })
       })
       .catch(window.alert);
   }
@@ -65,13 +79,19 @@ class Main extends Component {
     
     return (
       <Container>
-
-        <Nav className="header">
+      <Site.Header className="d-flex container header py-4">
+          <a className="header-brand">Frontrow</a>
+          <div className="d-flex order-lg-2 ml-auto">
+          <Button className="d-none nav-item d-md-flex" color='primary'>Edit Profile</Button>
+          &nbsp;
+          <Button className="d-none d-md-flex" color="primary"  
+          onClick={this.handleLoggedOut}>Logout</Button>
+          </div>
+      </Site.Header>
+      <Nav className="d-flex container header py-12">
           <Nav.Item value="FrontRow" icon="globe"></Nav.Item>
           <Nav.Item active value="My Profile" icon="user"></Nav.Item>
-          <Nav.Item className="d-flex order-lg-2 ml-auto"><Button color="primary"  
-          onClick={this.handleLoggedOut}>Logout</Button></Nav.Item>
-        </Nav>
+      </Nav>
 
         <Profile {...this.state}/>
 
