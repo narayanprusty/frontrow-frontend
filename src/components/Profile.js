@@ -28,6 +28,10 @@ class Profile extends Component {
     this.setState({send: ''})
   }
 
+  componentDidMount() {
+    this.setState({age: this.props.user.age})
+  }
+
   edit() {
     this.setState({loading: true})
     fetch('http://localhost:7000/user/update',{
@@ -66,7 +70,8 @@ class Profile extends Component {
                                   </SweetAlert>
          : <p></p> 
     }
-
+{JSON.stringify(this.state)}
+{JSON.stringify(this.props.user.age)}
       <br></br>
       <Card className="col col-login mx-auto row mb-6">
       <Card.Body>
@@ -74,7 +79,7 @@ class Profile extends Component {
             <Form.Input id='username' name='username' value={this.props.user.username} 
                 onChange={(evt) => { this.setState({username: evt.target.value});}}
                 label='Username' placeholder='Enter Username' />
-            <Form.Input id='age' name='age' label='Age' value={this.props.user.age} 
+            <Form.Input id='age' name='age' label='Age' value={this.state.age} 
                 onChange={(evt) => { this.setState({age: evt.target.value});}}
                 placeholder='Enter Age' />
             <Form.Input id='location' name='location' label='Location' value={this.props.user.location} 
