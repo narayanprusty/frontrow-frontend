@@ -104,11 +104,17 @@ class Main extends Component {
           .then( json =>
           {
             {
-              json.data[0].username==undefined ? user.username==undefined :user.username = json.data[0].username;
+              json.data[0].username==undefined ? user.username = null :user.username = json.data[0].username;
             }
-            user.age = json.data[0].age||null;
-            user.location = json.data[0].location||null;
-            user.interests = json.data[0].interests||null;
+            {
+              json.data[0].age==undefined ? user.age =null :user.age = json.data[0].age;
+            }
+            {
+              json.data[0].location==undefined ? user.location =null :user.location = json.data[0].location;
+            }
+            {
+              json.data[0].interests==undefined ? user.interests =null :user.interests = json.data[0].interests;
+            }
             this.setState({user})
             this.setState({username: user.username})
             this.setState({age: user.age})
