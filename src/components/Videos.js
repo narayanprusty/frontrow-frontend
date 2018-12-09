@@ -3,14 +3,14 @@ import Blockies from 'react-blockies';
 import jwtDecode from 'jwt-decode';
 import { Redirect } from 'react-router';
 import "tabler-react/dist/Tabler.css";
-import { Button,Container,Nav,Site,Form,Card } from "tabler-react";
+import { Button,Container,Nav,Site,GalleryCard,Card } from "tabler-react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import TagsInput from 'react-tagsinput'
 import Profile from "./Profile";
 
 const LS_KEY = 'frontrow';
 
-class Main extends Component {
+class Video extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -22,8 +22,7 @@ class Main extends Component {
         username: "",
         location: "",
         interests: [],
-        age: "",
-        videoRedirect: false
+        age: ""
       },
       username: "",
       age: "",
@@ -32,44 +31,12 @@ class Main extends Component {
       interests: [],
       ok: false
     };
-    this.edit = this.edit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
-    this.RedirectVid = this.RedirectVid.bind(this);
-  }
-
-  RedirectVid() {
-    this.setState({video: true})
   }
 
   hideAlert(){ 
     this.setState({send: ''})
-  }
-
-  edit() {
-    this.setState({loading: true})
-    fetch('http://localhost:7000/user/update',{
-      method : 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'authorization': "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g,"")
-        },
-        body: JSON.stringify({username: this.state.username,age: this.state.age,
-                              location: this.state.location,interests: this.state.interests})
-      }).then( response => {
-        return response.json();
-      })
-      .then( json =>
-      {
-        if(json.success==true) {
-          this.setState({send: 'true',loading: false})
-        } else {
-          this.setState({send: 'false',loading: false,error: json.error.result.error})
-        }
-      
-      }).catch(err => {alert(err);this.setState({loading: false})})
-    
   }
 
   handleChange(interests) {
@@ -134,10 +101,6 @@ class Main extends Component {
     } else {
      publicAddress = jwtDecode(this.state.auth).payload.publicAddress
     }
-
-    if(this.state.video == true) {
-      return <Redirect to={{pathname: "/videos"}} />;
-    }
     
     return (
       <Container>
@@ -152,44 +115,32 @@ class Main extends Component {
       </Site.Header>
       <Nav className="d-flex container header py-12">
           <Nav.Item value="FrontRow" icon="globe"></Nav.Item>
-          <Nav.Item onClick={this.RedirectVid}  value="Videos" icon="user"></Nav.Item>
+          <Nav.Item active  value="Videos" icon="user"></Nav.Item>
           <Nav.Item  value="Adverisement" icon="globe"></Nav.Item>
       </Nav>
 
-        <Container>
-      {
-          this.state.send=='true'? <SweetAlert title="Success!" onConfirm={this.hideAlert}>Successful
-                                  </SweetAlert>
-         : <p></p> 
-    }
-      <br></br>
-      <Card className="col col-login mx-auto row mb-6">
-      <Card.Body>
-        <Form>
-            <Form.Input id='username' name='username' value={this.state.username} 
-                onChange={(evt) => { this.setState({username: evt.target.value});}}
-                label='Username' placeholder='Enter Username' />
-            <Form.Input id='age' name='age' label='Age' value={this.state.age} 
-                onChange={(evt) => { this.setState({age: evt.target.value});}}
-                placeholder='Enter Age' />
-            <Form.Input id='location' name='location' label='Location' value={this.state.location} 
-                onChange={(evt) => { this.setState({location: evt.target.value});}}
-                placeholder='Enter Location' />
-            <b>Interests</b><br></br>
-            <TagsInput value={this.state.interests} onChange={this.handleChange} />
-            <br></br>
-            {
-              this.state.ok == false ? <Button disabled
-                color='primary'>Edit Profile</Button> :
-              this.state.loading ? <Button disabled
-                color='primary'>Updating..</Button>
-            :
-            <Button onClick={this.edit}
-                color='primary'>Edit Profile</Button> }
-        </Form>
-        </Card.Body>
-      </Card>
-      </Container>
+        <Container className="row row-cards">
+
+            <GalleryCard className="rounded col-sm-6 col-lg-4">
+                <GalleryCard.Image src="https://tabler.github.io/tabler/demo/photos/grant-ritchie-338179-500.jpg" />
+                <GalleryCard.Footer>
+                    <GalleryCard.Details
+                        avatarURL="https://tabler.github.io/tabler/demo/faces/male/41.jpg"
+                        fullName="Nathar Guerrero"
+                        dateString="12 days ago"
+                    />
+                    <GalleryCard.IconGroup>
+                        <GalleryCard.IconItem name="eye" label="112" />
+                        <GalleryCard.IconItem
+                            name="heart"
+                            label="42"
+                            right
+                        />
+                    </GalleryCard.IconGroup>
+                </GalleryCard.Footer>
+            </GalleryCard>
+            
+        </Container>
 
           <br></br>        
       
@@ -199,4 +150,4 @@ class Main extends Component {
 }
 
 
-export default Main;
+export default Video;

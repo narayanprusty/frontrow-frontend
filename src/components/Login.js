@@ -14,7 +14,7 @@ class Login extends Component {
     this.state = {
       loading: false,
       auth: localStorage.getItem(LS_KEY) || undefined,
-      address: undefined
+      //address: undefined
     };
 
     this.Login = this.Login.bind(this);
@@ -22,7 +22,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    this.Init();
+    //this.Init();
   }
 
   Init = async () => {
@@ -32,6 +32,8 @@ class Login extends Component {
   }
   
     Login = async () => {   
+
+    await this.Init();
     
     if (!window.web3) {
       window.alert('Please install MetaMask first.');
@@ -116,21 +118,15 @@ class Login extends Component {
     }
     
   return (
-      <Container className="text-center col col-login mx-auto row mb-6">
+      <Container className="text-center col col-login">
       <Card>
         <Card.Header >
           <Card.Title className="text-center">FrontRow</Card.Title>
          </Card.Header>
-        <Card.Body className="p-6">
-        {
-            this.state.address ?
+        <Card.Body >
             <Button onClick={this.Login} color="primary" >
             {this.state.loading ? 'Loading...' : 'Login with MetaMask'}
           </Button>
-            : <Button disabled color="primary" >
-            Login with MetaMask
-          </Button>
-        }
         </Card.Body>
       </Card>
 
