@@ -10,7 +10,7 @@ import Profile from "./Profile";
 
 const LS_KEY = 'frontrow';
 
-class Main extends Component {
+class EditProfile extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -30,12 +30,14 @@ class Main extends Component {
       location: "",
       send: "",
       interests: [],
-      ok: false
+      ok: false,
+      gotoEdit: false
     };
     this.edit = this.edit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
     this.RedirectVid = this.RedirectVid.bind(this);
+    this.RedirectEdit = this.RedirectEdit.bind(this);
   }
 
   RedirectVid() {
@@ -131,6 +133,10 @@ class Main extends Component {
     this.setState({ auth: null });
   };
 
+  RedirectEdit() {
+    this.setState({gotoEdit: true})
+  }
+
   render() {
     
     var publicAddress = "";
@@ -150,7 +156,7 @@ class Main extends Component {
       <Site.Header className="d-flex container header py-4">
           <a className="header-brand">Frontrow</a>
           <div className="d-flex order-lg-2 ml-auto">
-          <Button className="d-none nav-item d-md-flex" color='primary'>Edit Profile</Button>
+          <Button onClick={this.RedirectEdit} className="d-none nav-item d-md-flex" color='primary'>Edit Profile</Button>
           &nbsp;
           <Button className="d-none d-md-flex" color="primary"  
           onClick={this.handleLoggedOut}>Logout</Button>
@@ -205,4 +211,4 @@ class Main extends Component {
 }
 
 
-export default Main;
+export default EditProfile;

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 
 import Login from './components/Login';
 import logo from './logo.svg';
-import Main from './components/Main';
+import EditProfile from './components/EditProfile';
 
 import './App.css';
 

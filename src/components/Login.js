@@ -114,7 +114,7 @@ class Login extends Component {
   render() {
    
     if (this.state.auth) {
-      return <Redirect to={{pathname: "/home", state:{id: this.state.auth}} } />;
+      return <Redirect to={{pathname: "/edit", state:{id: this.state.auth}} } />;
     }
     
   return (

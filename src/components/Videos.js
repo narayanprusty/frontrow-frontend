@@ -29,10 +29,12 @@ class Video extends Component {
       location: "",
       send: "",
       interests: [],
-      ok: false
+      ok: false,
+      gotoEdit: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
+    this.RedirectEdit = this.RedirectEdit.bind(this);
   }
 
   hideAlert(){ 
@@ -91,6 +93,10 @@ class Video extends Component {
     localStorage.removeItem(LS_KEY);
     this.setState({ auth: null });
   };
+  RedirectEdit() {
+    this.setState({gotoEdit: true})
+  }
+
 
   render() {
     
@@ -101,13 +107,16 @@ class Video extends Component {
     } else {
      publicAddress = jwtDecode(this.state.auth).payload.publicAddress
     }
+    if(this.state.gotoEdit == true) {
+        return <Redirect to={{pathname: "/edit"}} />;
+      }
     
     return (
       <Container>
       <Site.Header className="d-flex container header py-4">
           <a className="header-brand">Frontrow</a>
           <div className="d-flex order-lg-2 ml-auto">
-          <Button className="d-none nav-item d-md-flex" color='primary'>Edit Profile</Button>
+          <Button onClick={this.RedirectEdit} className="d-none nav-item d-md-flex" color='primary'>Edit Profile</Button>
           &nbsp;
           <Button className="d-none d-md-flex" color="primary"  
           onClick={this.handleLoggedOut}>Logout</Button>
