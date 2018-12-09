@@ -6,6 +6,7 @@
     "classnames": "^2.2.6",
     "informed": "^1.10.5",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
     "react": "^16.5.1",
     "react-blockies": "^1.4.0",

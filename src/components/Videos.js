@@ -5,8 +5,7 @@ import { Redirect } from 'react-router';
 import "tabler-react/dist/Tabler.css";
 import { Button,Container,Nav,Site,GalleryCard,Card } from "tabler-react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import TagsInput from 'react-tagsinput'
-import Profile from "./Profile";
+import Moment from 'react-moment';
 
 const LS_KEY = 'frontrow';
 
@@ -30,11 +29,13 @@ class Video extends Component {
       send: "",
       interests: [],
       ok: false,
-      gotoEdit: false
+      gotoEdit: false,
+      videos: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
     this.RedirectEdit = this.RedirectEdit.bind(this);
+    this.VideoRead = this.VideoRead.bind(this);
   }
 
   hideAlert(){ 
@@ -46,6 +47,7 @@ class Video extends Component {
   }
 
   componentWillMount() {
+    this.VideoRead();
     var accesstoken = this.state.auth
     accesstoken = accesstoken.replace(/\"/g,"");
     const { payload: { id } } = jwtDecode(accesstoken);
@@ -89,6 +91,24 @@ class Video extends Component {
       .catch(window.alert);
   }
 
+  VideoRead() {
+
+    fetch('http://localhost:7000/video/get/',{
+          method : 'POST',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'authorization': localStorage.getItem('jwt')
+            },
+          }).then( response => {
+            return response.json();
+          })
+          .then( json =>
+          {
+            this.setState({videos: json.data})
+          })
+  }
+
   handleLoggedOut = () => {
     localStorage.removeItem(LS_KEY);
     this.setState({ auth: null });
@@ -101,6 +121,33 @@ class Video extends Component {
   render() {
     
     var publicAddress = "";
+    const Videos = ({data}) => (
+        <Container className="row row-cards">
+        {
+            data.map(function(video,i){
+                var p = <Moment fromNow>{video.publishedOn}</Moment>
+                return <GalleryCard className="rounded col-sm-6 col-lg-4" key={i}>
+                <GalleryCard.Image src={video.imageURL} />
+                <GalleryCard.Footer>
+                    <GalleryCard.Details
+                        avatarURL="https://tabler.github.io/tabler/demo/faces/male/41.jpg"
+                        fullName={video.title}
+                        dateString={p}
+                    />
+                    <GalleryCard.IconGroup>
+                        <GalleryCard.IconItem name="eye" label={video.totalViews} />
+                        <GalleryCard.IconItem
+                            name="heart"
+                            label="0"
+                            right
+                        />
+                    </GalleryCard.IconGroup>
+                </GalleryCard.Footer>
+            </GalleryCard>
+            })
+        }
+        </Container>
+    )
     
     if(!this.state.auth || this.state.auth==null) { 
       return <Redirect to={{pathname: "/"}} />;
@@ -122,34 +169,15 @@ class Video extends Component {
           onClick={this.handleLoggedOut}>Logout</Button>
           </div>
       </Site.Header>
+     
       <Nav className="d-flex container header py-12">
           <Nav.Item value="FrontRow" icon="globe"></Nav.Item>
           <Nav.Item active  value="Videos" icon="user"></Nav.Item>
           <Nav.Item  value="Adverisement" icon="globe"></Nav.Item>
       </Nav>
 
-        <Container className="row row-cards">
-
-            <GalleryCard className="rounded col-sm-6 col-lg-4">
-                <GalleryCard.Image src="https://tabler.github.io/tabler/demo/photos/grant-ritchie-338179-500.jpg" />
-                <GalleryCard.Footer>
-                    <GalleryCard.Details
-                        avatarURL="https://tabler.github.io/tabler/demo/faces/male/41.jpg"
-                        fullName="Nathar Guerrero"
-                        dateString="12 days ago"
-                    />
-                    <GalleryCard.IconGroup>
-                        <GalleryCard.IconItem name="eye" label="112" />
-                        <GalleryCard.IconItem
-                            name="heart"
-                            label="42"
-                            right
-                        />
-                    </GalleryCard.IconGroup>
-                </GalleryCard.Footer>
-            </GalleryCard>
+            <Videos data={this.state.videos} />            
             
-        </Container>
 
           <br></br>        
       
