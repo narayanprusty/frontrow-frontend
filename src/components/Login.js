@@ -26,18 +26,20 @@ class Login extends Component {
   }
 
   Init = async () => {
+    if(!window.ethereum) {
+      return 
+    }
     window.web3 = new Web3(window.ethereum);
     add = await window.ethereum.enable();
     await this.setState({address: add[0]})
   }
   
-    Login = async () => {   
+    Login = async () => { 
 
     await this.Init();
     
     if (!window.web3) {
-      window.alert('Please install MetaMask first.');
-      return;
+      return alert("Please install Metamask!");
     }
     if (!web3) {
       web3 = new Web3(window.web3.currentProvider);
