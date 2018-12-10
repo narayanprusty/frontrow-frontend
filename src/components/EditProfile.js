@@ -115,7 +115,7 @@ class EditProfile extends Component {
               json.data[0].location==undefined ? user.location =null :user.location = json.data[0].location;
             }
             {
-              json.data[0].interests==undefined ? user.interests =null :user.interests = json.data[0].interests;
+              json.data[0].interests==undefined ? user.interests =[null] :user.interests = json.data[0].interests;
             }
             this.setState({user})
             this.setState({username: user.username})
