@@ -1,7 +1,8 @@
 // @flow
 
-import React from "react";
-
+import React, { Component } from "react";
+import jwtDecode from "jwt-decode";
+import Select from "react-select";
 import {
   Container,
   Grid,
@@ -13,248 +14,471 @@ import {
   List,
   Media,
   Text,
-  Comment,
+  Comment
 } from "tabler-react";
-
+import SweetAlert from "react-bootstrap-sweetalert";
+import TagsInput from "react-tagsinput";
 import SiteWrapper from "../SiteWrapper.react";
 
-function ProfilePage() {
-  return (
-    <SiteWrapper>
-      <div className="my-3 my-md-5">
-        <Container>
-          <Grid.Row>
-            <Grid.Col lg={4}>
-              <Profile
-                name="Peter Richards"
-                backgroundURL="demo/photos/eberhard-grossgasteiger-311213-500.jpg"
-                avatarURL="demo/faces/male/16.jpg"
-                twitterURL="test"
-              >
-                Big belly rude boy, million dollar hustler. Unemployed.
-              </Profile>
-              <Card>
-                <Card.Body>
-                  <Media>
-                    <Avatar
-                      size="xxl"
-                      className="mr-5"
-                      imageURL="demo/faces/male/21.jpg"
-                    />
-                    <Media.BodySocial
-                      name="Juan Hernandez"
-                      workTitle="Webdeveloper"
-                      facebook="Facebook"
-                      twitter="Twitter"
-                      phone="1234567890"
-                      skype="@skypename"
-                    />
-                  </Media>
-                </Card.Body>
-              </Card>
-              <Card>
-                <Card.Header>
-                  <Card.Title>My Profile</Card.Title>
-                </Card.Header>
-                <Card.Body>
-                  <Form>
+const LS_KEY = "frontrow";
+const Countries = [
+  { label: "Afghanistan", code: "AF" },
+  { label: "land Islands", code: "AX" },
+  { label: "Albania", code: "AL" },
+  { label: "Algeria", code: "DZ" },
+  { label: "American Samoa", code: "AS" },
+  { label: "AndorrA", code: "AD" },
+  { label: "Angola", code: "AO" },
+  { label: "Anguilla", code: "AI" },
+  { label: "Antarctica", code: "AQ" },
+  { label: "Antigua and Barbuda", code: "AG" },
+  { label: "Argentina", code: "AR" },
+  { label: "Armenia", code: "AM" },
+  { label: "Aruba", code: "AW" },
+  { label: "Australia", code: "AU" },
+  { label: "Austria", code: "AT" },
+  { label: "Azerbaijan", code: "AZ" },
+  { label: "Bahamas", code: "BS" },
+  { label: "Bahrain", code: "BH" },
+  { label: "Bangladesh", code: "BD" },
+  { label: "Barbados", code: "BB" },
+  { label: "Belarus", code: "BY" },
+  { label: "Belgium", code: "BE" },
+  { label: "Belize", code: "BZ" },
+  { label: "Benin", code: "BJ" },
+  { label: "Bermuda", code: "BM" },
+  { label: "Bhutan", code: "BT" },
+  { label: "Bolivia", code: "BO" },
+  { label: "Bosnia and Herzegovina", code: "BA" },
+  { label: "Botswana", code: "BW" },
+  { label: "Bouvet Island", code: "BV" },
+  { label: "Brazil", code: "BR" },
+  { label: "British Indian Ocean Territory", code: "IO" },
+  { label: "Brunei Darussalam", code: "BN" },
+  { label: "Bulgaria", code: "BG" },
+  { label: "Burkina Faso", code: "BF" },
+  { label: "Burundi", code: "BI" },
+  { label: "Cambodia", code: "KH" },
+  { label: "Cameroon", code: "CM" },
+  { label: "Canada", code: "CA" },
+  { label: "Cape Verde", code: "CV" },
+  { label: "Cayman Islands", code: "KY" },
+  { label: "Central African Republic", code: "CF" },
+  { label: "Chad", code: "TD" },
+  { label: "Chile", code: "CL" },
+  { label: "China", code: "CN" },
+  { label: "Christmas Island", code: "CX" },
+  { label: "Cocos (Keeling) Islands", code: "CC" },
+  { label: "Colombia", code: "CO" },
+  { label: "Comoros", code: "KM" },
+  { label: "Congo", code: "CG" },
+  { label: "Congo, The Democratic Republic of the", code: "CD" },
+  { label: "Cook Islands", code: "CK" },
+  { label: "Costa Rica", code: "CR" },
+  { label: "Cote D'Ivoire", code: "CI" },
+  { label: "Croatia", code: "HR" },
+  { label: "Cuba", code: "CU" },
+  { label: "Cyprus", code: "CY" },
+  { label: "Czech Republic", code: "CZ" },
+  { label: "Denmark", code: "DK" },
+  { label: "Djibouti", code: "DJ" },
+  { label: "Dominica", code: "DM" },
+  { label: "Dominican Republic", code: "DO" },
+  { label: "Ecuador", code: "EC" },
+  { label: "Egypt", code: "EG" },
+  { label: "El Salvador", code: "SV" },
+  { label: "Equatorial Guinea", code: "GQ" },
+  { label: "Eritrea", code: "ER" },
+  { label: "Estonia", code: "EE" },
+  { label: "Ethiopia", code: "ET" },
+  { label: "Falkland Islands (Malvinas)", code: "FK" },
+  { label: "Faroe Islands", code: "FO" },
+  { label: "Fiji", code: "FJ" },
+  { label: "Finland", code: "FI" },
+  { label: "France", code: "FR" },
+  { label: "French Guiana", code: "GF" },
+  { label: "French Polynesia", code: "PF" },
+  { label: "French Southern Territories", code: "TF" },
+  { label: "Gabon", code: "GA" },
+  { label: "Gambia", code: "GM" },
+  { label: "Georgia", code: "GE" },
+  { label: "Germany", code: "DE" },
+  { label: "Ghana", code: "GH" },
+  { label: "Gibraltar", code: "GI" },
+  { label: "Greece", code: "GR" },
+  { label: "Greenland", code: "GL" },
+  { label: "Grenada", code: "GD" },
+  { label: "Guadeloupe", code: "GP" },
+  { label: "Guam", code: "GU" },
+  { label: "Guatemala", code: "GT" },
+  { label: "Guernsey", code: "GG" },
+  { label: "Guinea", code: "GN" },
+  { label: "Guinea-Bissau", code: "GW" },
+  { label: "Guyana", code: "GY" },
+  { label: "Haiti", code: "HT" },
+  { label: "Heard Island and Mcdonald Islands", code: "HM" },
+  { label: "Holy See (Vatican City State)", code: "VA" },
+  { label: "Honduras", code: "HN" },
+  { label: "Hong Kong", code: "HK" },
+  { label: "Hungary", code: "HU" },
+  { label: "Iceland", code: "IS" },
+  { label: "India", code: "IN" },
+  { label: "Indonesia", code: "ID" },
+  { label: "Iran, Islamic Republic Of", code: "IR" },
+  { label: "Iraq", code: "IQ" },
+  { label: "Ireland", code: "IE" },
+  { label: "Isle of Man", code: "IM" },
+  { label: "Israel", code: "IL" },
+  { label: "Italy", code: "IT" },
+  { label: "Jamaica", code: "JM" },
+  { label: "Japan", code: "JP" },
+  { label: "Jersey", code: "JE" },
+  { label: "Jordan", code: "JO" },
+  { label: "Kazakhstan", code: "KZ" },
+  { label: "Kenya", code: "KE" },
+  { label: "Kiribati", code: "KI" },
+  { label: "Korea, Democratic People'S Republic of", code: "KP" },
+  { label: "Korea, Republic of", code: "KR" },
+  { label: "Kuwait", code: "KW" },
+  { label: "Kyrgyzstan", code: "KG" },
+  { label: "Lao People'S Democratic Republic", code: "LA" },
+  { label: "Latvia", code: "LV" },
+  { label: "Lebanon", code: "LB" },
+  { label: "Lesotho", code: "LS" },
+  { label: "Liberia", code: "LR" },
+  { label: "Libyan Arab Jamahiriya", code: "LY" },
+  { label: "Liechtenstein", code: "LI" },
+  { label: "Lithuania", code: "LT" },
+  { label: "Luxembourg", code: "LU" },
+  { label: "Macao", code: "MO" },
+  { label: "Macedonia, The Former Yugoslav Republic of", code: "MK" },
+  { label: "Madagascar", code: "MG" },
+  { label: "Malawi", code: "MW" },
+  { label: "Malaysia", code: "MY" },
+  { label: "Maldives", code: "MV" },
+  { label: "Mali", code: "ML" },
+  { label: "Malta", code: "MT" },
+  { label: "Marshall Islands", code: "MH" },
+  { label: "Martinique", code: "MQ" },
+  { label: "Mauritania", code: "MR" },
+  { label: "Mauritius", code: "MU" },
+  { label: "Mayotte", code: "YT" },
+  { label: "Mexico", code: "MX" },
+  { label: "Micronesia, Federated States of", code: "FM" },
+  { label: "Moldova, Republic of", code: "MD" },
+  { label: "Monaco", code: "MC" },
+  { label: "Mongolia", code: "MN" },
+  { label: "Montenegro", code: "ME" },
+  { label: "Montserrat", code: "MS" },
+  { label: "Morocco", code: "MA" },
+  { label: "Mozambique", code: "MZ" },
+  { label: "Myanmar", code: "MM" },
+  { label: "Namibia", code: "NA" },
+  { label: "Nauru", code: "NR" },
+  { label: "Nepal", code: "NP" },
+  { label: "Netherlands", code: "NL" },
+  { label: "Netherlands Antilles", code: "AN" },
+  { label: "New Caledonia", code: "NC" },
+  { label: "New Zealand", code: "NZ" },
+  { label: "Nicaragua", code: "NI" },
+  { label: "Niger", code: "NE" },
+  { label: "Nigeria", code: "NG" },
+  { label: "Niue", code: "NU" },
+  { label: "Norfolk Island", code: "NF" },
+  { label: "Northern Mariana Islands", code: "MP" },
+  { label: "Norway", code: "NO" },
+  { label: "Oman", code: "OM" },
+  { label: "Pakistan", code: "PK" },
+  { label: "Palau", code: "PW" },
+  { label: "Palestinian Territory, Occupied", code: "PS" },
+  { label: "Panama", code: "PA" },
+  { label: "Papua New Guinea", code: "PG" },
+  { label: "Paraguay", code: "PY" },
+  { label: "Peru", code: "PE" },
+  { label: "Philippines", code: "PH" },
+  { label: "Pitcairn", code: "PN" },
+  { label: "Poland", code: "PL" },
+  { label: "Portugal", code: "PT" },
+  { label: "Puerto Rico", code: "PR" },
+  { label: "Qatar", code: "QA" },
+  { label: "Reunion", code: "RE" },
+  { label: "Romania", code: "RO" },
+  { label: "Russian Federation", code: "RU" },
+  { label: "RWANDA", code: "RW" },
+  { label: "Saint Helena", code: "SH" },
+  { label: "Saint Kitts and Nevis", code: "KN" },
+  { label: "Saint Lucia", code: "LC" },
+  { label: "Saint Pierre and Miquelon", code: "PM" },
+  { label: "Saint Vincent and the Grenadines", code: "VC" },
+  { label: "Samoa", code: "WS" },
+  { label: "San Marino", code: "SM" },
+  { label: "Sao Tome and Principe", code: "ST" },
+  { label: "Saudi Arabia", code: "SA" },
+  { label: "Senegal", code: "SN" },
+  { label: "Serbia", code: "RS" },
+  { label: "Seychelles", code: "SC" },
+  { label: "Sierra Leone", code: "SL" },
+  { label: "Singapore", code: "SG" },
+  { label: "Slovakia", code: "SK" },
+  { label: "Slovenia", code: "SI" },
+  { label: "Solomon Islands", code: "SB" },
+  { label: "Somalia", code: "SO" },
+  { label: "South Africa", code: "ZA" },
+  { label: "South Georgia and the South Sandwich Islands", code: "GS" },
+  { label: "Spain", code: "ES" },
+  { label: "Sri Lanka", code: "LK" },
+  { label: "Sudan", code: "SD" },
+  { label: "Suriname", code: "SR" },
+  { label: "Svalbard and Jan Mayen", code: "SJ" },
+  { label: "Swaziland", code: "SZ" },
+  { label: "Sweden", code: "SE" },
+  { label: "Switzerland", code: "CH" },
+  { label: "Syrian Arab Republic", code: "SY" },
+  { label: "Taiwan, Province of China", code: "TW" },
+  { label: "Tajikistan", code: "TJ" },
+  { label: "Tanzania, United Republic of", code: "TZ" },
+  { label: "Thailand", code: "TH" },
+  { label: "Timor-Leste", code: "TL" },
+  { label: "Togo", code: "TG" },
+  { label: "Tokelau", code: "TK" },
+  { label: "Tonga", code: "TO" },
+  { label: "Trinidad and Tobago", code: "TT" },
+  { label: "Tunisia", code: "TN" },
+  { label: "Turkey", code: "TR" },
+  { label: "Turkmenistan", code: "TM" },
+  { label: "Turks and Caicos Islands", code: "TC" },
+  { label: "Tuvalu", code: "TV" },
+  { label: "Uganda", code: "UG" },
+  { label: "Ukraine", code: "UA" },
+  { label: "United Arab Emirates", code: "AE" },
+  { label: "United Kingdom", code: "GB" },
+  { label: "United States", code: "US" },
+  { label: "United States Minor Outlying Islands", code: "UM" },
+  { label: "Uruguay", code: "UY" },
+  { label: "Uzbekistan", code: "UZ" },
+  { label: "Vanuatu", code: "VU" },
+  { label: "Venezuela", code: "VE" },
+  { label: "Viet Nam", code: "VN" },
+  { label: "Virgin Islands, British", code: "VG" },
+  { label: "Virgin Islands, U.S.", code: "VI" },
+  { label: "Wallis and Futuna", code: "WF" },
+  { label: "Western Sahara", code: "EH" },
+  { label: "Yemen", code: "YE" },
+  { label: "Zambia", code: "ZM" },
+  { label: "Zimbabwe", code: "ZW" }
+];
+
+class ProfilePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      username: "",
+      age: "",
+      location: "",
+      send: "",
+      interests: [],
+      ok: false,
+      auth: localStorage.getItem(LS_KEY) || undefined
+    };
+    this.edit = this.edit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.hideAlert = this.hideAlert.bind(this);
+  }
+
+  hideAlert() {
+    this.setState({ send: "" });
+  }
+
+  edit() {
+    this.setState({ loading: true });
+    fetch("http://localhost:7000/user/update", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization:
+          "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        age: this.state.age,
+        location: this.state.location,
+        interests: this.state.interests
+      })
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        if (json.success == true) {
+          this.setState({ send: "true", loading: false });
+        } else {
+          this.setState({
+            send: "false",
+            loading: false,
+            error: json.error.result.error
+          });
+        }
+      })
+      .catch(err => {
+        alert(err);
+        this.setState({ loading: false });
+      });
+  }
+
+  handleChange(interests) {
+    this.setState({ interests });
+  }
+
+  componentWillMount() {
+    var accesstoken = this.state.auth;
+    if (accesstoken == undefined) return;
+    accesstoken = accesstoken.replace(/\"/g, "");
+    const {
+      payload: { id }
+    } = jwtDecode(accesstoken);
+    fetch(`http://localhost:7000/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accesstoken}`
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        let user = Object.assign({}, this.state.user);
+        user.publicAddress = json.data.publicAddress;
+        user.nonce = json.data.nonce;
+
+        fetch("http://localhost:7000/user/get/" + json.data.publicAddress, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            authorization: localStorage.getItem("jwt")
+          }
+        })
+          .then(response => {
+            return response.json();
+          })
+          .then(json => {
+            if (json.data[0] == undefined) return;
+            {
+              json.data[0].username == undefined
+                ? this.setState({ username: null })
+                : this.setState({ username: json.data[0].username });
+            }
+            {
+              json.data[0].age == undefined
+                ? this.setState({ age: null })
+                : this.setState({ age: json.data[0].age });
+            }
+            {
+              json.data[0].location == undefined
+                ? this.setState({ location: null })
+                : this.setState({ location: json.data[0].location });
+            }
+            {
+              json.data[0].interests == undefined
+                ? this.setState({ interests: null })
+                : this.setState({ interests: json.data[0].interests });
+            }
+            this.setState({ ok: true });
+          });
+      })
+      .catch(window.alert);
+  }
+
+  render() {
+    return (
+      <SiteWrapper>
+        <div className="my-3 my-md-5">
+          <Container>
+            {this.state.send == "true" ? (
+              <SweetAlert title="Success!" onConfirm={this.hideAlert}>
+                Successful
+              </SweetAlert>
+            ) : (
+              <p />
+            )}
+            <Grid.Row>
+              <Grid.Col lg={12}>
+                <Form className="card">
+                  <Card.Body>
+                    <Card.Title>Edit Profile</Card.Title>
                     <Grid.Row>
-                      <Grid.Col auto>
-                        <Avatar size="xl" imageURL="demo/faces/female/9.jpg" />
-                      </Grid.Col>
-                      <Grid.Col>
+                      <Grid.Col sm={6} md={3}>
                         <Form.Group>
-                          <Form.Label>Email-Address</Form.Label>
-                          <Form.Input placeholder="your-email@domain.com" />
+                          <Form.Label>Username</Form.Label>
+                          <Form.Input
+                            type="text"
+                            placeholder="Username"
+                            value={this.state.username}
+                            onChange={evt => {
+                              this.setState({ username: evt.target.value });
+                            }}
+                          />
+                        </Form.Group>
+                      </Grid.Col>
+                      <Grid.Col sm={6} md={4}>
+                        <Form.Group>
+                          <Form.Label>Age</Form.Label>
+                          <Form.Input
+                            type="text"
+                            placeholder="Age"
+                            value={this.state.age}
+                            onChange={evt => {
+                              this.setState({ age: evt.target.value });
+                            }}
+                          />
+                        </Form.Group>
+                      </Grid.Col>
+                      <Grid.Col md={5}>
+                        <Form.Group>
+                          <Form.Label>
+                            Country : {this.state.location}
+                          </Form.Label>
+                          <Select
+                            options={Countries}
+                            onChange={evt => {
+                              this.setState({ location: evt.label });
+                            }}
+                          />
+                        </Form.Group>
+                      </Grid.Col>
+                      <Grid.Col md={5}>
+                        <Form.Group>
+                          <Form.Label>Interests</Form.Label>
+                          <TagsInput
+                            value={this.state.interests}
+                            onChange={this.handleChange}
+                          />
                         </Form.Group>
                       </Grid.Col>
                     </Grid.Row>
-                    <Form.Group>
-                      <Form.Label>Bio</Form.Label>
-                      <Form.Textarea rows={5}>
-                        Big belly rude boy, million dollar hustler. Unemployed.
-                      </Form.Textarea>
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Email-Address</Form.Label>
-                      <Form.Input placeholder="your-email@domain.com" />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Password</Form.Label>
-                      <Form.Input type="password" value="Password" />
-                    </Form.Group>
-                    <Form.Footer>
-                      <Button color="primary" block>
-                        Save
+                  </Card.Body>
+                  <Card.Footer className="text-right">
+                    {this.state.ok == false ? (
+                      <Button disabled color="primary">
+                        Update Profile
                       </Button>
-                    </Form.Footer>
-                  </Form>
-                </Card.Body>
-              </Card>
-            </Grid.Col>
-            <Grid.Col lg={8}>
-              <Card>
-                <Card.Header>
-                  <Form.InputGroup>
-                    <Form.Input type="text" placeholder="Message" />
-                    <Form.InputGroup append>
-                      <Button icon="camera" color="secondary" />
-                    </Form.InputGroup>
-                  </Form.InputGroup>
-                </Card.Header>
-                <Comment.List>
-                  <Comment
-                    avatarURL="demo/faces/male/16.jpg"
-                    name="Peter Richards"
-                    date="4 min"
-                    text="Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-                    replies={
-                      <React.Fragment>
-                        <Comment.Reply
-                          name="Debra Beck"
-                          avatarURL="demo/faces/female/17.jpg"
-                          text="Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis."
-                        />
-                        <Comment.Reply
-                          name="Jack Ruiz"
-                          avatarURL="demo/faces/male/32.jpg"
-                          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
-                        />
-                      </React.Fragment>
-                    }
-                  />
-                  <Comment
-                    avatarURL="demo/faces/male/16.jpg"
-                    date="12 min"
-                    name="Peter Richards"
-                    text="Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis."
-                  />
-                  <Comment
-                    avatarURL="demo/faces/male/16.jpg"
-                    date="34 min"
-                    name="Peter Richards"
-                    text="Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui."
-                    replies={
-                      <Comment.Reply
-                        name="Wayne Holland"
-                        avatarURL="demo/faces/male/26.jpg"
-                        text=" Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis."
-                      />
-                    }
-                  />
-                </Comment.List>
-              </Card>
-              <Form className="card">
-                <Card.Body>
-                  <Card.Title>Edit Profile</Card.Title>
-                  <Grid.Row>
-                    <Grid.Col md={5}>
-                      <Form.Group>
-                        <Form.Label>Company</Form.Label>
-                        <Form.Input
-                          type="text"
-                          disabled
-                          placeholder="Company"
-                          value="Creative Code Inc."
-                        />
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col sm={6} md={3}>
-                      <Form.Group>
-                        <Form.Label>Username</Form.Label>
-                        <Form.Input
-                          type="text"
-                          placeholder="Username"
-                          value="michael23"
-                        />
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col sm={6} md={4}>
-                      <Form.Group>
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Input type="email" placeholder="Email" />
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col sm={6} md={6}>
-                      <Form.Group>
-                        <Form.Label>First Name</Form.Label>
-                        <Form.Input
-                          type="text"
-                          placeholder="First Name"
-                          value="Chet"
-                        />
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col sm={6} md={6}>
-                      <Form.Group>
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Input
-                          type="text"
-                          placeholder="Last Name"
-                          value="Faker"
-                        />
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col md={12}>
-                      <Form.Group>
-                        <Form.Label>Address</Form.Label>
-                        <Form.Input
-                          type="text"
-                          placeholder="Home Address"
-                          value="Melbourne, Australia"
-                        />
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col sm={6} md={4}>
-                      <Form.Group>
-                        <Form.Label>City</Form.Label>
-                        <Form.Input
-                          type="text"
-                          placeholder="City"
-                          value="Melbourne"
-                        />
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col sm={6} md={3}>
-                      <Form.Group>
-                        <Form.Label>Postal Code</Form.Label>
-                        <Form.Input type="number" placeholder="ZIP Code" />
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col md={5}>
-                      <Form.Group>
-                        <Form.Label>Country</Form.Label>
-                        <Form.Select>
-                          <option>Germany</option>
-                        </Form.Select>
-                      </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col md={12}>
-                      <Form.Group className="mb=0" label="About Me">
-                        <Form.Textarea
-                          rows={5}
-                          placeholder="Here can be your description"
-                        >
-                          Oh so, your weak rhyme You doubt I'll bother, reading
-                          into it I'll probably won't, left to my own devices
-                          But that's the difference in our opinions.
-                        </Form.Textarea>
-                      </Form.Group>
-                    </Grid.Col>
-                  </Grid.Row>
-                </Card.Body>
-                <Card.Footer className="text-right">
-                  <Button type="submit" color="primary">
-                    Update Profile
-                  </Button>
-                </Card.Footer>
-              </Form>
-            </Grid.Col>
-          </Grid.Row>
-        </Container>
-      </div>
-    </SiteWrapper>
-  );
+                    ) : this.state.loading ? (
+                      <Button disabled color="primary">
+                        Updating..
+                      </Button>
+                    ) : (
+                      <Button onClick={this.edit} color="primary">
+                        Update Profile
+                      </Button>
+                    )}
+                  </Card.Footer>
+                </Form>
+              </Grid.Col>
+            </Grid.Row>
+          </Container>
+        </div>
+      </SiteWrapper>
+    );
+  }
 }
 
 export default ProfilePage;

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import Web3 from 'web3';
+import Web3 from "web3";
 import {
   Site,
   Nav,
@@ -10,23 +10,20 @@ import {
   List,
   Button,
   RouterContextProvider,
+  Icon
 } from "tabler-react";
 
 import type { NotificationProps } from "tabler-react";
 
 type Props = {|
-  +children: React.Node,
-|};
-
-type State = {|
-  notificationsObjects: Array<NotificationProps>,
+  +children: React.Node
 |};
 
 type subNavItem = {|
   +value: string,
   +to?: string,
   +icon?: string,
-  +LinkComponent?: React.ElementType,
+  +LinkComponent?: React.ElementType
 |};
 
 type navItem = {|
@@ -36,7 +33,7 @@ type navItem = {|
   +active?: boolean,
   +LinkComponent?: React.ElementType,
   +subItems?: Array<subNavItem>,
-  +useExact?: boolean,
+  +useExact?: boolean
 |};
 
 const navBarItems: Array<navItem> = [
@@ -45,7 +42,7 @@ const navBarItems: Array<navItem> = [
     to: "/",
     icon: "home",
     LinkComponent: withRouter(NavLink),
-    useExact: true,
+    useExact: true
   },
   {
     value: "Interface",
@@ -54,15 +51,15 @@ const navBarItems: Array<navItem> = [
       {
         value: "Cards Design",
         to: "/cards",
-        LinkComponent: withRouter(NavLink),
+        LinkComponent: withRouter(NavLink)
       },
       { value: "Charts", to: "/charts", LinkComponent: withRouter(NavLink) },
       {
         value: "Pricing Cards",
         to: "/pricing-cards",
-        LinkComponent: withRouter(NavLink),
-      },
-    ],
+        LinkComponent: withRouter(NavLink)
+      }
+    ]
   },
   {
     value: "Components",
@@ -71,8 +68,8 @@ const navBarItems: Array<navItem> = [
       { value: "Maps", to: "/maps", LinkComponent: withRouter(NavLink) },
       { value: "Icons", to: "/icons", LinkComponent: withRouter(NavLink) },
       { value: "Store", to: "/store", LinkComponent: withRouter(NavLink) },
-      { value: "Blog", to: "/blog", LinkComponent: withRouter(NavLink) },
-    ],
+      { value: "Blog", to: "/blog", LinkComponent: withRouter(NavLink) }
+    ]
   },
   {
     value: "Pages",
@@ -83,12 +80,12 @@ const navBarItems: Array<navItem> = [
       {
         value: "Register",
         to: "/register",
-        LinkComponent: withRouter(NavLink),
+        LinkComponent: withRouter(NavLink)
       },
       {
         value: "Forgot password",
         to: "/forgot-password",
-        LinkComponent: withRouter(NavLink),
+        LinkComponent: withRouter(NavLink)
       },
       { value: "400 error", to: "/400", LinkComponent: withRouter(NavLink) },
       { value: "401 error", to: "/401", LinkComponent: withRouter(NavLink) },
@@ -100,22 +97,22 @@ const navBarItems: Array<navItem> = [
       {
         value: "Empty page",
         to: "/empty-page",
-        LinkComponent: withRouter(NavLink),
+        LinkComponent: withRouter(NavLink)
       },
-      { value: "RTL", to: "/rtl", LinkComponent: withRouter(NavLink) },
-    ],
+      { value: "RTL", to: "/rtl", LinkComponent: withRouter(NavLink) }
+    ]
   },
   {
     value: "Forms",
     to: "/form-elements",
     icon: "check-square",
-    LinkComponent: withRouter(NavLink),
+    LinkComponent: withRouter(NavLink)
   },
   {
     value: "Gallery",
     to: "/gallery",
     icon: "image",
-    LinkComponent: withRouter(NavLink),
+    LinkComponent: withRouter(NavLink)
   },
   {
     icon: "file-text",
@@ -123,8 +120,8 @@ const navBarItems: Array<navItem> = [
     to:
       process.env.NODE_ENV === "production"
         ? "https://tabler.github.io/tabler-react/documentation"
-        : "/documentation",
-  },
+        : "/documentation"
+  }
 ];
 
 const accountDropdownProps = {
@@ -138,18 +135,16 @@ const accountDropdownProps = {
     { icon: "send", value: "Message" },
     { isDivider: true },
     { icon: "help-circle", value: "Need help?" },
-    { icon: "log-out", value: "Sign out" },
-  ],
+    { icon: "log-out", value: "Sign out" }
+  ]
 };
 
 var LS_KEY = "frontrow";
-var web3 = null;  
+var web3 = null;
 var add = "";
 
 class SiteWrapper extends React.Component<Props, State> {
-
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       loading: false,
@@ -160,71 +155,78 @@ class SiteWrapper extends React.Component<Props, State> {
           avatarURL: "demo/faces/male/41.jpg",
           message: (
             <React.Fragment>
-              <strong>Nathan</strong> pushed new commit: Fix page load performance
-              issue.
+              <strong>Nathan</strong> pushed new commit: Fix page load
+              performance issue.
             </React.Fragment>
           ),
-          time: "10 minutes ago",
+          time: "10 minutes ago"
         }
-      ],
+      ]
     };
     this.Login = this.Login.bind(this);
-    //this.Init = this.Init.bind(this);
   }
 
   handleLoggedIn = auth => {
     localStorage.setItem(LS_KEY, JSON.stringify(auth));
-    this.setState({ auth: auth  });
+    this.setState({ auth: auth });
+  };
+
+  handleLoggedOut = () => {
+    localStorage.removeItem(LS_KEY);
+    this.setState({ auth: null });
   };
 
   handleSignup = publicAddress =>
     fetch(`http://localhost:7000/users`, {
       body: JSON.stringify({ publicAddress }),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
-      method: 'POST'
+      method: "POST"
     }).then(response => response.json());
 
-  handleSignMessage = ( publicAddress, nonce ) => {
+  handleSignMessage = (publicAddress, nonce) => {
     return new Promise((resolve, reject) =>
-        web3.eth.personal.sign(
-            web3.utils.fromUtf8(`I am signing my one-time nonce: ` + nonce),
-            publicAddress,
-            (err, signature) => {
-            if (err) {
-                return reject(err);
-                }
-            return resolve( signature );
-            }
+      web3.eth.personal.sign(
+        web3.utils.fromUtf8(`I am signing my one-time nonce: ` + nonce),
+        publicAddress,
+        (err, signature) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve(signature);
+        }
       )
     );
   };
 
-  handleAuthenticate = (publicAddress, signature ) => {
-
+  handleAuthenticate = (publicAddress, signature) => {
     return fetch(`http://localhost:7000/auth`, {
-      body: JSON.stringify({ publicAddress: publicAddress, signature: signature }),
+      body: JSON.stringify({
+        publicAddress: publicAddress,
+        signature: signature
+      }),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
-      method: 'POST'
-    }).then(response => { return response.json(); });
-
-  }
+      method: "POST"
+    }).then(response => {
+      return response.json();
+    });
+  };
 
   Init = async () => {
-    if(!window.ethereum) {
-      return 
+    if (!window.ethereum) {
+      return;
     }
     window.web3 = new Web3(window.ethereum);
     add = await window.ethereum.enable();
-    await this.setState({address: add[0]})
-  }
+    await this.setState({ address: add[0] });
+  };
 
-  Login = async () => { 
+  Login = async () => {
     await this.Init();
-    
+
     if (!window.web3) {
       return alert("Please install Metamask!");
     }
@@ -233,29 +235,30 @@ class SiteWrapper extends React.Component<Props, State> {
     }
 
     this.setState({ loading: true });
-    
+
     try {
-      var nonce = ""
-      var response = await fetch(`http://localhost:7000/users?publicAddress=${add[0]}`)
-      var data = await response.json()
-      if(data.users.length!==0) {
+      var nonce = "";
+      var response = await fetch(
+        `http://localhost:7000/users?publicAddress=${add[0]}`
+      );
+      var data = await response.json();
+      if (data.users.length !== 0) {
         nonce = await data.users[0].nonce;
       } else {
-        nonce = await this.handleSignup(add[0])
-        nonce = await nonce.nonce
+        nonce = await this.handleSignup(add[0]);
+        nonce = await nonce.nonce;
       }
-      
-      var sig = await this.handleSignMessage(add[0],nonce);
-      var token = await this.handleAuthenticate(add[0],sig)
-      var auth = await token.token
-      var login = await this.handleLoggedIn(auth)
-      await this.setState({loading: false})
 
-    } catch(e) {
-        window.alert(e);
-        this.setState({ loading: false });
+      var sig = await this.handleSignMessage(add[0], nonce);
+      var token = await this.handleAuthenticate(add[0], sig);
+      var auth = await token.token;
+      var login = await this.handleLoggedIn(auth);
+      await this.setState({ loading: false });
+    } catch (e) {
+      window.alert(e);
+      this.setState({ loading: false });
     }
-  }
+  };
 
   render(): React.Node {
     const notificationsObjects = this.state.notificationsObjects || [];
@@ -269,51 +272,38 @@ class SiteWrapper extends React.Component<Props, State> {
           href: "/",
           alt: "Tabler React",
           imageURL: "./demo/brand/tabler.svg",
-          navItems: (
-              this.state.auth == undefined ? 
+          navItems:
+            this.state.auth == undefined ? (
               <Nav.Item type="div" className="d-none d-md-flex">
-              <Button
-                outline
-                RootComponent="a"
-                color="primary"
-                onClick={this.Login}
-              >
-                Login
-              </Button>
-            </Nav.Item> :
-            <Nav.Item type="div" className="d-none d-md-flex">
-              <Button
-                outline
-                RootComponent="a"
-                color="primary"
-              >
-                Edit Profile
-              </Button>
-            </Nav.Item>  
-          ),
-          notificationsTray: {
-            notificationsObjects,
-            markAllAsRead: () =>
-              this.setState(
-                () => ({
-                  notificationsObjects: this.state.notificationsObjects.map(
-                    v => ({ ...v, unread: false })
-                  ),
-                }),
-                () =>
-                  setTimeout(
-                    () =>
-                      this.setState({
-                        notificationsObjects: this.state.notificationsObjects.map(
-                          v => ({ ...v, unread: true })
-                        ),
-                      }),
-                    5000
-                  )
-              ),
-            unread: unreadCount,
-          },
-          accountDropdown: accountDropdownProps,
+                <Button
+                  outline
+                  RootComponent="a"
+                  color="primary"
+                  onClick={this.Login}
+                >
+                  Login
+                </Button>
+              </Nav.Item>
+            ) : (
+              <Nav.Item type="div" className="d-none d-md-flex">
+                <Button
+                  outline
+                  RootComponent="a"
+                  color="primary"
+                  href="/profile"
+                >
+                  Edit Profile
+                </Button>
+                <Button
+                  outline
+                  RootComponent="a"
+                  onClick={this.handleLoggedOut}
+                >
+                  <Icon prefix="fe" name="power" />
+                </Button>
+              </Nav.Item>
+            ),
+          accountDropdown: accountDropdownProps
         }}
         navProps={{ itemsObjects: navBarItems }}
         routerContextComponentType={withRouter(RouterContextProvider)}
@@ -326,7 +316,7 @@ class SiteWrapper extends React.Component<Props, State> {
             <a href="#">Five Link</a>,
             <a href="#">Sixth Link</a>,
             <a href="#">Seventh Link</a>,
-            <a href="#">Eigth Link</a>,
+            <a href="#">Eigth Link</a>
           ],
           note:
             "Premium and Open Source dashboard template with responsive and high quality UI. For Free!",
@@ -369,7 +359,7 @@ class SiteWrapper extends React.Component<Props, State> {
                 </Button>
               </Grid.Col>
             </React.Fragment>
-          ),
+          )
         }}
       >
         {this.props.children}
