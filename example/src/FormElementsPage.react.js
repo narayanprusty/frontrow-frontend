@@ -42,8 +42,44 @@ class VideoForm extends Component {
       })
       .then(json => {
         if (json.success == true) {
-          this.setState({ send: "true",loading: false });
-          alert(JSON.stringify(json.vid));
+          
+          this.setState({ loading: true });
+          fetch("http://localhost:7000/video/update", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "authorization":
+              "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+            },
+            body: JSON.stringify({
+              imageURL: this.state.thumbnail,
+              title: this.state.title ,
+              videoURL: this.state.videoURL ,
+              id: json.vid
+            })
+          })
+            .then(response => {
+              return response.json();
+            })
+            .then(json1 => {
+              if (json1.success == true) {
+                
+                this.setState({send: 'true',loading: false})         
+                
+              } else {
+                this.setState({
+                  send: "false",
+                  loading: false,
+                  error: json1.error.result.error
+                });
+              }
+            })
+            .catch(err => {
+              alert(err);
+              this.setState({ loading: false });
+            });      
+          
         } else {
           this.setState({
             send: "false",
@@ -136,7 +172,7 @@ class VideoForm extends Component {
                             placeholder="Video URL"
                             value={this.state.video}
                             onChange={evt => {
-                              this.setState({ video: evt.target.value });
+                              this.setState({ videoURL: evt.target.value });
                             }}
                           />
                         </Form.Group>
