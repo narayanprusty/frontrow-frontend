@@ -44,7 +44,7 @@ function App(props: Props): React.Node {
           <Route exact path="/503" component={Error503} />
           <Route exact path="/blog" component={BlogPage} />
           <Route exact path="/cards" component={CardsDesignPage} />
-          <Route exact path="/charts" component={ChartsPage} />
+          <Route path="/charts/:id" component={ChartsPage} />
           <Route exact path="/email" component={Email} />
           <Route exact path="/empty-page" component={Empty} />
           <Route exact path="/form-elements" component={FormElementsPage} />

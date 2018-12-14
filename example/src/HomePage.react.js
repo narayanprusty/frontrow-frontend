@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Page, GalleryCard, Container, Grid } from "tabler-react";
 import jwtDecode from "jwt-decode";
 import SiteWrapper from "./SiteWrapper.react";
-//import Moment from 'react-moment';
+import Moment from 'react-moment';
 
 const LS_KEY = "frontrow";
 
@@ -24,6 +24,7 @@ class Home extends Component {
     };
     this.hideAlert = this.hideAlert.bind(this);
     this.VideoRead = this.VideoRead.bind(this);
+    this.Alert = this.Alert.bind(this);
   }
 
   VideoRead() {
@@ -105,11 +106,16 @@ class Home extends Component {
     this.setState({ send: "" });
   }
 
+  Alert() {
+    alert("sdcsdc")
+  }
+
   render() {
     const Videos = ({ data }) => (
       <Container className="row row-cards">
         {data.map(function(video, i) {
-          //var p = <Moment fromNow>{video.publishedOn}</Moment>
+          var p = <Moment fromNow>{video.publishedOn}</Moment>
+          var link = "/charts/" + video.uniqueIdentifier
           return (
             <Grid.Col sm={6} lg={4} key={i}>
             <GalleryCard key={i}>
@@ -118,11 +124,11 @@ class Home extends Component {
                 <GalleryCard.Details
                   avatarURL="https://tabler.github.io/tabler/demo/faces/male/41.jpg"
                   fullName={video.title}
-                  dateString={video.publishedOn}
+                  dateString={p}
                 />
                 <GalleryCard.IconGroup>
                   <GalleryCard.IconItem name="eye" label={video.totalViews} />
-                  <GalleryCard.IconItem name="heart" label="0" right />
+                  <GalleryCard.IconItem name="heart" label={link} right />
                 </GalleryCard.IconGroup>
               </GalleryCard.Footer>
             </GalleryCard>
