@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { Page, GalleryCard, Container } from "tabler-react";
+import { Page, GalleryCard, Container, Grid } from "tabler-react";
 import jwtDecode from "jwt-decode";
 import SiteWrapper from "./SiteWrapper.react";
 //import Moment from 'react-moment';
@@ -111,7 +111,8 @@ class Home extends Component {
         {data.map(function(video, i) {
           //var p = <Moment fromNow>{video.publishedOn}</Moment>
           return (
-            <GalleryCard className="rounded col-sm-6 col-lg-4" key={i}>
+            <Grid.Col sm={6} lg={4} key={i}>
+            <GalleryCard key={i}>
               <GalleryCard.Image src={video.imageURL} />
               <GalleryCard.Footer>
                 <GalleryCard.Details
@@ -125,6 +126,7 @@ class Home extends Component {
                 </GalleryCard.IconGroup>
               </GalleryCard.Footer>
             </GalleryCard>
+            </Grid.Col>
           );
         })}
       </Container>
@@ -133,7 +135,7 @@ class Home extends Component {
     return (
       <SiteWrapper>
         <Page.Content>
-          <Videos data={this.state.videos} />
+                  <Videos data={this.state.videos} />
         </Page.Content>
       </SiteWrapper>
     );

@@ -15,6 +15,7 @@
     "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.5",
     "react-moment": "^0.8.4",
+    "react-player": "^1.7.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.0.3",
     "react-select": "^2.0.0-beta.7",
@@ -23,6 +24,7 @@
     "react-tagsinput": "^3.19.0",
     "refractor": "^2.6.1",
     "tabler-react": "link:..",
+    "video-react": "^0.13.1",
     "web3": "^1.0.0-beta.37"
   },
   "scripts": {
