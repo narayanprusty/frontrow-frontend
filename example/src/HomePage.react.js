@@ -5,6 +5,7 @@ import { Page, GalleryCard, Container, Grid } from "tabler-react";
 import jwtDecode from "jwt-decode";
 import SiteWrapper from "./SiteWrapper.react";
 import Moment from 'react-moment';
+import { Redirect } from 'react-router';
 
 const LS_KEY = "frontrow";
 
@@ -118,8 +119,11 @@ class Home extends Component {
           var link = "/charts/" + video.uniqueIdentifier
           return (
             <Grid.Col sm={6} lg={4} key={i}>
+            <div  onClick = {() => {    
+                alert(JSON.stringify("sdcsc"));
+             }} >
             <GalleryCard key={i}>
-              <GalleryCard.Image src={video.imageURL} />
+              <GalleryCard.Image src={video.imageURL}/>
               <GalleryCard.Footer>
                 <GalleryCard.Details
                   avatarURL="https://tabler.github.io/tabler/demo/faces/male/41.jpg"
@@ -132,6 +136,7 @@ class Home extends Component {
                 </GalleryCard.IconGroup>
               </GalleryCard.Footer>
             </GalleryCard>
+            </div>
             </Grid.Col>
           );
         })}
@@ -141,7 +146,7 @@ class Home extends Component {
     return (
       <SiteWrapper>
         <Page.Content>
-                  <Videos data={this.state.videos} />
+                  <Videos data={this.state.videos}  />
         </Page.Content>
       </SiteWrapper>
     );

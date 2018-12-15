@@ -19,6 +19,7 @@ import {
 import SweetAlert from "react-bootstrap-sweetalert";
 import TagsInput from "react-tagsinput";
 import SiteWrapper from "../SiteWrapper.react";
+import 'react-tagsinput/react-tagsinput.css'
 
 const LS_KEY = "frontrow";
 const Countries = [

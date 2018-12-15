@@ -1,7 +1,7 @@
 // @flow
 
 import React,{Component} from "react";
-import { Page, Grid, Card} from "tabler-react";
+import { Page, Grid, GalleryCard} from "tabler-react";
 import SiteWrapper from "../SiteWrapper.react";
 import ReactPlayer from 'react-player';
 import Moment from 'react-moment';
@@ -59,31 +59,35 @@ class Video extends Component {
 
   render() {
 
+    var p = <Moment format="DD/MM/YYYY">{this.state.publishDate}</Moment>
+
     return (
       <SiteWrapper>
         <Page.Content>
-          <Grid.Row>
-          <Card>
-              <Card.Header>
-                <Card.Title>{this.state.title}</Card.Title>
-              </Card.Header>
-            <Card.Body>
 
-            <Grid.Col sm={6} lg={4}>
-              <ReactPlayer
+          <Grid.Col sm={6} lg={12}>
+            <div>
+            <GalleryCard>
+            <div>
+            <ReactPlayer
                 url={this.state.videoURL}
-                className='react-player'
                 controls='true'
               />
-                
-              <b>Total Views :</b> {this.state.views} <br></br>
-              <b>Published Date :</b> <Moment>{this.state.publishDate}</Moment>
-            
+            </div>
+
+              <GalleryCard.Footer>
+                <GalleryCard.Details
+                  fullName={this.state.title}
+                  dateString={p}
+                />
+                <GalleryCard.IconGroup>
+                  <GalleryCard.IconItem name="eye" label={this.state.views} />
+                </GalleryCard.IconGroup>
+              </GalleryCard.Footer>
+            </GalleryCard>
+            </div>
             </Grid.Col>
 
-            </Card.Body>
-          </Card>
-          </Grid.Row>
         </Page.Content>
       </SiteWrapper>
     );
