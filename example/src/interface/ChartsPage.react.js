@@ -26,10 +26,40 @@ class Video extends Component {
       publishDate: ""        
     };
     this.OneVideoRead = this.OneVideoRead.bind(this);
+    this.updateView = this.updateView.bind(this);
+  }
+
+  updateView(e) {
+
+    var vid = this.state.vid;
+    fetch("http://localhost:7000/view/update/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: vid.replace(/\"/g, ""),
+        views: e
+      })
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        
+        if(json.success == true){
+        
+        } else {
+          alert("Error")
+        }
+        
+      });
+    
   }
 
   componentDidMount() {
-    this.OneVideoRead()
+    this.OneVideoRead();
   }
 
   OneVideoRead() {
@@ -48,10 +78,11 @@ class Video extends Component {
       .then(json => {
         
         if(json.success == true){
-          this.setState({ title: json.data[0].title , views: json.data[0].totalViews , 
+          this.setState({ title: json.data[0].title , views: json.data[0].totalViews + 1 , 
             publishDate: json.data[0].publishedOn,videoURL: json.data[0].video });
+            this.updateView(json.data[0].totalViews + 1)
         } else {
-          alert("Sdc")
+          alert("Error")
         }
         
       });

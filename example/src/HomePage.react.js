@@ -25,7 +25,6 @@ class Home extends Component {
     };
     this.hideAlert = this.hideAlert.bind(this);
     this.VideoRead = this.VideoRead.bind(this);
-    this.Alert = this.Alert.bind(this);
   }
 
   VideoRead() {
@@ -107,10 +106,6 @@ class Home extends Component {
     this.setState({ send: "" });
   }
 
-  Alert() {
-    alert("sdcsdc")
-  }
-
   render() {
     const Videos = ({ data }) => (
       <Container className="row row-cards">
@@ -119,9 +114,7 @@ class Home extends Component {
           var link = "/charts/" + video.uniqueIdentifier
           return (
             <Grid.Col sm={6} lg={4} key={i}>
-            <div  onClick = {() => {    
-                alert(JSON.stringify("sdcsc"));
-             }} >
+            <div>
             <GalleryCard key={i}>
               <GalleryCard.Image src={video.imageURL}/>
               <GalleryCard.Footer>
