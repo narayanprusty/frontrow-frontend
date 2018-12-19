@@ -229,7 +229,6 @@ class SiteWrapper extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-
     var accesstoken = this.state.auth;
     if (accesstoken == undefined) return;
     accesstoken = accesstoken.replace(/\"/g, "");
@@ -245,11 +244,9 @@ class SiteWrapper extends React.Component<Props, State> {
       .then(json => {
         let user = Object.assign({}, this.state.user);
         user.publicAddress = json.data.publicAddress;
-        
+
         this.getuser(user.publicAddress);
-
-      })
-
+      });
   }
 
   Init = async () => {
@@ -311,8 +308,8 @@ class SiteWrapper extends React.Component<Props, State> {
       accountDropdownProps = {
         avatarURL:
           "https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png",
-        name: "Guest Account",
-        description: "Anonymous Mode",
+        name: this.state.username || "Unknown",
+        description: "Logged In",
         options: [
           { icon: "user", value: "Profile", to: "/profile" },
           { icon: "log-out", value: "Sign out", to: "javascript:logout();" }

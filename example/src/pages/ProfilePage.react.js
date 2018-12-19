@@ -402,7 +402,7 @@ class ProfilePage extends Component {
           <Container>
             {this.state.send == "true" ? (
               <SweetAlert title="Success!" onConfirm={this.hideAlert}>
-                Successful
+                Profile Updated
               </SweetAlert>
             ) : (
               <p />
