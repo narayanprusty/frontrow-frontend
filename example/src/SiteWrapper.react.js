@@ -257,6 +257,7 @@ class SiteWrapper extends React.Component<Props, State> {
     );
 
     window.logout = this.handleLoggedOut;
+    window.login = this.Login;
     let accountDropdownProps = {};
     if (this.state.auth) {
       accountDropdownProps = {
@@ -275,7 +276,13 @@ class SiteWrapper extends React.Component<Props, State> {
           "https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png",
         name: "Guest Account",
         description: "Anonymous Mode",
-        options: [{ icon: "user", value: "You need to login" }]
+        options: [
+          {
+            icon: "unlock",
+            value: "Login using Metamask",
+            to: "javascript:login();"
+          }
+        ]
       };
     }
 

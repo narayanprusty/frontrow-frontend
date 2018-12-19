@@ -23,10 +23,33 @@ class Video extends Component {
       ok: false,
       auth: localStorage.getItem(LS_KEY) || undefined,
       views: "",
+      uploadername: "",
       publishDate: ""
     };
     this.OneVideoRead = this.OneVideoRead.bind(this);
     this.updateView = this.updateView.bind(this);
+    this.getuploader = this.getuploader.bind(this);
+  }
+
+  getuploader(e) {
+    fetch("http://localhost:7000/user/get/" + e, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        if (json.data[0] == undefined) return;
+        {
+          json.data[0].username == undefined
+            ? this.setState({ uploadername: null })
+            : this.setState({ uploadername: json.data[0].username });
+        }
+      });
   }
 
   updateView(e) {
@@ -79,6 +102,7 @@ class Video extends Component {
             videoURL: json.data[0].video
           });
           this.updateView(json.data[0].totalViews + 1);
+          this.getuploader(json.data[0].uploader);
         } else {
           alert("Error");
         }
@@ -94,6 +118,10 @@ class Video extends Component {
     };
 
     var p = <Moment format="DD/MM/YYYY">{this.state.publishDate}</Moment>;
+    let fullName = this.state.title;
+    if (this.state.uploadername) {
+      fullName = fullName + " by " + this.state.uploadername;
+    }
 
     return (
       <SiteWrapper>
@@ -109,10 +137,11 @@ class Video extends Component {
                     height="50%"
                   />
                 </div>
-
+                <div className="pt-2" />
                 <GalleryCard.Footer>
                   <GalleryCard.Details
-                    fullName={this.state.title}
+                    avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
+                    fullName={fullName}
                     dateString={p}
                   />
                   <GalleryCard.IconGroup>

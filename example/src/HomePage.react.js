@@ -107,7 +107,7 @@ class Home extends Component {
   }
 
   render() {
-    //<GalleryCard.IconItem name="heart" label={link} right />
+    //<GalleryCard.IconItem name="heart" label={} right />
     const Videos = ({ data }) => (
       <Container className="row row-cards">
         {data.map(function(video, i) {
@@ -115,7 +115,10 @@ class Home extends Component {
           var link = "/charts/" + video.uniqueIdentifier;
           return (
             <Grid.Col sm={6} lg={4} key={i}>
-              <div>
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => window.goToVideo(link)}
+              >
                 <GalleryCard key={i}>
                   <GalleryCard.Image src={video.imageURL} />
                   <GalleryCard.Footer>
@@ -148,5 +151,9 @@ class Home extends Component {
     );
   }
 }
+
+window.goToVideo = l => {
+  window.location = l;
+};
 
 export default Home;
