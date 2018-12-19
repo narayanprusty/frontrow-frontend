@@ -3,6 +3,7 @@
 import * as React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import Web3 from "web3";
+import jwtDecode from "jwt-decode";
 import {
   Site,
   Nav,
@@ -138,6 +139,7 @@ class SiteWrapper extends React.Component<Props, State> {
     this.state = {
       loading: false,
       auth: localStorage.getItem(LS_KEY) || undefined,
+      username: "",
       notificationsObjects: [
         {
           unread: true,
@@ -153,6 +155,28 @@ class SiteWrapper extends React.Component<Props, State> {
       ]
     };
     this.Login = this.Login.bind(this);
+    this.getuser = this.getuser.bind(this);
+  }
+
+  getuser(e) {
+    fetch("http://localhost:7000/user/get/" + e, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        if (json.data[0] == undefined) return;
+        {
+          json.data[0].username == undefined
+            ? this.setState({ username: null })
+            : this.setState({ username: json.data[0].username });
+        }
+      });
   }
 
   handleLoggedIn = auth => {
@@ -203,6 +227,30 @@ class SiteWrapper extends React.Component<Props, State> {
       return response.json();
     });
   };
+
+  componentDidMount() {
+
+    var accesstoken = this.state.auth;
+    if (accesstoken == undefined) return;
+    accesstoken = accesstoken.replace(/\"/g, "");
+    const {
+      payload: { id }
+    } = jwtDecode(accesstoken);
+    fetch(`http://localhost:7000/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accesstoken}`
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        let user = Object.assign({}, this.state.user);
+        user.publicAddress = json.data.publicAddress;
+        
+        this.getuser(user.publicAddress);
+
+      })
+
+  }
 
   Init = async () => {
     if (!window.ethereum) {
