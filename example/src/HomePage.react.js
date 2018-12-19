@@ -4,8 +4,8 @@ import React, { Component } from "react";
 import { Page, GalleryCard, Container, Grid } from "tabler-react";
 import jwtDecode from "jwt-decode";
 import SiteWrapper from "./SiteWrapper.react";
-import Moment from 'react-moment';
-import { Redirect } from 'react-router';
+import Moment from "react-moment";
+import { Redirect } from "react-router";
 
 const LS_KEY = "frontrow";
 
@@ -107,29 +107,32 @@ class Home extends Component {
   }
 
   render() {
+    //<GalleryCard.IconItem name="heart" label={link} right />
     const Videos = ({ data }) => (
       <Container className="row row-cards">
         {data.map(function(video, i) {
-          var p = <Moment fromNow>{video.publishedOn}</Moment>
-          var link = "/charts/" + video.uniqueIdentifier
+          var p = <Moment fromNow>{video.publishedOn}</Moment>;
+          var link = "/charts/" + video.uniqueIdentifier;
           return (
             <Grid.Col sm={6} lg={4} key={i}>
-            <div>
-            <GalleryCard key={i}>
-              <GalleryCard.Image src={video.imageURL}/>
-              <GalleryCard.Footer>
-                <GalleryCard.Details
-                  avatarURL="https://tabler.github.io/tabler/demo/faces/male/41.jpg"
-                  fullName={video.title}
-                  dateString={p}
-                />
-                <GalleryCard.IconGroup>
-                  <GalleryCard.IconItem name="eye" label={video.totalViews} />
-                  <GalleryCard.IconItem name="heart" label={link} right />
-                </GalleryCard.IconGroup>
-              </GalleryCard.Footer>
-            </GalleryCard>
-            </div>
+              <div>
+                <GalleryCard key={i}>
+                  <GalleryCard.Image src={video.imageURL} />
+                  <GalleryCard.Footer>
+                    <GalleryCard.Details
+                      avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
+                      fullName={video.title}
+                      dateString={p}
+                    />
+                    <GalleryCard.IconGroup>
+                      <GalleryCard.IconItem
+                        name="eye"
+                        label={video.totalViews}
+                      />
+                    </GalleryCard.IconGroup>
+                  </GalleryCard.Footer>
+                </GalleryCard>
+              </div>
             </Grid.Col>
           );
         })}
@@ -139,7 +142,7 @@ class Home extends Component {
     return (
       <SiteWrapper>
         <Page.Content>
-                  <Videos data={this.state.videos}  />
+          <Videos data={this.state.videos} />
         </Page.Content>
       </SiteWrapper>
     );

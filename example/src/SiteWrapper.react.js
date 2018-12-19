@@ -38,12 +38,13 @@ type navItem = {|
 
 const navBarItems: Array<navItem> = [
   {
-    value: "Home",
+    value: "Videos",
     to: "/",
-    icon: "home",
+    icon: "video",
     LinkComponent: withRouter(NavLink),
     useExact: true
   },
+  /*
   {
     value: "Interface",
     icon: "box",
@@ -102,12 +103,14 @@ const navBarItems: Array<navItem> = [
       { value: "RTL", to: "/rtl", LinkComponent: withRouter(NavLink) }
     ]
   },
+  */
   {
-    value: "Forms",
+    value: "Add Video",
     to: "/form-elements",
     icon: "check-square",
     LinkComponent: withRouter(NavLink)
-  },
+  }
+  /*
   {
     value: "Gallery",
     to: "/gallery",
@@ -122,22 +125,8 @@ const navBarItems: Array<navItem> = [
         ? "https://tabler.github.io/tabler-react/documentation"
         : "/documentation"
   }
+  */
 ];
-
-const accountDropdownProps = {
-  avatarURL: "./demo/faces/female/25.jpg",
-  name: "Jane Pearson",
-  description: "Administrator",
-  options: [
-    { icon: "user", value: "Profile" },
-    { icon: "settings", value: "Settings" },
-    { icon: "mail", value: "Inbox", badge: "6" },
-    { icon: "send", value: "Message" },
-    { isDivider: true },
-    { icon: "help-circle", value: "Need help?" },
-    { icon: "log-out", value: "Sign out" }
-  ]
-};
 
 var LS_KEY = "frontrow";
 var web3 = null;
@@ -266,43 +255,36 @@ class SiteWrapper extends React.Component<Props, State> {
       (a, v) => a || v.unread,
       false
     );
+
+    window.logout = this.handleLoggedOut;
+    let accountDropdownProps = {};
+    if (this.state.auth) {
+      accountDropdownProps = {
+        avatarURL:
+          "https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png",
+        name: "Guest Account",
+        description: "Anonymous Mode",
+        options: [
+          { icon: "user", value: "Profile", to: "/profile" },
+          { icon: "log-out", value: "Sign out", to: "javascript:logout();" }
+        ]
+      };
+    } else {
+      accountDropdownProps = {
+        avatarURL:
+          "https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png",
+        name: "Guest Account",
+        description: "Anonymous Mode",
+        options: [{ icon: "user", value: "You need to login" }]
+      };
+    }
+
     return (
       <Site.Wrapper
         headerProps={{
           href: "/",
           alt: "Tabler React",
           imageURL: "./demo/brand/tabler.svg",
-          navItems:
-            this.state.auth == undefined ? (
-              <Nav.Item type="div" className="d-none d-md-flex">
-                <Button
-                  outline
-                  RootComponent="a"
-                  color="primary"
-                  onClick={this.Login}
-                >
-                  Login
-                </Button>
-              </Nav.Item>
-            ) : (
-              <Nav.Item type="div" className="d-none d-md-flex">
-                <Button
-                  outline
-                  RootComponent="a"
-                  color="primary"
-                  href="/profile"
-                >
-                  Edit Profile
-                </Button>
-                <Button
-                  outline
-                  RootComponent="a"
-                  onClick={this.handleLoggedOut}
-                >
-                  <Icon prefix="fe" name="power" />
-                </Button>
-              </Nav.Item>
-            ),
           accountDropdown: accountDropdownProps
         }}
         navProps={{ itemsObjects: navBarItems }}
