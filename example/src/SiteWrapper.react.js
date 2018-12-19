@@ -3,6 +3,7 @@
 import * as React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import Web3 from "web3";
+import jwtDecode from "jwt-decode";
 import {
   Site,
   Nav,
@@ -124,21 +125,6 @@ const navBarItems: Array<navItem> = [
   }
 ];
 
-const accountDropdownProps = {
-  avatarURL: "./demo/faces/female/25.jpg",
-  name: "Jane Pearson",
-  description: "Administrator",
-  options: [
-    { icon: "user", value: "Profile" },
-    { icon: "settings", value: "Settings" },
-    { icon: "mail", value: "Inbox", badge: "6" },
-    { icon: "send", value: "Message" },
-    { isDivider: true },
-    { icon: "help-circle", value: "Need help?" },
-    { icon: "log-out", value: "Sign out" }
-  ]
-};
-
 var LS_KEY = "frontrow";
 var web3 = null;
 var add = "";
@@ -149,6 +135,7 @@ class SiteWrapper extends React.Component<Props, State> {
     this.state = {
       loading: false,
       auth: localStorage.getItem(LS_KEY) || undefined,
+      username: "",
       notificationsObjects: [
         {
           unread: true,
@@ -164,6 +151,28 @@ class SiteWrapper extends React.Component<Props, State> {
       ]
     };
     this.Login = this.Login.bind(this);
+    this.getuser = this.getuser.bind(this);
+  }
+
+  getuser(e) {
+    fetch("http://localhost:7000/user/get/" + e, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        if (json.data[0] == undefined) return;
+        {
+          json.data[0].username == undefined
+            ? this.setState({ username: null })
+            : this.setState({ username: json.data[0].username });
+        }
+      });
   }
 
   handleLoggedIn = auth => {
@@ -214,6 +223,30 @@ class SiteWrapper extends React.Component<Props, State> {
       return response.json();
     });
   };
+
+  componentDidMount() {
+
+    var accesstoken = this.state.auth;
+    if (accesstoken == undefined) return;
+    accesstoken = accesstoken.replace(/\"/g, "");
+    const {
+      payload: { id }
+    } = jwtDecode(accesstoken);
+    fetch(`http://localhost:7000/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accesstoken}`
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        let user = Object.assign({}, this.state.user);
+        user.publicAddress = json.data.publicAddress;
+        
+        this.getuser(user.publicAddress);
+
+      })
+
+  }
 
   Init = async () => {
     if (!window.ethereum) {
@@ -271,7 +304,7 @@ class SiteWrapper extends React.Component<Props, State> {
         headerProps={{
           href: "/",
           alt: "Tabler React",
-          imageURL: "./demo/brand/tabler.svg",
+          imageURL: "../demo/brand/tabler.svg",
           navItems:
             this.state.auth == undefined ? (
               <Nav.Item type="div" className="d-none d-md-flex">
@@ -303,7 +336,20 @@ class SiteWrapper extends React.Component<Props, State> {
                 </Button>
               </Nav.Item>
             ),
-          accountDropdown: accountDropdownProps
+          accountDropdown: {
+            avatarURL: "../demo/faces/female/25.jpg",
+            name: this.state.username,
+            description: "User",
+            options: [
+              { icon: "user", value: "Profile" },
+              { icon: "settings", value: "Settings" },
+              { icon: "mail", value: "Inbox", badge: "6" },
+              { icon: "send", value: "Message" },
+              { isDivider: true },
+              { icon: "help-circle", value: "Need help?" },
+              { icon: "log-out", value: "Sign out" }
+            ]
+          }
         }}
         navProps={{ itemsObjects: navBarItems }}
         routerContextComponentType={withRouter(RouterContextProvider)}
