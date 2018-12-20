@@ -107,7 +107,7 @@ const navBarItems: Array<navItem> = [
   */
   {
     value: "Add Video",
-    to: "/form-elements",
+    to: "/add-video",
     icon: "check-square",
     LinkComponent: withRouter(NavLink)
   }
@@ -134,171 +134,171 @@ var web3 = null;
 var add = "";
 
 class SiteWrapper extends React.Component<Props, State> {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            auth: localStorage.getItem(LS_KEY) || undefined,
-            username: "",
-            notificationsObjects: [
-                {
-                    unread: true,
-                    avatarURL: "demo/faces/male/41.jpg",
-                    message: (
-                        <React.Fragment>
-                            <strong>Nathan</strong> pushed new commit: Fix page load
-                            performance issue.
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      auth: localStorage.getItem(LS_KEY) || undefined,
+      username: "",
+      notificationsObjects: [
+        {
+          unread: true,
+          avatarURL: "demo/faces/male/41.jpg",
+          message: (
+            <React.Fragment>
+              <strong>Nathan</strong> pushed new commit: Fix page load
+              performance issue.
             </React.Fragment>
-                    ),
-                    time: "10 minutes ago"
-                }
-            ]
-        };
-        this.Login = this.Login.bind(this);
-        this.getuser = this.getuser.bind(this);
-    }
-
-    getuser(e) {
-        fetch("http://localhost:7000/user/get/" + e, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                if (json.data[0] == undefined) return;
-                {
-                    json.data[0].username == undefined
-                        ? this.setState({ username: null })
-                        : this.setState({ username: json.data[0].username });
-                }
-            });
-    }
-
-    handleLoggedIn = auth => {
-        localStorage.setItem(LS_KEY, JSON.stringify(auth));
-        this.setState({ auth: auth });
+          ),
+          time: "10 minutes ago"
+        }
+      ]
     };
+    this.Login = this.Login.bind(this);
+    this.getuser = this.getuser.bind(this);
+  }
 
-    handleLoggedOut = () => {
-        localStorage.removeItem(LS_KEY);
-        this.setState({ auth: null });
-    };
-
-    handleSignup = async publicAddress => {
-        console.log("Sign up with ", add[0]);
-        var response = await fetch(`http://localhost:7000/users`, {
-            body: JSON.stringify({ publicAddress }),
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: "POST"
-        });
-        console.log(response);
+  getuser(e) {
+    fetch("http://localhost:7000/user/get/" + e, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
         return response.json();
+      })
+      .then(json => {
+        if (json.data[0] == undefined) return;
+        {
+          json.data[0].username == undefined
+            ? this.setState({ username: null })
+            : this.setState({ username: json.data[0].username });
+        }
+      });
+  }
+
+  handleLoggedIn = auth => {
+    localStorage.setItem(LS_KEY, JSON.stringify(auth));
+    this.setState({ auth: auth });
+  };
+
+  handleLoggedOut = () => {
+    localStorage.removeItem(LS_KEY);
+    this.setState({ auth: null });
+  };
+
+  handleSignup = async publicAddress => {
+    console.log("Sign up with ", add[0]);
+    var response = await fetch(`http://localhost:7000/users`, {
+      body: JSON.stringify({ publicAddress }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    });
+    console.log(response);
+    return response.json();
+  };
+
+  handleSignMessage = (publicAddress, nonce) => {
+    return new Promise((resolve, reject) =>
+      web3.eth.personal.sign(
+        web3.utils.fromUtf8(`I am signing my one-time nonce: ` + nonce),
+        publicAddress,
+        (err, signature) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve(signature);
+        }
+      )
+    );
+  };
+
+  handleAuthenticate = (publicAddress, signature) => {
+    return fetch(`http://localhost:7000/auth`, {
+      body: JSON.stringify({
+        publicAddress: publicAddress,
+        signature: signature
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    }).then(response => {
+      return response.json();
+    });
+  };
+
+  componentDidMount() {
+    var accesstoken = this.state.auth;
+    if (accesstoken == undefined) return;
+    accesstoken = accesstoken.replace(/\"/g, "");
+    const {
+      payload: { id }
+    } = jwtDecode(accesstoken);
+    fetch(`http://localhost:7000/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accesstoken}`
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        let user = Object.assign({}, this.state.user);
+        user.publicAddress = json.data.publicAddress;
+
+        this.getuser(user.publicAddress);
+      });
+  }
+
+  Init = async () => {
+    if (!window.ethereum) {
+      return;
+    }
+    window.web3 = new Web3(window.ethereum);
+    add = await window.ethereum.enable();
+    console.log(add);
+    await this.setState({ address: add[0] });
+  };
+
+  Login = async () => {
+    await this.Init();
+
+    if (!window.web3) {
+      return alert("Please install Metamask!");
+    }
+    if (!web3) {
+      web3 = new Web3(window.web3.currentProvider);
     }
 
-    handleSignMessage = (publicAddress, nonce) => {
-        return new Promise((resolve, reject) =>
-            web3.eth.personal.sign(
-                web3.utils.fromUtf8(`I am signing my one-time nonce: ` + nonce),
-                publicAddress,
-                (err, signature) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    return resolve(signature);
-                }
-            )
-        );
-    };
+    this.setState({ loading: true });
 
-    handleAuthenticate = (publicAddress, signature) => {
-        return fetch(`http://localhost:7000/auth`, {
-            body: JSON.stringify({
-                publicAddress: publicAddress,
-                signature: signature
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: "POST"
-        }).then(response => {
-            return response.json();
-        });
-    };
+    try {
+      var nonce = "";
+      var response = await fetch(
+        `http://localhost:7000/users?publicAddress=${add[0]}`
+      );
+      var data = await response.json();
+      if (data.users.length > 0) {
+        nonce = await data.users[0].nonce;
+      } else {
+        nonce = await this.handleSignup(add[0]);
+        nonce = await nonce.nonce;
+      }
+      console.log("nonce", nonce);
 
-    componentDidMount() {
-        var accesstoken = this.state.auth;
-        if (accesstoken == undefined) return;
-        accesstoken = accesstoken.replace(/\"/g, "");
-        const {
-            payload: { id }
-        } = jwtDecode(accesstoken);
-        fetch(`http://localhost:7000/users/${id}`, {
-            headers: {
-                Authorization: `Bearer ${accesstoken}`
-            }
-        })
-            .then(response => response.json())
-            .then(json => {
-                let user = Object.assign({}, this.state.user);
-                user.publicAddress = json.data.publicAddress;
-
-                this.getuser(user.publicAddress);
-            });
+      var sig = await this.handleSignMessage(add[0], nonce);
+      var token = await this.handleAuthenticate(add[0], sig);
+      var auth = await token.token;
+      var login = await this.handleLoggedIn(auth);
+      await this.setState({ loading: false });
+    } catch (e) {
+      window.alert(e);
+      this.setState({ loading: false });
     }
-
-    Init = async () => {
-        if (!window.ethereum) {
-            return;
-        }
-        window.web3 = new Web3(window.ethereum);
-        add = await window.ethereum.enable();
-        console.log(add);
-        await this.setState({ address: add[0] });
-    };
-
-    Login = async () => {
-        await this.Init();
-
-        if (!window.web3) {
-            return alert("Please install Metamask!");
-        }
-        if (!web3) {
-            web3 = new Web3(window.web3.currentProvider);
-        }
-
-        this.setState({ loading: true });
-
-        try {
-            var nonce = "";
-            var response = await fetch(
-                `http://localhost:7000/users?publicAddress=${add[0]}`
-            );
-            var data = await response.json();
-            if (data.users.length > 0) {
-                nonce = await data.users[0].nonce;
-            } else {
-                nonce = await this.handleSignup(add[0]);
-                nonce = await nonce.nonce;
-            }
-            console.log("nonce", nonce);
-
-            var sig = await this.handleSignMessage(add[0], nonce);
-            var token = await this.handleAuthenticate(add[0], sig);
-            var auth = await token.token;
-            var login = await this.handleLoggedIn(auth);
-            await this.setState({ loading: false });
-        } catch (e) {
-            window.alert(e);
-            this.setState({ loading: false });
-        }
-    };
+  };
 
   render(): React.Node {
     const notificationsObjects = this.state.notificationsObjects || [];

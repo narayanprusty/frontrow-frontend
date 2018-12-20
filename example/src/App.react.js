@@ -12,7 +12,7 @@ import {
   Error503,
   Empty,
   Email,
-  ProfilePage,
+  ProfilePage
 } from "./pages";
 
 import HomePage from "./HomePage.react";
@@ -47,7 +47,7 @@ function App(props: Props): React.Node {
           <Route path="/video/:id" component={ChartsPage} />
           <Route exact path="/email" component={Email} />
           <Route exact path="/empty-page" component={Empty} />
-          <Route exact path="/form-elements" component={FormElementsPage} />
+          <Route exact path="/add-video" component={FormElementsPage} />
           <Route exact path="/forgot-password" component={ForgotPasswordPage} />
           <Route exact path="/gallery" component={GalleryPage} />
           <Route exact path="/icons" component={IconPage} />
