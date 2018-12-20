@@ -279,7 +279,7 @@ class ProfilePage extends Component {
       location: "",
       send: "",
       interests: [],
-      ok: false,
+      ok: true,
       auth: localStorage.getItem(LS_KEY) || undefined
     };
     this.edit = this.edit.bind(this);
@@ -368,6 +368,7 @@ class ProfilePage extends Component {
             return response.json();
           })
           .then(json => {
+            console.log("User data", json.data[0]);
             if (json.data[0] == undefined) return;
             {
               json.data[0].username == undefined
@@ -386,7 +387,7 @@ class ProfilePage extends Component {
             }
             {
               json.data[0].interests == undefined
-                ? this.setState({ interests: null })
+                ? this.setState({ interests: [] })
                 : this.setState({ interests: json.data[0].interests });
             }
             this.setState({ ok: true });
