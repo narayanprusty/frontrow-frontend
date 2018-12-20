@@ -134,6 +134,9 @@ class Home extends Component {
                       />
                     </GalleryCard.IconGroup>
                   </GalleryCard.Footer>
+                  <div className="d-flex align-items-center px-2">
+                  <small>{video.username ? "Uploaded by: "+video.username.toString() : ""}</small>
+                  </div>
                 </GalleryCard>
               </div>
             </Grid.Col>

@@ -24,7 +24,8 @@ class Video extends Component {
       auth: localStorage.getItem(LS_KEY) || undefined,
       views: "",
       uploadername: "",
-      publishDate: ""
+      publishDate: "",
+      username: "",
     };
     this.OneVideoRead = this.OneVideoRead.bind(this);
     this.updateView = this.updateView.bind(this);
@@ -99,7 +100,8 @@ class Video extends Component {
             title: json.data[0].title,
             views: json.data[0].totalViews + 1,
             publishDate: json.data[0].publishedOn,
-            videoURL: json.data[0].video
+            videoURL: json.data[0].video,
+            username: json.data[0].username
           });
           this.updateView(json.data[0].totalViews + 1);
           this.getuploader(json.data[0].uploader);
@@ -117,7 +119,7 @@ class Video extends Component {
       title: this.state.title
     };
 
-    var p = <Moment format="DD/MM/YYYY">{this.state.publishDate}</Moment>;
+    var p = <Moment fromNow>{this.state.publishDate}</Moment>;
     let fullName = this.state.title;
     if (this.state.uploadername) {
       fullName = fullName + " by " + this.state.uploadername;
@@ -148,6 +150,9 @@ class Video extends Component {
                     <GalleryCard.IconItem name="eye" label={this.state.views} />
                   </GalleryCard.IconGroup>
                 </GalleryCard.Footer>
+                <div className="d-flex align-items-center px-2">
+                <small>{this.state.username ? "Uploaded by: "+this.state.username.toString() : ""}</small>
+                </div>
               </GalleryCard>
             </div>
             <Disqus.DiscussionEmbed

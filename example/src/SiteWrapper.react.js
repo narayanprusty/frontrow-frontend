@@ -154,6 +154,7 @@ class SiteWrapper extends React.Component<Props, State> {
         }
       ]
     };
+    this.handleLoggedIn = this.handleLoggedIn.bind(this);
     this.Login = this.Login.bind(this);
     this.getuser = this.getuser.bind(this);
   }
@@ -170,6 +171,7 @@ class SiteWrapper extends React.Component<Props, State> {
         return response.json();
       })
       .then(json => {
+          console.log("User info", json);
         if (json.data[0] == undefined) return;
         {
           json.data[0].username == undefined
@@ -182,6 +184,9 @@ class SiteWrapper extends React.Component<Props, State> {
   handleLoggedIn = auth => {
     localStorage.setItem(LS_KEY, JSON.stringify(auth));
     this.setState({ auth: auth });
+    if(!this.state.username)
+        window.location = "/profile";
+
   };
 
   handleLoggedOut = () => {

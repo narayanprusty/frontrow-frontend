@@ -96,6 +96,7 @@ class VideoForm extends Component {
 
   hideAlert() {
     this.setState({ send: "" });
+    this.props.history.push(`/`)
   }
 
   render() {
