@@ -132,7 +132,7 @@ class Video extends Component {
                 <div>
                   <ReactPlayer
                     url={this.state.videoURL}
-                    controls="true"
+                    controls={true}
                     width="100%"
                     height="50%"
                   />

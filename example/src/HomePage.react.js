@@ -112,7 +112,7 @@ class Home extends Component {
       <Container className="row row-cards">
         {data.map(function(video, i) {
           var p = <Moment fromNow>{video.publishedOn}</Moment>;
-          var link = "/charts/" + video.uniqueIdentifier;
+          var link = "/video/" + video.uniqueIdentifier;
           return (
             <Grid.Col sm={6} lg={4} key={i}>
               <div

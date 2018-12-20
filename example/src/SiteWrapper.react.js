@@ -336,7 +336,7 @@ class SiteWrapper extends React.Component<Props, State> {
         headerProps={{
           href: "/",
           alt: "Tabler React",
-          imageURL: "./demo/brand/tabler.svg",
+          imageURL: "/demo/logo.png",
           accountDropdown: accountDropdownProps
         }}
         navProps={{ itemsObjects: navBarItems }}
