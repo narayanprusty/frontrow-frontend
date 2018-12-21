@@ -55,7 +55,7 @@ class Video extends Component {
 
   updateView(e) {
     var vid = this.state.vid;
-    fetch("http://localhost:7000/view/update/", {
+    fetch("http://localhost:7000/video/view/update/", {
       method: "POST",
       headers: {
         Accept: "application/json",
