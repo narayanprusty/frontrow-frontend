@@ -95,6 +95,7 @@ class Video extends Component {
         return response.json();
       })
       .then(json => {
+          console.log("Video Read", json);
         if (json.success == true) {
           this.setState({
             title: json.data[0].title,
@@ -143,16 +144,13 @@ class Video extends Component {
                 <GalleryCard.Footer>
                   <GalleryCard.Details
                     avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
-                    fullName={fullName}
+                    fullName={fullName + (this.state.username ? " uploaded by "+this.state.username.toString() : "")}
                     dateString={p}
                   />
                   <GalleryCard.IconGroup>
                     <GalleryCard.IconItem name="eye" label={this.state.views} />
                   </GalleryCard.IconGroup>
                 </GalleryCard.Footer>
-                <div className="d-flex align-items-center px-2">
-                <small>{this.state.username ? "Uploaded by: "+this.state.username.toString() : ""}</small>
-                </div>
               </GalleryCard>
             </div>
             <Disqus.DiscussionEmbed

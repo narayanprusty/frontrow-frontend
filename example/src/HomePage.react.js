@@ -124,7 +124,7 @@ class Home extends Component {
                   <GalleryCard.Footer>
                     <GalleryCard.Details
                       avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
-                      fullName={video.title}
+                      fullName={video.title + (video.username ? " uploaded by " + video.username.toString() : "")}
                       dateString={p}
                     />
                     <GalleryCard.IconGroup>
@@ -134,9 +134,6 @@ class Home extends Component {
                       />
                     </GalleryCard.IconGroup>
                   </GalleryCard.Footer>
-                  <div className="d-flex align-items-center px-2">
-                  <small>{video.username ? "Uploaded by: "+video.username.toString() : ""}</small>
-                  </div>
                 </GalleryCard>
               </div>
             </Grid.Col>
