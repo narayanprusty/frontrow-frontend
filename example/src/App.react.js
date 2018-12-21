@@ -25,6 +25,7 @@ import ChartsPage from "./interface/ChartsPage.react";
 import GalleryPage from "./GalleryPage.react";
 import MapCardsPage from "./components/MapCardsPage.react";
 import BlogPage from "./components/BlogPage.react";
+import PublishAdsPage from "./interface/PublishAdsPage.react";
 
 import "tabler-react/dist/Tabler.css";
 
@@ -48,6 +49,7 @@ function App(props: Props): React.Node {
           <Route exact path="/email" component={Email} />
           <Route exact path="/empty-page" component={Empty} />
           <Route exact path="/add-video" component={FormElementsPage} />
+          <Route exact path="/publish-ads" component={PublishAdsPage} />
           <Route exact path="/forgot-password" component={ForgotPasswordPage} />
           <Route exact path="/gallery" component={GalleryPage} />
           <Route exact path="/icons" component={IconPage} />

@@ -10,107 +10,187 @@ import Disqus from "disqus-react";
 const LS_KEY = "frontrow";
 
 class Video extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      vid: JSON.stringify(this.props.location.pathname.split("/")[2]),
-      loading: false,
-      title: "",
-      videoURL: "",
-      views: "",
-      user: "",
-      send: "",
-      ok: false,
-      auth: localStorage.getItem(LS_KEY) || undefined,
-      views: "",
-      uploadername: "",
-      publishDate: "",
-      username: "",
-    };
-    this.OneVideoRead = this.OneVideoRead.bind(this);
-    this.updateView = this.updateView.bind(this);
-    this.getuploader = this.getuploader.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            vid: JSON.stringify(this.props.location.pathname.split("/")[2]),
+            loading: false,
+            title: "",
+            videoURL: "",
+            views: "",
+            user: "",
+            send: "",
+            ok: false,
+            auth: localStorage.getItem(LS_KEY) || undefined,
+            views: "",
+            uploadername: "",
+            publishDate: "",
+            username: "",
+            playing: true,
+            duration: 0,
+            played: 0,
+            lastAdShowedOn: 0,
+            showingAd: false,
+            fetchingAd: false,
+            bannerURL: "",
+            height: "",
+        };
+        this.OneVideoRead = this.OneVideoRead.bind(this);
+        this.updateView = this.updateView.bind(this);
+        this.getuploader = this.getuploader.bind(this);
+        this.onDuration = this.onDuration.bind(this);
+        this.onProgress = this.onProgress.bind(this);
+        this.getuploader = this.getuploader.bind(this);
+        this.resize = this.resize.bind(this);
+    }
 
-  getuploader(e) {
-    fetch("http://localhost:7000/user/get/" + e, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        if (json.data[0] == undefined) return;
-        {
-          json.data[0].username == undefined
-            ? this.setState({ uploadername: null })
-            : this.setState({ uploadername: json.data[0].username });
+    getuploader = (e) => {
+        fetch("http://localhost:7000/user/get/" + e, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                console.log("height",this.div.clientHeight, this.div.clientHeight * 0.8)
+                this.setState({height: this.div.clientHeight});
+                if (json.data[0] == undefined) return;
+                {
+                    json.data[0].username == undefined
+                        ? this.setState({ uploadername: null })
+                        : this.setState({ uploadername: json.data[0].username });
+                }
+            });
+    }
+
+    updateView(e) {
+        var vid = this.state.vid;
+        fetch("http://localhost:7000/video/view/update/", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: vid.replace(/\"/g, ""),
+                views: e
+            })
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                if (json.success == true) {
+                } else {
+                    alert("Error");
+                }
+            });
+    }
+
+    resize = () => {
+        if(this.div.clientHeight > 0)
+            this.setState({height: this.div.clientHeight});
+    }
+
+    componentDidMount() {
+        window.addEventListener('resize', this.resize);
+        this.OneVideoRead();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.resize)
+    }
+
+    OneVideoRead() {
+        var vid = this.state.vid;
+        fetch("http://localhost:7000/video/get/" + vid.replace(/\"/g, ""), {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                authorization: localStorage.getItem("jwt")
+            }
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                console.log("Video Read", json);
+                if (json.success == true) {
+                    this.setState({
+                        title: json.data[0].title,
+                        views: json.data[0].totalViews + 1,
+                        publishDate: json.data[0].publishedOn,
+                        videoURL: json.data[0].video,
+                        username: json.data[0].username
+                    });
+                    this.updateView(json.data[0].totalViews + 1);
+                    this.getuploader(json.data[0].uploader);
+                } else {
+                    alert("Error");
+                }
+            });
+    }
+
+    onDuration = (duration) => {
+        console.log('onDuration', duration)
+        this.setState({ duration })
+    }
+
+    onProgress = e => {
+        var played = this.state.duration * e.played;
+        var seconds = parseInt(played);
+        if (seconds < 5) {
+            this.setState({ lastAdShowedOn: 0 });
         }
-      });
-  }
+        console.log(seconds);
+        if (seconds % 7 == 0 && seconds > this.state.lastAdShowedOn && !this.state.fetchingAd) {
 
-  updateView(e) {
-    var vid = this.state.vid;
-    fetch("http://localhost:7000/video/view/update/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        id: vid.replace(/\"/g, ""),
-        views: e
-      })
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        if (json.success == true) {
-        } else {
-          alert("Error");
+            fetch("http://localhost:7000/adv/banner", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    authorization:
+                        "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+                }
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                console.log(json, json.bannerUrl);
+                this.setState({
+                    playing: false,
+                    lastAdShowedOn: seconds,
+                    showingAd: true,
+                    bannerURL: json.bannerUrl
+                });
+
+                setTimeout(
+                    function () {
+                        this.setState({ playing: true, showingAd: false });
+                    }
+                        .bind(this),
+                    5000
+                );
+            });
         }
-      });
-  }
+    }
 
-  componentDidMount() {
-    this.OneVideoRead();
-  }
-
-  OneVideoRead() {
-    var vid = this.state.vid;
-    fetch("http://localhost:7000/video/get/" + vid.replace(/\"/g, ""), {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        authorization: localStorage.getItem("jwt")
-      }
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-          console.log("Video Read", json);
-        if (json.success == true) {
-          this.setState({
-            title: json.data[0].title,
-            views: json.data[0].totalViews + 1,
-            publishDate: json.data[0].publishedOn,
-            videoURL: json.data[0].video,
-            username: json.data[0].username
-          });
-          this.updateView(json.data[0].totalViews + 1);
-          this.getuploader(json.data[0].uploader);
-        } else {
-          alert("Error");
-        }
-      });
-  }
+    handleImageLoaded() {
+        setTimeout(
+            function () {
+                this.setState({ playing: true, showingAd: false });
+            }
+                .bind(this),
+            5000
+        );
+    }
 
   render() {
     const disqusShortname = "frontrow";
@@ -132,13 +212,27 @@ class Video extends Component {
           <Grid.Col sm={6} lg={12}>
             <div>
               <GalleryCard>
-                <div>
+                <div 
+                    style={{display: this.state.showingAd ? "none" : "block"}} 
+                    ref={ div => { this.div = div; } }
+                >
                   <ReactPlayer
+                    playing={this.state.playing}
+                    onDuration={this.onDuration}
+                    onProgress={this.onProgress}
                     url={this.state.videoURL}
+                    progressInterval={1000}
                     controls={true}
                     width="100%"
                     height="50%"
                   />
+                </div>
+                <div style={{display: this.state.showingAd ? "block" : "none"}}>
+                    <img 
+                        width="100%"
+                        height={this.state.height} 
+                        src={this.state.bannerURL} onLoad={this.handleImageLoaded.bind(this)} 
+                    />
                 </div>
                 <div className="pt-2" />
                 <GalleryCard.Footer>

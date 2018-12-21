@@ -110,6 +110,12 @@ const navBarItems: Array<navItem> = [
     to: "/add-video",
     icon: "check-square",
     LinkComponent: withRouter(NavLink)
+  },
+  {
+    value: "Publish Ads",
+    to: "/publish-ads",
+    icon: "box",
+    LinkComponent: withRouter(NavLink)
   }
   /*
   {
@@ -307,7 +313,7 @@ class SiteWrapper extends React.Component<Props, State> {
                     .bind(this),
                 4000
             );
-            
+
         } catch (e) {
             window.alert(e);
             this.setState({ loading: false });
