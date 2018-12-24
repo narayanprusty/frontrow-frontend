@@ -410,12 +410,12 @@ class ProfilePage extends Component {
               <p />
             )}
             <Grid.Row>
-              <Grid.Col lg={12}>
+              <Grid.Col>
                 <Form className="card">
                   <Card.Body>
                     <Card.Title>Edit Profile</Card.Title>
                     <Grid.Row>
-                      <Grid.Col sm={6} md={3}>
+                      <Grid.Col xs={12} sm={6} md={6} >
                         <Form.Group>
                           <Form.Label>Username</Form.Label>
                           <Form.Input
@@ -428,7 +428,7 @@ class ProfilePage extends Component {
                           />
                         </Form.Group>
                       </Grid.Col>
-                      <Grid.Col sm={6} md={4}>
+                      <Grid.Col xs={12} sm={6} md={6}>
                         <Form.Group>
                           <Form.Label>Age</Form.Label>
                           <Form.Input
@@ -441,7 +441,9 @@ class ProfilePage extends Component {
                           />
                         </Form.Group>
                       </Grid.Col>
-                      <Grid.Col md={5}>
+                      </Grid.Row>
+                      <Grid.Row>
+                      <Grid.Col xs={12} sm={6} md={6}>
                         <Form.Group>
                           <Form.Label>
                             Country : {this.state.location}
@@ -454,7 +456,7 @@ class ProfilePage extends Component {
                           />
                         </Form.Group>
                       </Grid.Col>
-                      <Grid.Col md={5}>
+                      <Grid.Col xs={12} sm={6} md={6}>
                         <Form.Group>
                           <Form.Label>Interests</Form.Label>
                           <TagsInput

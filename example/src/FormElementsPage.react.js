@@ -132,10 +132,10 @@ class VideoForm extends Component {
           }
         >
           <Grid.Row>
-            <Grid.Col lg={12}>
+            <Grid.Col>
               <Form>
                 <Grid.Row>
-                  <Grid.Col sm={6} md={3}>
+                  <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
                       <Form.Label>Title</Form.Label>
                       <Form.Input
@@ -147,7 +147,9 @@ class VideoForm extends Component {
                       />
                     </Form.Group>
                   </Grid.Col>
-                  <Grid.Col sm={6} md={4}>
+                  </Grid.Row>
+                  <Grid.Row>
+                  <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
                       <Form.Label>Thumbnail URL</Form.Label>
                       <Form.Input
@@ -160,7 +162,9 @@ class VideoForm extends Component {
                       />
                     </Form.Group>
                   </Grid.Col>
-                  <Grid.Col sm={6} md={4}>
+                  </Grid.Row>
+                  <Grid.Row>
+                  <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
                       <Form.Label>Video URL</Form.Label>
                       <Form.Input

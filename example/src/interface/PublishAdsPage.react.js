@@ -174,7 +174,7 @@ class PublishAdsForm extends Component {
             <Grid.Col lg={12}>
                 <Form>
                     <Grid.Row>
-                        <Grid.Col sm={6} md={3}>
+                        <Grid.Col xs={12} sm={6} md={6}>
                             <Form.Group>
                                 <Form.Label>From Age</Form.Label>
                                 <Form.Input
@@ -192,11 +192,22 @@ class PublishAdsForm extends Component {
                                     onChange={e => this.setState({ interests: e })}
                                 />
                             </Form.Group>
+                            <Form.Group>
+                            <Form.Label>
+                                Country : {this.state.country}
+                            </Form.Label>
+                            <Select
+                                options={Countries}
+                                onChange={evt => {
+                                    this.setState({ country: evt.label });
+                                }}
+                            />
+                            </Form.Group>
                             <div>
                                 Matching users : {this.state.matches ? this.state.matches : 0}
                             </div>
                         </Grid.Col>
-                        <Grid.Col sm={6} md={3}>
+                        <Grid.Col xs={12} sm={6} md={6}>
                         <Form.Group>
                             <Form.Label>To Age</Form.Label>
                             <Form.Input
@@ -215,19 +226,6 @@ class PublishAdsForm extends Component {
                                 value={this.state.bannerUrl}
                                 onChange={evt => {
                                 this.setState({ bannerUrl: evt.target.value });
-                                }}
-                            />
-                        </Form.Group>
-                    </Grid.Col>
-                    <Grid.Col sm={6} md={4}>
-                        <Form.Group>
-                            <Form.Label>
-                                Country : {this.state.country}
-                            </Form.Label>
-                            <Select
-                                options={Countries}
-                                onChange={evt => {
-                                    this.setState({ country: evt.label });
                                 }}
                             />
                         </Form.Group>
