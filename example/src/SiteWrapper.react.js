@@ -112,7 +112,7 @@ const navBarItems: Array<navItem> = [
     LinkComponent: withRouter(NavLink)
   },
   {
-    value: "Publish Ads",
+    value: "Publish Ads & Summery",
     to: "/publish-ads",
     icon: "box",
     LinkComponent: withRouter(NavLink)

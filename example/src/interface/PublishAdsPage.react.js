@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { Page, Card, Grid, Form, Button, Dropdown } from "tabler-react";
+import { Page, Card, Grid, Form, Button, Dropdown, Table, Text, Icon } from "tabler-react";
 import Select from "react-select";
 import SiteWrapper from "../SiteWrapper.react";
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -9,6 +9,7 @@ import Countries from '../helpers/countries';
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import { ENGINE_METHOD_DIGESTS } from "constants";
+import { stat } from "fs";
 
 const LS_KEY = "frontrow";
 
@@ -24,18 +25,75 @@ class PublishAdsForm extends Component {
             ageUpperLimit: "",
             ageLowerLimit: "",
             costPerView: "",
+            loadingAdsStats: false,
+            adsStats: [],
             auth: localStorage.getItem(LS_KEY) || undefined
         };
         this.getStats = this.getStats.bind(this);
         this.hideAlert = this.hideAlert.bind(this);
         this.publishAd = this.publishAd.bind(this);
+        this.getAdsStats = this.getAdsStats.bind(this);
     }
 
-  componentDidMount() {
-    if (!this.state.auth) {
-      window.location = "/";
+    componentDidMount() {
+        if (!this.state.auth) {
+            window.location = "/";
+        }
+        this.setState({ loadingAdsStats: true });
+        fetch("http://localhost:7000/adv/adsStats", {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                authorization:
+                    "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                console.log(json);
+                var adsStats = this.getAdsStats(json);
+                this.setState({ adsStats: adsStats });
+                this.setState({ loadingAdStats: false });
+                //return response.json();
+            })
+            .catch(err => {
+                console.log(err);
+                this.setState({ loadingAdStats: false });
+            });
     }
-  }
+
+    getAdsStats = (data) => {
+        var stats = [];
+        for (var i = 0; i < data.length; i++) {
+            stats.push(
+                {
+                    key: i,
+                    item: [
+                        {
+                            content: (
+                                <Text RootComponent="span" muted>
+                                    {data[i].uniqueIdentifier}
+                                </Text>
+                            ),
+                        },
+                        {
+                            content: (
+                                <a href="invoice.html" className="text-inherit">
+                                    {data[i].views ? data[i].views : 0}
+                                </a>
+                            ),
+                        },
+                        { content: (data[i].views ? (data[i].views * data[i].costPerView) : 0) },
+                        { content: data[i].costPerView },
+                    ],
+                }
+            );
+        }
+        return stats;
+    }
 
     getStats() {
         this.setState({ loadingStats: true });
@@ -134,38 +192,7 @@ class PublishAdsForm extends Component {
           footer={
               <div>
             <Card.Footer>
-            <div className="d-flex">
-              {this.state.loadingStats ? (
-                <Button disabled className="ml-auto" color="primary">
-                  Getting Stats..
-                </Button>
-              ) : (
-                <Button
-                  color="primary"
-                  className="ml-auto"
-                  onClick={this.getStats}
-                >
-                  Get Stats
-                </Button>
-              )}
-            </div>
-          </Card.Footer>
-            <Card.Footer>
-              <div className="d-flex">
-                {this.state.loading ? (
-                  <Button disabled className="ml-auto" color="primary">
-                    Pulishing..
-                  </Button>
-                ) : (
-                  <Button
-                    color="primary"
-                    className="ml-auto"
-                    onClick={this.publishAd}
-                  >
-                    Publish
-                  </Button>
-                )}
-              </div>
+            
             </Card.Footer>
             </div>
           }
@@ -241,9 +268,62 @@ class PublishAdsForm extends Component {
                         </Form.Group>
                     </Grid.Col>
                 </Grid.Row>
+                <Grid.Row>
+                <Grid.Col lg={12} xs={12} md={12} sm={12}>
+                <div>
+                    <div style={{float: "left", marginRight: 10}}>
+                    {this.state.loadingStats ? (
+                        <Button disabled className="ml-auto" color="primary">
+                        Getting Stats..
+                        </Button>
+                    ) : (
+                        <Button
+                        color="primary"
+                        className="ml-auto"
+                        onClick={this.getStats}
+                        >
+                        Get Stats
+                        </Button>
+                    )}
+                    </div>
+                    <div style={{float: "left"}}>
+                        {this.state.loading ? (
+                        <Button disabled className="ml-auto" color="primary">
+                            Pulishing..
+                        </Button>
+                        ) : (
+                        <Button
+                            color="primary"
+                            className="ml-auto"
+                            onClick={this.publishAd}
+                        >
+                            Publish
+                        </Button>
+                        )}
+                        </div>
+                </div>
+                </Grid.Col>
+                </Grid.Row>
             </Form>
         </Grid.Col>
     </Grid.Row>
+    <Grid.Row>
+    <Grid.Col width={12}>
+            <Card title="Ads Summery">
+              <Table
+                responsive
+                className="card-table table-vcenter text-nowrap"
+                headerItems={[
+                  { content: "ID.", className: "w-1" },
+                  { content: "Views" },
+                  { content: "Total Debit" },
+                  { content: "Cost per view" },
+                ]}
+                bodyItems={this.state.adsStats}
+              />
+            </Card>
+          </Grid.Col>
+          </Grid.Row>
     </Page.Card>
     </SiteWrapper>
     );

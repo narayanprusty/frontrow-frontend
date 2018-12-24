@@ -280,6 +280,7 @@ class ProfilePage extends Component {
       send: "",
       interests: [],
       ok: true,
+      earnings: "",
       auth: localStorage.getItem(LS_KEY) || undefined
     };
     this.edit = this.edit.bind(this);
@@ -306,7 +307,7 @@ class ProfilePage extends Component {
         username: this.state.username,
         age: this.state.age,
         location: this.state.location,
-        interests: this.state.interests
+        interests: this.state.interests,
       })
     })
       .then(response => {
@@ -391,6 +392,11 @@ class ProfilePage extends Component {
                 ? this.setState({ interests: [] })
                 : this.setState({ interests: json.data[0].interests });
             }
+            {
+                json.data[0].earning == undefined
+                ? this.setState({earnings: ""})
+                : this.setState({earnings: json.data[0].earning});
+            }
             this.setState({ ok: true });
           });
       })
@@ -465,6 +471,11 @@ class ProfilePage extends Component {
                           />
                         </Form.Group>
                       </Grid.Col>
+                      </Grid.Row>
+                      <Grid.Row>
+                        <Grid.Col xs={12} sm={12} md={12}>
+                            <div>Your earnings: {this.state.earnings ? Math.round(this.state.earnings * 1000)/1000 : 0}</div>
+                        </Grid.Col>
                     </Grid.Row>
                   </Card.Body>
                   <Card.Footer className="text-right">
