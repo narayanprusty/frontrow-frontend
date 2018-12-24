@@ -64,7 +64,7 @@ class Video extends Component {
                         ? this.setState({ uploadername: null })
                         : this.setState({ uploadername: json.data[0].username });
                 }
-            });
+            }).catch(console.log);
     }
 
     updateView(e) {
@@ -88,7 +88,7 @@ class Video extends Component {
                 } else {
                     alert("Error");
                 }
-            });
+            }).catch(console.log);
     }
 
     resize = () => {
@@ -133,7 +133,7 @@ class Video extends Component {
                 } else {
                     alert("Error");
                 }
-            });
+            }).catch(console.log);
     }
 
     onDuration = (duration) => {
@@ -174,12 +174,28 @@ class Video extends Component {
                 setTimeout(
                     function () {
                         this.setState({ playing: true, showingAd: false });
+                        this.markAdSeen(json.uniqueIdentifier, this.state.vid.replace(/\"/g, ""));
                     }
                         .bind(this),
                     5000
                 );
-            });
+            }).catch(console.log);
         }
+    }
+
+    markAdSeen = (adId, vId) => {
+        fetch("http://localhost:7000/adv/seen", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                authorization: "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+            },
+            body: JSON.stringify({
+                adId: adId,
+                vId: vId
+            }),
+        });
     }
 
     handleImageLoaded() {
