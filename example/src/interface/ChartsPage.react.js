@@ -149,62 +149,64 @@ class Video extends Component {
     this.setState({ duration });
   };
 
-  onProgress = e => {
-    var played = this.state.duration * e.played;
-    var seconds = parseInt(played);
-    if (seconds < 5) {
-      this.setState({ lastAdShowedOn: 0 });
-    }
-    console.log(seconds);
-    if (
-      seconds % 7 == 0 &&
-      seconds > this.state.lastAdShowedOn &&
-      !this.state.fetchingAd
-    ) {
-      fetch(config.api.serverUrl + "/adv/banner", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          authorization:
-            "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+    onProgress = e => {
+        var played = this.state.duration * e.played;
+        var seconds = parseInt(played);
+        if (seconds < 5) {
+            this.setState({ lastAdShowedOn: 0 });
         }
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(json => {
-          console.log(json, json.bannerUrl);
-          this.setState({
-            playing: false,
-            lastAdShowedOn: seconds,
-            showingAd: true,
-            bannerURL: json.bannerUrl
-          });
+        console.log(seconds);
+        if (
+            seconds % 7 == 0 &&
+            seconds > this.state.lastAdShowedOn &&
+            !this.state.fetchingAd
+        ) {
+            var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
+            fetch(config.api.serverUrl + "/adv/banner", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    authorization:
+                        "Bearer " + auth
+                }
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then(json => {
+                    console.log(json, json.bannerUrl);
+                    this.setState({
+                        playing: false,
+                        lastAdShowedOn: seconds,
+                        showingAd: true,
+                        bannerURL: json.bannerUrl
+                    });
 
-          setTimeout(
-            function() {
-              this.setState({ playing: true, showingAd: false });
-              this.markAdSeen(
-                json.uniqueIdentifier,
-                this.state.vid.replace(/\"/g, "")
-              );
-            }.bind(this),
-            5000
-          );
-        })
-        .catch(console.log);
-    }
-  };
+                    setTimeout(
+                        function () {
+                            this.setState({ playing: true, showingAd: false });
+                            this.markAdSeen(
+                                json.uniqueIdentifier,
+                                this.state.vid.replace(/\"/g, "")
+                            );
+                        }.bind(this),
+                        5000
+                    );
+                })
+                .catch(console.log);
+        }
+    };
 
   markAdSeen = (adId, vId) => {
+    var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
     fetch(config.api.serverUrl + "/adv/seen", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         authorization:
-          "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+          "Bearer " + auth
       },
       body: JSON.stringify({
         adId: adId,

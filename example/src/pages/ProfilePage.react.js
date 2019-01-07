@@ -296,13 +296,14 @@ class ProfilePage extends Component {
 
   edit() {
     this.setState({ loading: true });
+    var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
     fetch(config.api.serverUrl + "/user/update", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         authorization:
-          "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+          "Bearer " + auth
       },
       body: JSON.stringify({
         username: this.state.username,

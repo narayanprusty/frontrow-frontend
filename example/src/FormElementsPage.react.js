@@ -33,13 +33,14 @@ class VideoForm extends Component {
 
   addVideo() {
     this.setState({ loading: true });
+    var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
     fetch(config.api.serverUrl + "/video/add", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         authorization:
-          "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+          "Bearer " + auth
       }
     })
       .then(response => {
@@ -48,13 +49,14 @@ class VideoForm extends Component {
       .then(json => {
         if (json.success == true) {
           this.setState({ loading: true });
+          var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
           fetch(config.api.serverUrl + "/video/update", {
             method: "POST",
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
               authorization:
-                "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+                "Bearer " + auth
             },
             body: JSON.stringify({
               imageURL: this.state.thumbnail,

@@ -50,6 +50,7 @@ class PublishAdsForm extends Component {
     if (!this.state.auth) {
       window.location = "/";
     }
+    var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
     this.setState({ loadingAdsStats: true });
     fetch(config.api.serverUrl + "/adv/adsStats", {
       method: "GET",
@@ -57,7 +58,7 @@ class PublishAdsForm extends Component {
         Accept: "application/json",
         "Content-Type": "application/json",
         authorization:
-          "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+          "Bearer " + auth
       }
     })
       .then(response => {
@@ -106,14 +107,15 @@ class PublishAdsForm extends Component {
 
   getStats() {
     this.setState({ loadingStats: true });
-    console.log(localStorage.getItem(LS_KEY).replace(/\"/g, ""));
+    var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
+    console.log(auth);
     fetch(config.api.serverUrl + "/adv/getStats", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         authorization:
-          "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+          "Bearer " + auth
       },
       body: JSON.stringify({
         country: this.state.country,
@@ -150,14 +152,15 @@ class PublishAdsForm extends Component {
     };
 
     this.setState({ loading: true });
-    console.log(localStorage.getItem(LS_KEY).replace(/\"/g, ""));
+    var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
+    console.log(auth);
     fetch(config.api.serverUrl + "/adv/publish", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         authorization:
-          "Bearer " + localStorage.getItem(LS_KEY).replace(/\"/g, "")
+          "Bearer " + auth
       },
       body: JSON.stringify(body)
     })
