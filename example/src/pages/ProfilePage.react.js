@@ -20,6 +20,7 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import TagsInput from "react-tagsinput";
 import SiteWrapper from "../SiteWrapper.react";
 import "react-tagsinput/react-tagsinput.css";
+import config from "./../config/config";
 
 const LS_KEY = "frontrow";
 const Countries = [
@@ -295,7 +296,7 @@ class ProfilePage extends Component {
 
   edit() {
     this.setState({ loading: true });
-    fetch("http://localhost:7000/user/update", {
+    fetch(config.api.serverUrl + "/user/update", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -307,7 +308,7 @@ class ProfilePage extends Component {
         username: this.state.username,
         age: this.state.age,
         location: this.state.location,
-        interests: this.state.interests,
+        interests: this.state.interests
       })
     })
       .then(response => {
@@ -347,7 +348,7 @@ class ProfilePage extends Component {
     const {
       payload: { id }
     } = jwtDecode(accesstoken);
-    fetch(`http://localhost:7000/users/${id}`, {
+    fetch(`${config.api.serverUrl}/users/${id}`, {
       headers: {
         Authorization: `Bearer ${accesstoken}`
       }
@@ -358,7 +359,7 @@ class ProfilePage extends Component {
         user.publicAddress = json.data.publicAddress;
         user.nonce = json.data.nonce;
 
-        fetch("http://localhost:7000/user/get/" + json.data.publicAddress, {
+        fetch(config.api.serverUrl + "/user/get/" + json.data.publicAddress, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -393,9 +394,9 @@ class ProfilePage extends Component {
                 : this.setState({ interests: json.data[0].interests });
             }
             {
-                json.data[0].earning == undefined
-                ? this.setState({earnings: ""})
-                : this.setState({earnings: json.data[0].earning});
+              json.data[0].earning == undefined
+                ? this.setState({ earnings: "" })
+                : this.setState({ earnings: json.data[0].earning });
             }
             this.setState({ ok: true });
           });
@@ -421,7 +422,7 @@ class ProfilePage extends Component {
                   <Card.Body>
                     <Card.Title>Edit Profile</Card.Title>
                     <Grid.Row>
-                      <Grid.Col xs={12} sm={6} md={6} >
+                      <Grid.Col xs={12} sm={6} md={6}>
                         <Form.Group>
                           <Form.Label>Username</Form.Label>
                           <Form.Input
@@ -447,8 +448,8 @@ class ProfilePage extends Component {
                           />
                         </Form.Group>
                       </Grid.Col>
-                      </Grid.Row>
-                      <Grid.Row>
+                    </Grid.Row>
+                    <Grid.Row>
                       <Grid.Col xs={12} sm={6} md={6}>
                         <Form.Group>
                           <Form.Label>
@@ -471,11 +472,16 @@ class ProfilePage extends Component {
                           />
                         </Form.Group>
                       </Grid.Col>
-                      </Grid.Row>
-                      <Grid.Row>
-                        <Grid.Col xs={12} sm={12} md={12}>
-                            <div>Your earnings: {this.state.earnings ? Math.round(this.state.earnings * 1000)/1000 : 0}</div>
-                        </Grid.Col>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Col xs={12} sm={12} md={12}>
+                        <div>
+                          Your earnings:{" "}
+                          {this.state.earnings
+                            ? Math.round(this.state.earnings * 1000) / 1000
+                            : 0}
+                        </div>
+                      </Grid.Col>
                     </Grid.Row>
                   </Card.Body>
                   <Card.Footer className="text-right">

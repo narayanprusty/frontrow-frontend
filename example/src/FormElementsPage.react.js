@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { Page, Card, Grid, Form, Button, Dropdown } from "tabler-react";
 import SiteWrapper from "./SiteWrapper.react";
 import SweetAlert from "react-bootstrap-sweetalert";
+import config from "./config/config";
 
 const LS_KEY = "frontrow";
 
@@ -32,7 +33,7 @@ class VideoForm extends Component {
 
   addVideo() {
     this.setState({ loading: true });
-    fetch("http://localhost:7000/video/add", {
+    fetch(config.api.serverUrl + "/video/add", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -47,7 +48,7 @@ class VideoForm extends Component {
       .then(json => {
         if (json.success == true) {
           this.setState({ loading: true });
-          fetch("http://localhost:7000/video/update", {
+          fetch(config.api.serverUrl + "/video/update", {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -96,7 +97,7 @@ class VideoForm extends Component {
 
   hideAlert() {
     this.setState({ send: "" });
-    this.props.history.push(`/`)
+    this.props.history.push(`/`);
   }
 
   render() {
@@ -147,8 +148,8 @@ class VideoForm extends Component {
                       />
                     </Form.Group>
                   </Grid.Col>
-                  </Grid.Row>
-                  <Grid.Row>
+                </Grid.Row>
+                <Grid.Row>
                   <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
                       <Form.Label>Thumbnail URL</Form.Label>
@@ -162,8 +163,8 @@ class VideoForm extends Component {
                       />
                     </Form.Group>
                   </Grid.Col>
-                  </Grid.Row>
-                  <Grid.Row>
+                </Grid.Row>
+                <Grid.Row>
                   <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
                       <Form.Label>Video URL</Form.Label>

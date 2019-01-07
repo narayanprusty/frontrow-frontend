@@ -13,6 +13,7 @@ import {
   RouterContextProvider,
   Icon
 } from "tabler-react";
+import config from "./config/config";
 
 import type { NotificationProps } from "tabler-react";
 
@@ -166,7 +167,7 @@ class SiteWrapper extends React.Component<Props, State> {
   }
 
   getuser(e) {
-    fetch("http://localhost:7000/user/get/" + e, {
+    fetch(config.api.serverUrl + "/user/get/" + e, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -177,7 +178,7 @@ class SiteWrapper extends React.Component<Props, State> {
         return response.json();
       })
       .then(json => {
-          console.log("User info", json);
+        console.log("User info", json);
         if (json.data[0] == undefined) return;
         {
           json.data[0].username == undefined
@@ -190,9 +191,7 @@ class SiteWrapper extends React.Component<Props, State> {
   handleLoggedIn = auth => {
     localStorage.setItem(LS_KEY, JSON.stringify(auth));
     this.setState({ auth: auth });
-    if(!this.state.username)
-        window.location = "/profile";
-
+    if (!this.state.username) window.location = "/profile";
   };
 
   handleLoggedOut = () => {
@@ -202,7 +201,7 @@ class SiteWrapper extends React.Component<Props, State> {
 
   handleSignup = async publicAddress => {
     console.log("Sign up with ", add[0]);
-    var response = await fetch(`http://localhost:7000/users`, {
+    var response = await fetch(`${config.api.serverUrl}/users`, {
       body: JSON.stringify({ publicAddress }),
       headers: {
         "Content-Type": "application/json"
@@ -229,7 +228,7 @@ class SiteWrapper extends React.Component<Props, State> {
   };
 
   handleAuthenticate = (publicAddress, signature) => {
-    return fetch(`http://localhost:7000/auth`, {
+    return fetch(`${config.api.serverUrl}/auth`, {
       body: JSON.stringify({
         publicAddress: publicAddress,
         signature: signature
@@ -250,7 +249,7 @@ class SiteWrapper extends React.Component<Props, State> {
     const {
       payload: { id }
     } = jwtDecode(accesstoken);
-    fetch(`http://localhost:7000/users/${id}`, {
+    fetch(`${config.api.serverUrl}/users/${id}`, {
       headers: {
         Authorization: `Bearer ${accesstoken}`
       }
@@ -274,51 +273,49 @@ class SiteWrapper extends React.Component<Props, State> {
     await this.setState({ address: add[0] });
   };
 
-    Login = async () => {
-        await this.Init();
+  Login = async () => {
+    await this.Init();
 
-        if (!window.web3) {
-            return alert("Please install Metamask!");
-        }
-        if (!web3) {
-            web3 = new Web3(window.web3.currentProvider);
-        }
+    if (!window.web3) {
+      return alert("Please install Metamask!");
+    }
+    if (!web3) {
+      web3 = new Web3(window.web3.currentProvider);
+    }
 
-        this.setState({ loading: true });
+    this.setState({ loading: true });
 
-        try {
-            var nonce = "";
-            var response = await fetch(
-                `http://localhost:7000/users?publicAddress=${add[0]}`
-            );
-            var data = await response.json();
-            if (data.users.length > 0) {
-                nonce = await data.users[0].nonce;
-            } else {
-                nonce = await this.handleSignup(add[0]);
-                nonce = await nonce.nonce;
-            }
-            console.log("nonce", nonce);
+    try {
+      var nonce = "";
+      var response = await fetch(
+        `${config.api.serverUrl}/users?publicAddress=${add[0]}`
+      );
+      var data = await response.json();
+      if (data.users.length > 0) {
+        nonce = await data.users[0].nonce;
+      } else {
+        nonce = await this.handleSignup(add[0]);
+        nonce = await nonce.nonce;
+      }
+      console.log("nonce", nonce);
 
-            var sig = await this.handleSignMessage(add[0], nonce);
-            var token = await this.handleAuthenticate(add[0], sig);
-            var auth = await token.token;
-            var login = await this.handleLoggedIn(auth);
-            await this.setState({ loading: false });
+      var sig = await this.handleSignMessage(add[0], nonce);
+      var token = await this.handleAuthenticate(add[0], sig);
+      var auth = await token.token;
+      var login = await this.handleLoggedIn(auth);
+      await this.setState({ loading: false });
 
-            setTimeout(
-                function () {
-                    this.getuser(add[0]);
-                }
-                    .bind(this),
-                4000
-            );
-
-        } catch (e) {
-            window.alert(e);
-            this.setState({ loading: false });
-        }
-    };
+      setTimeout(
+        function() {
+          this.getuser(add[0]);
+        }.bind(this),
+        4000
+      );
+    } catch (e) {
+      window.alert(e);
+      this.setState({ loading: false });
+    }
+  };
 
   render(): React.Node {
     const notificationsObjects = this.state.notificationsObjects || [];

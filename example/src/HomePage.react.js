@@ -6,109 +6,112 @@ import jwtDecode from "jwt-decode";
 import SiteWrapper from "./SiteWrapper.react";
 import Moment from "react-moment";
 import { Redirect } from "react-router";
-import Loader from 'react-loader-spinner'
+import Loader from "react-loader-spinner";
+import config from "./config/config";
 
 const LS_KEY = "frontrow";
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            auth: localStorage.getItem(LS_KEY) || undefined,
-            username: "",
-            send: "",
-            age: "",
-            location: "",
-            interests: [],
-            ok: false,
-            videos: [],
-            loadedVideos: false,
-        };
-        this.hideAlert = this.hideAlert.bind(this);
-        this.VideoRead = this.VideoRead.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      auth: localStorage.getItem(LS_KEY) || undefined,
+      username: "",
+      send: "",
+      age: "",
+      location: "",
+      interests: [],
+      ok: false,
+      videos: [],
+      loadedVideos: false
+    };
+    this.hideAlert = this.hideAlert.bind(this);
+    this.VideoRead = this.VideoRead.bind(this);
+  }
 
-    VideoRead() {
-        this.setState({ loadedVideos: false });
-        fetch("http://localhost:7000/video/get/", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                authorization: localStorage.getItem("jwt")
-            }
+  VideoRead() {
+    this.setState({ loadedVideos: false });
+    fetch(config.api.serverUrl + "/video/get/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("jwt")
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          videos: json.data,
+          loadedVideos: true
+        });
+      });
+  }
+
+  componentWillMount() {
+    var accesstoken = this.state.auth;
+    this.VideoRead();
+    if (accesstoken == undefined) return;
+    accesstoken = accesstoken.replace(/\"/g, "");
+    const {
+      payload: { id }
+    } = jwtDecode(accesstoken);
+    fetch(`${config.api.serverUrl}/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accesstoken}`
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        let user = Object.assign({}, this.state.user);
+        user.publicAddress = json.data.publicAddress;
+        user.nonce = json.data.nonce;
+
+        fetch(config.api.serverUrl + "/user/get/" + json.data.publicAddress, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            authorization: localStorage.getItem("jwt")
+          }
         })
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                this.setState({ videos: json.data, loadedVideos: true
-                 });
-            });
-    }
-
-    componentWillMount() {
-        var accesstoken = this.state.auth;
-        this.VideoRead();
-        if (accesstoken == undefined) return;
-        accesstoken = accesstoken.replace(/\"/g, "");
-        const {
-            payload: { id }
-        } = jwtDecode(accesstoken);
-        fetch(`http://localhost:7000/users/${id}`, {
-            headers: {
-                Authorization: `Bearer ${accesstoken}`
+          .then(response => {
+            return response.json();
+          })
+          .then(json => {
+            if (json.data[0] == undefined) return;
+            {
+              json.data[0].username == undefined
+                ? this.setState({ username: null })
+                : this.setState({ username: json.data[0].username });
             }
-        })
-            .then(response => response.json())
-            .then(json => {
-                let user = Object.assign({}, this.state.user);
-                user.publicAddress = json.data.publicAddress;
-                user.nonce = json.data.nonce;
+            {
+              json.data[0].age == undefined
+                ? this.setState({ age: null })
+                : this.setState({ age: json.data[0].age });
+            }
+            {
+              json.data[0].location == undefined
+                ? this.setState({ location: null })
+                : this.setState({ location: json.data[0].location });
+            }
+            {
+              json.data[0].interests == undefined
+                ? this.setState({ interests: null })
+                : this.setState({ interests: json.data[0].interests });
+            }
+            this.setState({ ok: true });
+          });
+      })
+      .catch(window.alert);
+  }
 
-                fetch("http://localhost:7000/user/get/" + json.data.publicAddress, {
-                    method: "POST",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        authorization: localStorage.getItem("jwt")
-                    }
-                })
-                    .then(response => {
-                        return response.json();
-                    })
-                    .then(json => {
-                        if (json.data[0] == undefined) return;
-                        {
-                            json.data[0].username == undefined
-                                ? this.setState({ username: null })
-                                : this.setState({ username: json.data[0].username });
-                        }
-                        {
-                            json.data[0].age == undefined
-                                ? this.setState({ age: null })
-                                : this.setState({ age: json.data[0].age });
-                        }
-                        {
-                            json.data[0].location == undefined
-                                ? this.setState({ location: null })
-                                : this.setState({ location: json.data[0].location });
-                        }
-                        {
-                            json.data[0].interests == undefined
-                                ? this.setState({ interests: null })
-                                : this.setState({ interests: json.data[0].interests });
-                        }
-                        this.setState({ ok: true });
-                    });
-            })
-            .catch(window.alert);
-    }
-
-    hideAlert() {
-        this.setState({ send: "" });
-    }
+  hideAlert() {
+    this.setState({ send: "" });
+  }
 
   render() {
     //<GalleryCard.IconItem name="heart" label={} right />
@@ -128,7 +131,12 @@ class Home extends Component {
                   <GalleryCard.Footer>
                     <GalleryCard.Details
                       avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
-                      fullName={video.title + (video.username ? " uploaded by " + video.username.toString() : "")}
+                      fullName={
+                        video.title +
+                        (video.username
+                          ? " uploaded by " + video.username.toString()
+                          : "")
+                      }
                       dateString={p}
                     />
                     <GalleryCard.IconGroup>
@@ -149,15 +157,13 @@ class Home extends Component {
     return (
       <SiteWrapper>
         <Page.Content>
-        {this.state.loadedVideos ? 
-            <Videos data={this.state.videos} /> :
-            <center><Loader 
-                type="Rings"
-                color="#ff002a"
-                height="100"	
-                width="100"
-            /></center>
-        }
+          {this.state.loadedVideos ? (
+            <Videos data={this.state.videos} />
+          ) : (
+            <center>
+              <Loader type="Rings" color="#ff002a" height="100" width="100" />
+            </center>
+          )}
         </Page.Content>
       </SiteWrapper>
     );

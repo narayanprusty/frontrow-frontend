@@ -20,6 +20,7 @@ import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import { ENGINE_METHOD_DIGESTS } from "constants";
 import { stat } from "fs";
+import config from "./../config/config";
 
 const LS_KEY = "frontrow";
 
@@ -50,7 +51,7 @@ class PublishAdsForm extends Component {
       window.location = "/";
     }
     this.setState({ loadingAdsStats: true });
-    fetch("http://localhost:7000/adv/adsStats", {
+    fetch(config.api.serverUrl + "/adv/adsStats", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -106,7 +107,7 @@ class PublishAdsForm extends Component {
   getStats() {
     this.setState({ loadingStats: true });
     console.log(localStorage.getItem(LS_KEY).replace(/\"/g, ""));
-    fetch("http://localhost:7000/adv/getStats", {
+    fetch(config.api.serverUrl + "/adv/getStats", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -150,7 +151,7 @@ class PublishAdsForm extends Component {
 
     this.setState({ loading: true });
     console.log(localStorage.getItem(LS_KEY).replace(/\"/g, ""));
-    fetch("http://localhost:7000/adv/publish", {
+    fetch(config.api.serverUrl + "/adv/publish", {
       method: "POST",
       headers: {
         Accept: "application/json",
