@@ -262,10 +262,10 @@ class PublishAdsForm extends Component {
                       />
                     </Form.Group>
                     <Form.Group>
-                      <Form.Label>Cost per view</Form.Label>
+                      <Form.Label>Cost per view($)</Form.Label>
                       <Form.Input
                         type="number"
-                        placeholder="Cost per view"
+                        placeholder="Cost per view($)"
                         onChange={evt => {
                           this.setState({ costPerView: evt.target.value });
                         }}
@@ -321,8 +321,8 @@ class PublishAdsForm extends Component {
                   headerItems={[
                     { content: "ID.", className: "w-1" },
                     { content: "Views" },
-                    { content: "Total Debit" },
-                    { content: "Cost per view" }
+                    { content: "Total Debit($)" },
+                    { content: "Cost per view($)" }
                   ]}
                   bodyItems={this.state.adsStats}
                 />

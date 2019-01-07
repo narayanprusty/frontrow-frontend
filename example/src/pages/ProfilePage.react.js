@@ -480,6 +480,7 @@ class ProfilePage extends Component {
                           {this.state.earnings
                             ? Math.round(this.state.earnings * 1000) / 1000
                             : 0}
+                          $
                         </div>
                       </Grid.Col>
                     </Grid.Row>
