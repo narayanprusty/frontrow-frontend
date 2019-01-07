@@ -476,11 +476,10 @@ class ProfilePage extends Component {
                     <Grid.Row>
                       <Grid.Col xs={12} sm={12} md={12}>
                         <div>
-                          Your earnings:{" "}
+                          Your earnings:{" $"}
                           {this.state.earnings
                             ? Math.round(this.state.earnings * 1000) / 1000
                             : 0}
-                          $
                         </div>
                       </Grid.Col>
                     </Grid.Row>
