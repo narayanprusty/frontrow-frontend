@@ -19,16 +19,22 @@ class VideoForm extends Component {
       user: "",
       send: "",
       ok: false,
-      auth: localStorage.getItem(LS_KEY) || undefined
+      auth: localStorage.getItem(LS_KEY) || undefined,
+      notLoggedIn: false,
     };
     this.addVideo = this.addVideo.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
+    this.hideLoginAlert = this.hideLoginAlert.bind(this);
   }
 
   componentDidMount() {
     if (!this.state.auth) {
-      window.location = "/";
+        this.setState({notLoggedIn: true});
     }
+  }
+
+  hideLoginAlert() {
+    this.props.history.push(`/`);
   }
 
   addVideo() {
@@ -72,10 +78,11 @@ class VideoForm extends Component {
               if (json1.success == true) {
                 this.setState({ send: "true", loading: false });
               } else {
+                  console.log(json1);
                 this.setState({
                   send: "false",
                   loading: false,
-                  error: json1.error.result.error
+                  error: json1.message
                 });
               }
             })
@@ -87,7 +94,7 @@ class VideoForm extends Component {
           this.setState({
             send: "false",
             loading: false,
-            error: json.error.result.error
+            error: json.message
           });
         }
       })
@@ -111,6 +118,13 @@ class VideoForm extends Component {
           </SweetAlert>
         ) : (
           <p />
+        )}
+        {this.state.notLoggedIn ? (
+            <SweetAlert title="Not logged in" onConfirm={this.hideLoginAlert}>
+                Please login!
+            </SweetAlert>
+        ) : (
+            <p />
         )}
         <Page.Card
           title="Upload Video"

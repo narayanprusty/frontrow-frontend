@@ -38,17 +38,19 @@ class PublishAdsForm extends Component {
       costPerView: "",
       loadingAdsStats: false,
       adsStats: [],
-      auth: localStorage.getItem(LS_KEY) || undefined
+      auth: localStorage.getItem(LS_KEY) || undefined,
+      notLoggedIn: false,
     };
     this.getStats = this.getStats.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
+    this.hideLoginAlert = this.hideLoginAlert.bind(this);
     this.publishAd = this.publishAd.bind(this);
     this.getAdsStats = this.getAdsStats.bind(this);
   }
 
   componentDidMount() {
     if (!this.state.auth) {
-      window.location = "/";
+      this.setState({notLoggedIn: true});
     }
     var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
     this.setState({ loadingAdsStats: true });
@@ -188,15 +190,26 @@ class PublishAdsForm extends Component {
     this.props.history.push(`/`);
   }
 
+  hideLoginAlert() {
+    this.props.history.push(`/`);
+  }
+
   render() {
     return (
       <SiteWrapper>
         {this.state.publish ? (
-          <SweetAlert title="Success!" onConfirm={this.hideAlert}>
-            Ad published successfully!
-          </SweetAlert>
+            <SweetAlert title="Success!" onConfirm={this.hideAlert}>
+                Ad published successfully!
+            </SweetAlert>
         ) : (
           <p />
+        )}
+        {this.state.notLoggedIn ? (
+            <SweetAlert title="Not logged in" onConfirm={this.hideLoginAlert}>
+                Please login!
+            </SweetAlert>
+        ) : (
+            <p />
         )}
         <Page.Card
           title="Post Ads"
