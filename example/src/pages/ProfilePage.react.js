@@ -37,6 +37,9 @@ class ProfilePage extends Component {
       interests: [],
       ok: true,
       earnings: "",
+      videoEarnings: "",
+      adsSeen: "",
+      adsPopped: "",
       auth: localStorage.getItem(LS_KEY) || undefined
     };
     this.edit = this.edit.bind(this);
@@ -154,6 +157,21 @@ class ProfilePage extends Component {
                 ? this.setState({ earnings: "" })
                 : this.setState({ earnings: json.data[0].earning });
             }
+            {
+                json.data[0].videoEarnings == undefined
+                ? this.setState({videoEarnings: 0})
+                : this.setState({videoEarnings: json.data[0].videoEarnings});
+            }
+            {
+                json.data[0].adsPopped == undefined
+                ? this.setState({adsPopped: 0})
+                : this.setState({adsPopped: json.data[0].adsPopped});
+            }
+            {
+                json.data[0].adsSeen == undefined
+                ? this.setState({adsSeen: 0})
+                : this.setState({adsSeen: json.data[0].adsSeen});
+            }
             this.setState({ ok: true });
           });
       })
@@ -232,9 +250,39 @@ class ProfilePage extends Component {
                     <Grid.Row>
                       <Grid.Col xs={12} sm={12} md={12}>
                         <div>
-                          Your earnings:{" $"}
+                          Your earnings (Ads):{" $"}
                           {this.state.earnings
                             ? Math.round(this.state.earnings * 1000) / 1000
+                            : 0}
+                        </div>
+                      </Grid.Col>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Col xs={12} sm={12} md={12}>
+                        <div>
+                          Your earnings (Uploads):{" $"}
+                          {this.state.videoEarnings
+                            ? Math.round(this.state.videoEarnings * 1000) / 1000
+                            : 0}
+                        </div>
+                      </Grid.Col>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Col xs={12} sm={12} md={12}>
+                        <div>
+                          Total ads seen:{" "}
+                          {this.state.adsSeen
+                            ? Math.round(this.state.adsSeen * 1000) / 1000
+                            : 0}
+                        </div>
+                      </Grid.Col>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Col xs={12} sm={12} md={12}>
+                        <div>
+                          Total ads popped in your videos:{" "}
+                          {this.state.adsPopped
+                            ? Math.round(this.state.adsPopped * 1000) / 1000
                             : 0}
                         </div>
                       </Grid.Col>
