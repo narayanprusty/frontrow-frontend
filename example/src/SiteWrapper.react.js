@@ -357,7 +357,7 @@ class SiteWrapper extends React.Component<Props, State> {
     return (
       <Site.Wrapper
         headerProps={{
-          href: "/",
+          href: window.location.protocol + "//" + window.location.hostname,
           alt: "Tabler React",
           imageURL: "/demo/logo.png",
           accountDropdown: accountDropdownProps
