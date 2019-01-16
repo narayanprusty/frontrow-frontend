@@ -178,8 +178,7 @@ class SiteWrapper extends React.Component<Props, State> {
         return response.json();
       })
       .then(json => {
-        console.log("User info", json);
-        if (json.data[0] == undefined) return;
+        if (json.data === undefined) return;
         {
           json.data[0].username == undefined
             ? this.setState({ username: null })

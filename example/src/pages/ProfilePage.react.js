@@ -131,8 +131,7 @@ class ProfilePage extends Component {
             return response.json();
           })
           .then(json => {
-            console.log("User data", json.data[0]);
-            if (json.data[0] == undefined) return;
+            if (json.data === undefined) return;
             {
               json.data[0].username == undefined
                 ? this.setState({ username: null })
