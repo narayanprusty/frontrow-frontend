@@ -14,7 +14,8 @@ import {
   List,
   Media,
   Text,
-  Comment
+  Comment,
+  PricingCard
 } from "tabler-react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import TagsInput from "react-tagsinput";
@@ -36,10 +37,10 @@ class ProfilePage extends Component {
       send: "",
       interests: [],
       ok: true,
-      earnings: "",
-      videoEarnings: "",
-      adsSeen: "",
-      adsPopped: "",
+      earnings: 0,
+      videoEarnings: 0,
+      adsSeen: 0,
+      adsPopped: 0,
       auth: localStorage.getItem(LS_KEY) || undefined
     };
     this.edit = this.edit.bind(this);
@@ -155,12 +156,12 @@ class ProfilePage extends Component {
             {
               json.data[0].earning == undefined
                 ? this.setState({ earnings: "" })
-                : this.setState({ earnings: json.data[0].earning });
+                : this.setState({ earnings: Math.round(json.data[0].earning * 100) / 100 });
             }
             {
                 json.data[0].videoEarnings == undefined
                 ? this.setState({videoEarnings: 0})
-                : this.setState({videoEarnings: json.data[0].videoEarnings});
+                : this.setState({videoEarnings: Math.round(json.data[0].videoEarnings * 100) / 100});
             }
             {
                 json.data[0].adsPopped == undefined
@@ -247,45 +248,31 @@ class ProfilePage extends Component {
                         </Form.Group>
                       </Grid.Col>
                     </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Col xs={12} sm={12} md={12}>
-                        <div>
-                          Your earnings (Ads):{" $"}
-                          {this.state.earnings
-                            ? Math.round(this.state.earnings * 1000) / 1000
-                            : 0}
-                        </div>
-                      </Grid.Col>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Col xs={12} sm={12} md={12}>
-                        <div>
-                          Your earnings (Uploads):{" $"}
-                          {this.state.videoEarnings
-                            ? Math.round(this.state.videoEarnings * 1000) / 1000
-                            : 0}
-                        </div>
-                      </Grid.Col>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Col xs={12} sm={12} md={12}>
-                        <div>
-                          Total ads seen:{" "}
-                          {this.state.adsSeen
-                            ? Math.round(this.state.adsSeen * 1000) / 1000
-                            : 0}
-                        </div>
-                      </Grid.Col>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Col xs={12} sm={12} md={12}>
-                        <div>
-                          Total ads popped in your videos:{" "}
-                          {this.state.adsPopped
-                            ? Math.round(this.state.adsPopped * 1000) / 1000
-                            : 0}
-                        </div>
-                      </Grid.Col>
+                    <Grid.Row cards={true}>
+                    <Grid.Col width={6} sm={6} lg={3}>
+                        <PricingCard>
+                            <PricingCard.Category>{"Earnings from watching ads"}</PricingCard.Category>
+                            <PricingCard.Price>{`$ ` + this.state.earnings}</PricingCard.Price>
+                        </PricingCard>
+                    </Grid.Col>
+                    <Grid.Col width={6} sm={6} lg={3}>
+                        <PricingCard>
+                            <PricingCard.Category>{"Total number of ads seen"}</PricingCard.Category>
+                            <PricingCard.Price>{this.state.adsSeen}</PricingCard.Price>
+                        </PricingCard>
+                    </Grid.Col>
+                    <Grid.Col width={6} sm={6} lg={3}>
+                        <PricingCard>
+                            <PricingCard.Category>{"Earnings from your videos"}</PricingCard.Category>
+                            <PricingCard.Price>{`$ ` + this.state.videoEarnings} </PricingCard.Price>
+                        </PricingCard>
+                    </Grid.Col>
+                    <Grid.Col width={6} sm={6} lg={3}>
+                        <PricingCard>
+                            <PricingCard.Category>{"Ads popped in your videos"}</PricingCard.Category>
+                            <PricingCard.Price>{this.state.adsPopped}</PricingCard.Price>
+                        </PricingCard>
+                    </Grid.Col>
                     </Grid.Row>
                   </Card.Body>
                   <Card.Footer className="text-right">
