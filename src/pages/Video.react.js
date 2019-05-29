@@ -38,7 +38,7 @@ class Video extends Component {
             height: "",
             bannerImageLoaded: false,
         };
-        this.OneVideoRead = this.OneVideoRead.bind(this);
+        this.OnVideoRead = this.OnVideoRead.bind(this);
         this.updateView = this.updateView.bind(this);
         this.getuploader = this.getuploader.bind(this);
         this.onDuration = this.onDuration.bind(this);
@@ -48,6 +48,7 @@ class Video extends Component {
     }
 
     getuploader = e => {
+        console.log(e)
         fetch(config.api.serverUrl + "/user/get/" + e, {
             method: "POST",
             headers: {
@@ -107,14 +108,14 @@ class Video extends Component {
 
     componentDidMount() {
         window.addEventListener("resize", this.resize);
-        this.OneVideoRead();
+        this.OnVideoRead();
     }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.resize);
     }
 
-    OneVideoRead() {
+    OnVideoRead() {
         var vid = this.state.vid;
         fetch(config.api.serverUrl + "/video/get/" + vid.replace(/\"/g, ""), {
             method: "POST",
@@ -138,7 +139,7 @@ class Video extends Component {
                         username: json.data[0].username
                     });
                     this.updateView(json.data[0].totalViews + 1);
-                    this.getuploader(json.data[0].uploader);
+                    this.getuploader('0x' + json.data[0].uploader);
                 } else {
                     alert("Error");
                 }
@@ -157,7 +158,6 @@ class Video extends Component {
         if (seconds < 60) {
             this.setState({ lastAdShowedOn: 0 });
         }
-        console.log(seconds);
         if (
             seconds % 60 == 0 &&
             seconds > this.state.lastAdShowedOn &&
@@ -177,7 +177,6 @@ class Video extends Component {
                     return response.json();
                 })
                 .then(json => {
-                    console.log(json, json.bannerUrl);
                     this.setState({
                         playing: false,
                         lastAdShowedOn: seconds,
@@ -242,7 +241,12 @@ class Video extends Component {
       title: this.state.title
     };
 
-    var p = <Moment fromNow>{this.state.publishDate}</Moment>;
+    if(this.state.publishDate) {
+        var p = <Moment fromNow>{this.state.publishDate}</Moment>;
+    } else {
+        var p = <span></span>
+    }
+
     let fullName = this.state.title;
     if (this.state.uploadername) {
       fullName = fullName + " by " + this.state.uploadername;
@@ -251,7 +255,7 @@ class Video extends Component {
     return (
       <SiteWrapper>
         <Page.Content>
-          <Grid.Col sm={6} lg={12}>
+          <Grid.Col sm={12} lg={12}>
             <div>
               <GalleryCard>
                 <div
@@ -285,12 +289,12 @@ class Video extends Component {
                 <div className="pt-2" />
                 <GalleryCard.Footer>
                   <GalleryCard.Details
-                    avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
+                    //avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
                     fullName={
-                      fullName +
+                      this.state.title /*+
                       (this.state.username
                         ? " uploaded by " + this.state.username.toString()
-                        : "")
+                        : "")*/
                     }
                     dateString={p}
                   />

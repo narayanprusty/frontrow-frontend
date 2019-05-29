@@ -130,12 +130,12 @@ class Home extends Component {
                   <GalleryCard.Image src={video.imageURL} />
                   <GalleryCard.Footer>
                     <GalleryCard.Details
-                      avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
+                      //avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
                       fullName={
-                        video.title +
+                        video.title /*+
                         (video.username
                           ? " uploaded by " + video.username.toString()
-                          : "")
+                          : "")*/
                       }
                       dateString={p}
                     />

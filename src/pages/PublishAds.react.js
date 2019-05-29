@@ -99,8 +99,8 @@ class PublishAds extends Component {
               </a>
             )
           },
-          { content: data[i].views ? data[i].views * data[i].costPerView : 0 },
-          { content: data[i].costPerView }
+          //{ content: data[i].views ? data[i].views * data[i].costPerView : 0 },
+          //{ content: data[i].costPerView }
         ]
       });
     }
@@ -143,7 +143,7 @@ class PublishAds extends Component {
 
   publishAd() {
     var body = {
-      costPerView: this.state.costPerView, //how much advertiser pays per view
+      //costPerView: this.state.costPerView, //how much advertiser pays per view
       filter: JSON.stringify({
         ageLowerLimit: this.state.ageLowerLimit,
         ageUpperLimit: this.state.ageUpperLimit,
@@ -152,6 +152,8 @@ class PublishAds extends Component {
       }),
       bannerUrl: this.state.bannerUrl
     };
+
+    console.log(body)
 
     this.setState({ loading: true });
     var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
@@ -215,7 +217,37 @@ class PublishAds extends Component {
           title="Post Ads"
           footer={
             <div>
-              <Card.Footer />
+              <Card.Footer>
+                <div className="">
+                  {this.state.loadingStats ? (
+                    <Button disabled className="ml-auto" color="primary">
+                      Getting Stats..
+                    </Button>
+                  ) : (
+                    <Button
+                      color="primary"
+                      className="ml-auto"
+                      onClick={this.getStats}
+                    >
+                      Get Stats
+                    </Button>
+                  )}
+                  &nbsp;&nbsp;
+                  {this.state.loading ? (
+                    <Button disabled className="ml-auto" color="primary">
+                      Pulishing..
+                    </Button>
+                  ) : (
+                    <Button
+                      color="primary"
+                      className="ml-auto"
+                      onClick={this.publishAd}
+                    >
+                      Publish
+                    </Button>
+                  )}
+                </div>
+              </Card.Footer>
             </div>
           }
         >
@@ -234,13 +266,7 @@ class PublishAds extends Component {
                         }}
                       />
                     </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Interests</Form.Label>
-                      <TagsInput
-                        value={this.state.interests}
-                        onChange={e => this.setState({ interests: e })}
-                      />
-                    </Form.Group>
+                    
                     <Form.Group>
                       <Form.Label>Country : {this.state.country}</Form.Label>
                       <Select
@@ -250,10 +276,7 @@ class PublishAds extends Component {
                         }}
                       />
                     </Form.Group>
-                    <div>
-                      Matching users :{" "}
-                      {this.state.matches ? this.state.matches : 0}
-                    </div>
+                    
                   </Grid.Col>
                   <Grid.Col xs={12} sm={6} md={6}>
                     <Form.Group>
@@ -277,7 +300,7 @@ class PublishAds extends Component {
                         }}
                       />
                     </Form.Group>
-                    <Form.Group>
+                      {/*<Form.Group>
                       <Form.Label>Cost per view($)</Form.Label>
                       <Form.Input
                         type="number"
@@ -286,63 +309,44 @@ class PublishAds extends Component {
                           this.setState({ costPerView: evt.target.value });
                         }}
                       />
-                    </Form.Group>
+                    </Form.Group>*/}
                   </Grid.Col>
                 </Grid.Row>
                 <Grid.Row>
-                  <Grid.Col lg={12} xs={12} md={12} sm={12}>
-                    <div style={{ marginTop: 10 }}>
-                      <div style={{ float: "left", marginRight: 10 }}>
-                        {this.state.loadingStats ? (
-                          <Button disabled className="ml-auto" color="primary">
-                            Getting Stats..
-                          </Button>
-                        ) : (
-                          <Button
-                            color="primary"
-                            className="ml-auto"
-                            onClick={this.getStats}
-                          >
-                            Get Stats
-                          </Button>
-                        )}
-                      </div>
-                      <div style={{ float: "left", marginBottom: 10 }}>
-                        {this.state.loading ? (
-                          <Button disabled className="ml-auto" color="primary">
-                            Pulishing..
-                          </Button>
-                        ) : (
-                          <Button
-                            color="primary"
-                            className="ml-auto"
-                            onClick={this.publishAd}
-                          >
-                            Publish
-                          </Button>
-                        )}
-                      </div>
+                  <Grid.Col md={12}>
+                    <Form.Group>
+                      <Form.Label>Interests</Form.Label>
+                      <TagsInput
+                        value={this.state.interests}
+                        onChange={e => this.setState({ interests: e })}
+                      />
+                    </Form.Group>
+                    <div>
+                      Matching users :{" "}
+                      {this.state.matches ? this.state.matches : 0}
                     </div>
                   </Grid.Col>
                 </Grid.Row>
               </Form>
             </Grid.Col>
           </Grid.Row>
+        </Page.Card>
+        <Page.Card
+          title="Ads Summary"
+        >
           <Grid.Row>
             <Grid.Col width={12}>
-              <Card title="Ads Summery">
-                <Table
-                  responsive
-                  className="card-table table-vcenter text-nowrap"
-                  headerItems={[
-                    { content: "ID.", className: "w-1" },
-                    { content: "Views" },
-                    { content: "Total Debit($)" },
-                    { content: "Cost per view($)" }
-                  ]}
-                  bodyItems={this.state.adsStats}
-                />
-              </Card>
+              <Table
+                responsive
+                className="card-table table-vcenter text-nowrap"
+                headerItems={[
+                  { content: "ID." },
+                  { content: "Views" },
+                  /*{ content: "Total Debit($)" },
+                  { content: "Cost per view($)" }*/
+                ]}
+                bodyItems={this.state.adsStats}
+              />
             </Grid.Col>
           </Grid.Row>
         </Page.Card>

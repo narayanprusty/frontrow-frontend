@@ -246,32 +246,32 @@ class Profile extends Component {
                         </Form.Group>
                       </Grid.Col>
                     </Grid.Row>
-                    <Grid.Row cards={true}>
-                    <Grid.Col width={6} sm={6} lg={3}>
-                        <PricingCard>
-                            <PricingCard.Category>{"Earnings from watching ads"}</PricingCard.Category>
-                            <PricingCard.Price>{`$ ` + this.state.earnings}</PricingCard.Price>
-                        </PricingCard>
-                    </Grid.Col>
-                    <Grid.Col width={6} sm={6} lg={3}>
-                        <PricingCard>
-                            <PricingCard.Category>{"Total number of ads seen"}</PricingCard.Category>
-                            <PricingCard.Price>{this.state.adsSeen}</PricingCard.Price>
-                        </PricingCard>
-                    </Grid.Col>
-                    <Grid.Col width={6} sm={6} lg={3}>
-                        <PricingCard>
-                            <PricingCard.Category>{"Earnings from your videos"}</PricingCard.Category>
-                            <PricingCard.Price>{`$ ` + this.state.videoEarnings} </PricingCard.Price>
-                        </PricingCard>
-                    </Grid.Col>
-                    <Grid.Col width={6} sm={6} lg={3}>
-                        <PricingCard>
-                            <PricingCard.Category>{"Ads popped in your videos"}</PricingCard.Category>
-                            <PricingCard.Price>{this.state.adsPopped}</PricingCard.Price>
-                        </PricingCard>
-                    </Grid.Col>
-                    </Grid.Row>
+                    {/*<Grid.Row cards={true}>
+                      <Grid.Col width={6} sm={6} lg={3}>
+                          <PricingCard>
+                              <PricingCard.Category>{"Earnings from watching ads"}</PricingCard.Category>
+                              <PricingCard.Price>{`$ ` + this.state.earnings}</PricingCard.Price>
+                          </PricingCard>
+                      </Grid.Col>
+                      <Grid.Col width={6} sm={6} lg={3}>
+                          <PricingCard>
+                              <PricingCard.Category>{"Total number of ads seen"}</PricingCard.Category>
+                              <PricingCard.Price>{this.state.adsSeen}</PricingCard.Price>
+                          </PricingCard>
+                      </Grid.Col>
+                      <Grid.Col width={6} sm={6} lg={3}>
+                          <PricingCard>
+                              <PricingCard.Category>{"Earnings from your videos"}</PricingCard.Category>
+                              <PricingCard.Price>{`$ ` + this.state.videoEarnings} </PricingCard.Price>
+                          </PricingCard>
+                      </Grid.Col>
+                      <Grid.Col width={6} sm={6} lg={3}>
+                          <PricingCard>
+                              <PricingCard.Category>{"Ads popped in your videos"}</PricingCard.Category>
+                              <PricingCard.Price>{this.state.adsPopped}</PricingCard.Price>
+                          </PricingCard>
+                      </Grid.Col>
+                          </Grid.Row>*/}
                   </Card.Body>
                   <Card.Footer className="text-right">
                     {this.state.ok == false ? (
