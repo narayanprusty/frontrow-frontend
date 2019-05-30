@@ -39,13 +39,6 @@ type navItem = {|
 |};
 
 const navBarItems: Array<navItem> = [
-  {
-    value: "Videos",
-    to: "/",
-    icon: "video",
-    LinkComponent: withRouter(NavLink),
-    useExact: true
-  },
   /*
   {
     value: "Interface",
@@ -106,18 +99,6 @@ const navBarItems: Array<navItem> = [
     ]
   },
   */
-  {
-    value: "Add Video",
-    to: "/add-video",
-    icon: "check-square",
-    LinkComponent: withRouter(NavLink)
-  },
-  {
-    value: "Publish Ads & Summery",
-    to: "/publish-ads",
-    icon: "box",
-    LinkComponent: withRouter(NavLink)
-  }
   /*
   {
     value: "Gallery",
@@ -147,6 +128,15 @@ class SiteWrapper extends React.Component<Props, State> {
       loading: false,
       auth: localStorage.getItem(LS_KEY) || undefined,
       username: "",
+      navBarItems: [
+        {
+          value: "Home",
+          to: "/",
+          icon: "home",
+          LinkComponent: withRouter(NavLink),
+          useExact: true
+        }
+      ],
       notificationsObjects: [
         {
           unread: true,
@@ -174,17 +164,45 @@ class SiteWrapper extends React.Component<Props, State> {
         "Content-Type": "application/json"
       }
     })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        if (json.data === undefined) return;
-        {
-          json.data[0].username == undefined
-            ? this.setState({ username: null })
-            : this.setState({ username: json.data[0].username });
+    .then(response => {
+      return response.json();
+    })
+    .then(json => {
+      if (json.data === undefined) {
+        return;
+      } else {
+        if(json.data[0].username == undefined) {
+          this.setState({ username: null })
+        } else {
+          this.setState({ username: json.data[0].username });
         }
-      });
+
+
+        if(!json.data[0].admin) {
+          this.setState({ admin: null })
+        } else {
+          this.setState({ admin: true });
+
+          let items = this.state.navBarItems;
+          items.push({
+            value: "Add Video",
+            to: "/add-video",
+            icon: "check-square",
+            LinkComponent: withRouter(NavLink)
+          })
+          items.push({
+            value: "Publish Ads & Summery",
+            to: "/publish-ads",
+            icon: "box",
+            LinkComponent: withRouter(NavLink)
+          })
+
+          this.setState({
+            navBarItems: items
+          })
+        }
+      }
+    });
   }
 
   handleLoggedIn = auth => {
@@ -361,7 +379,7 @@ class SiteWrapper extends React.Component<Props, State> {
           imageURL: "/demo/logo.png",
           accountDropdown: accountDropdownProps
         }}
-        navProps={{ itemsObjects: navBarItems }}
+        navProps={{ itemsObjects: this.state.navBarItems }}
         routerContextComponentType={withRouter(RouterContextProvider)}
         footerProps={{
           links: [

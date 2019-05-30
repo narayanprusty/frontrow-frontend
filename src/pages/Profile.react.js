@@ -179,7 +179,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <SiteWrapper>
+      <div>
         <div className="my-3 my-md-5">
           <Container>
             {this.state.send == "true" ? (
@@ -293,7 +293,7 @@ class Profile extends Component {
             </Grid.Row>
           </Container>
         </div>
-      </SiteWrapper>
+      </div>
     );
   }
 }

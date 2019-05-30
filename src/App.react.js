@@ -5,8 +5,10 @@ import {
   Profile,
   PublishAds,
   Video,
-  AddVideo
+  AddVideo,
+  Videos
 } from "./pages";
+import SiteWrapper from "./SiteWrapper.react";
 
 import HomePage from "./HomePage.react";
 
@@ -19,12 +21,15 @@ function App(props: Props): React.Node {
     <React.StrictMode>
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/video/:id" component={Video} />
-          <Route exact path="/add-video" component={AddVideo} />
-          <Route exact path="/publish-ads" component={PublishAds} />
-          <Route exact path="/profile" component={Profile} />
-          <Route component={Error404} />
+          <SiteWrapper>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/video/:id" component={Video} />
+            <Route exact path="/add-video" component={AddVideo} />
+            <Route exact path="/videos" component={Videos} />
+            <Route exact path="/publish-ads" component={PublishAds} />
+            <Route exact path="/profile" component={Profile} />
+            {/*<Route component={Error404} />*/}
+          </SiteWrapper>
         </Switch>
       </Router>
     </React.StrictMode>

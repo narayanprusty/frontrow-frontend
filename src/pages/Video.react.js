@@ -253,7 +253,7 @@ class Video extends Component {
     }
 
     return (
-      <SiteWrapper>
+      <div>
         <Page.Content>
           <Grid.Col sm={12} lg={12}>
             <div>
@@ -310,7 +310,7 @@ class Video extends Component {
             />
           </Grid.Col>
         </Page.Content>
-      </SiteWrapper>
+      </div>
     );
   }
 }

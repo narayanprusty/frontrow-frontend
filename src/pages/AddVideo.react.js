@@ -21,6 +21,9 @@ class AddVideo extends Component {
       ok: false,
       auth: localStorage.getItem(LS_KEY) || undefined,
       notLoggedIn: false,
+      language: 'hindi',
+      category: 'movies_action',
+      videoType: 'youtube_video'
     };
     this.addVideo = this.addVideo.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
@@ -68,7 +71,10 @@ class AddVideo extends Component {
               imageURL: this.state.thumbnail,
               title: this.state.title,
               videoURL: this.state.videoURL,
-              id: json.vid
+              id: json.vid,
+              language: this.state.language,
+              category: this.state.category,
+              videoType: this.state.videoType
             })
           })
             .then(response => {
@@ -111,7 +117,7 @@ class AddVideo extends Component {
 
   render() {
     return (
-      <SiteWrapper>
+      <div>
         {this.state.send == "true" ? (
           <SweetAlert title="Success!" onConfirm={this.hideAlert}>
             Successful
@@ -183,6 +189,26 @@ class AddVideo extends Component {
                 <Grid.Row>
                   <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
+                      <Form.Label>Video Type</Form.Label>
+                      <Form.Select name='videoType' onChange={evt => {
+                          this.setState({ videoType: evt.target.value });
+                        }}>
+                        <option value="youtube_video">
+                          Youtube Video
+                        </option>
+                        <option value="youtube_playlist">
+                          Youtube Playlist
+                        </option>
+                        <option value="file">
+                          Live Stream or Video File
+                        </option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Grid.Col>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Col xs={12} sm={12} md={12}>
+                    <Form.Group>
                       <Form.Label>Video URL</Form.Label>
                       <Form.Input
                         type="text"
@@ -195,11 +221,84 @@ class AddVideo extends Component {
                     </Form.Group>
                   </Grid.Col>
                 </Grid.Row>
+                <Grid.Row>
+                  <Grid.Col xs={12} sm={12} md={12}>
+                    <Form.Group>
+                      <Form.Label>Langiage</Form.Label>
+                      <Form.Select name='language' onChange={evt => {
+                          this.setState({ language: evt.target.value });
+                        }}>
+                        <option value="hindi">
+                          Hindi
+                        </option>
+                        <option value="english">
+                          Engligh
+                        </option>
+                        <option value="telugu">
+                          Telugu
+                        </option>
+                        <option value="bangla">
+                          Bangla
+                        </option>
+                        <option value="malayalam">
+                          Malayalam
+                        </option>
+                        <option value="assamese">
+                          Assamese
+                        </option>
+                        <option value="gujurati">
+                          Gujurati
+                        </option>
+                        <option value="marathi">
+                          Marathi
+                        </option>
+                        <option value="tamil">
+                          Tamil
+                        </option>
+                        <option value="punjabi">
+                          Punjabi
+                        </option>
+                        <option value="kannada">
+                          Kannada
+                        </option>
+                        <option value="bhojpuri">
+                          Bhojpuri
+                        </option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Grid.Col>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Col xs={12} sm={12} md={12}>
+                    <Form.Group>
+                      <Form.Label>Category</Form.Label>
+                      <Form.Select name='category' onChange={evt => {
+                          this.setState({ category: evt.target.value });
+                        }}>
+                        <optgroup label="Movies">
+                          <option value="movies_action">Action</option>
+                          <option value="movies_comedy">Comedy</option>
+                        </optgroup>
+                        <optgroup label="Live TV">
+                          <option value="livetv_action">Sports</option>
+                          <option value="livetv_comedy">News</option>
+                        </optgroup>
+                        <option value="news">News</option>
+                        <option value="music">Music</option>
+                        <optgroup label="Web Series">
+                          <option value="webseries_action">Action</option>
+                          <option value="webseries_documentry">Documentry</option>
+                        </optgroup>
+                        <option value="others">Others</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Grid.Col>
+                </Grid.Row>
               </Form>
             </Grid.Col>
           </Grid.Row>
         </Page.Card>
-      </SiteWrapper>
+      </div>
     );
   }
 }

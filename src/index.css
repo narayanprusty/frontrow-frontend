@@ -3,3 +3,69 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.image-gallery-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  padding: 43.37% 0 0 0; /* 34.37% = 100 / (w / h) = 100 / (640 / 220) */
+}
+
+.image-gallery-image img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.image-gallery-content button:focus {
+  outline: none !important
+}
+
+.image-gallery-thumbnail-inner {
+  position: relative;
+  overflow: hidden;
+  padding: 53.37% 0 0 0; /* 34.37% = 100 / (w / h) = 100 / (640 / 220) */
+}
+
+.image-gallery-thumbnail-inner img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.homepage h3 {
+  display: inline-block;
+}
+
+.seemore {
+  position: relative;
+  top: -2px;
+  left: 7px
+}
+
+div[class*="coverflow__container"] {
+  background: none;
+  height: 250px;
+}
+
+/*div[class*="coverflow__right"] {
+  right: 0px !important;
+}
+
+div[class*="coverflow__left"] {
+  left: 0px !important;
+}*/

@@ -198,7 +198,7 @@ class PublishAds extends Component {
 
   render() {
     return (
-      <SiteWrapper>
+      <div>
         {this.state.publish ? (
             <SweetAlert title="Success!" onConfirm={this.hideAlert}>
                 Ad published successfully!
@@ -350,7 +350,7 @@ class PublishAds extends Component {
             </Grid.Col>
           </Grid.Row>
         </Page.Card>
-      </SiteWrapper>
+      </div>
     );
   }
 }
