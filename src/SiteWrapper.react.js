@@ -17,30 +17,23 @@ import config from "./config/config";
 
 import type { NotificationProps } from "tabler-react";
 
-type Props = {|
-  +children: React.Node
-|};
-
-type subNavItem = {|
-  +value: string,
-  +to?: string,
-  +icon?: string,
-  +LinkComponent?: React.ElementType
-|};
-
-type navItem = {|
-  +value: string,
-  +to?: string,
-  +icon?: string,
-  +active?: boolean,
-  +LinkComponent?: React.ElementType,
-  +subItems?: Array<subNavItem>,
-  +useExact?: boolean
-|};
 
 const navBarItems: Array<navItem> = [
-  /*
-  {
+    {
+      value: "Home",
+      to: "/",
+      icon: "home",
+      LinkComponent: withRouter(NavLink),
+      useExact: true
+    },
+    {
+      value: "Videos",
+      to: "/videos",
+      icon: "video",
+      LinkComponent: withRouter(NavLink),
+      useExact: true
+    }
+  /*{
     value: "Interface",
     icon: "box",
     subItems: [
@@ -98,8 +91,6 @@ const navBarItems: Array<navItem> = [
       { value: "RTL", to: "/rtl", LinkComponent: withRouter(NavLink) }
     ]
   },
-  */
-  /*
   {
     value: "Gallery",
     to: "/gallery",
@@ -113,8 +104,7 @@ const navBarItems: Array<navItem> = [
       process.env.NODE_ENV === "production"
         ? "https://tabler.github.io/tabler-react/documentation"
         : "/documentation"
-  }
-  */
+  }*/
 ];
 
 var LS_KEY = "frontrow";
@@ -128,15 +118,7 @@ class SiteWrapper extends React.Component<Props, State> {
       loading: false,
       auth: localStorage.getItem(LS_KEY) || undefined,
       username: "",
-      navBarItems: [
-        {
-          value: "Home",
-          to: "/",
-          icon: "home",
-          LinkComponent: withRouter(NavLink),
-          useExact: true
-        }
-      ],
+      navBarItems: navBarItems,
       notificationsObjects: [
         {
           unread: true,
@@ -154,6 +136,8 @@ class SiteWrapper extends React.Component<Props, State> {
     this.handleLoggedIn = this.handleLoggedIn.bind(this);
     this.Login = this.Login.bind(this);
     this.getuser = this.getuser.bind(this);
+
+    let items = this.state.navBarItems;
   }
 
   getuser(e) {

@@ -5,6 +5,8 @@ import { Page, Card, Grid, Form, Button, Dropdown } from "tabler-react";
 import SiteWrapper from "../SiteWrapper.react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import config from "../config/config";
+import categories from "../data/categories.json"
+import languages from "../data/languages.json"
 
 const LS_KEY = "frontrow";
 
@@ -112,7 +114,7 @@ class AddVideo extends Component {
 
   hideAlert() {
     this.setState({ send: "" });
-    this.props.history.push(`/`);
+    //this.props.history.push(`/`);
   }
 
   render() {
@@ -224,46 +226,13 @@ class AddVideo extends Component {
                 <Grid.Row>
                   <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
-                      <Form.Label>Langiage</Form.Label>
+                      <Form.Label>Language</Form.Label>
                       <Form.Select name='language' onChange={evt => {
                           this.setState({ language: evt.target.value });
                         }}>
-                        <option value="hindi">
-                          Hindi
-                        </option>
-                        <option value="english">
-                          Engligh
-                        </option>
-                        <option value="telugu">
-                          Telugu
-                        </option>
-                        <option value="bangla">
-                          Bangla
-                        </option>
-                        <option value="malayalam">
-                          Malayalam
-                        </option>
-                        <option value="assamese">
-                          Assamese
-                        </option>
-                        <option value="gujurati">
-                          Gujurati
-                        </option>
-                        <option value="marathi">
-                          Marathi
-                        </option>
-                        <option value="tamil">
-                          Tamil
-                        </option>
-                        <option value="punjabi">
-                          Punjabi
-                        </option>
-                        <option value="kannada">
-                          Kannada
-                        </option>
-                        <option value="bhojpuri">
-                          Bhojpuri
-                        </option>
+                        {languages.map((item, i) => {
+                          return <option value={item.toLowerCase()}>{item}</option>
+                        })}
                       </Form.Select>
                     </Form.Group>
                   </Grid.Col>
@@ -275,21 +244,19 @@ class AddVideo extends Component {
                       <Form.Select name='category' onChange={evt => {
                           this.setState({ category: evt.target.value });
                         }}>
-                        <optgroup label="Movies">
-                          <option value="movies_action">Action</option>
-                          <option value="movies_comedy">Comedy</option>
-                        </optgroup>
-                        <optgroup label="Live TV">
-                          <option value="livetv_action">Sports</option>
-                          <option value="livetv_comedy">News</option>
-                        </optgroup>
-                        <option value="news">News</option>
-                        <option value="music">Music</option>
-                        <optgroup label="Web Series">
-                          <option value="webseries_action">Action</option>
-                          <option value="webseries_documentry">Documentry</option>
-                        </optgroup>
-                        <option value="others">Others</option>
+                        {categories.map((item, i) => {
+                          if(item.child) {
+                            return (
+                              <optgroup label="Movies">
+                                {item.subcategories.map((child) => {
+                                  return <option value={child.id}>{child.name}</option>                    
+                                })}
+                              </optgroup>
+                            )
+                          } else {
+                            return <option value={item.id}>{item.name}</option>
+                          }
+                        })}
                       </Form.Select>
                     </Form.Group>
                   </Grid.Col>
