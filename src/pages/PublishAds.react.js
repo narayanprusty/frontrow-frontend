@@ -88,6 +88,13 @@ class PublishAds extends Component {
           {
             content: (
               <Text RootComponent="span" muted>
+                {data[i].name}
+              </Text>
+            )
+          },
+          {
+            content: (
+              <Text RootComponent="span" muted>
                 {data[i].uniqueIdentifier}
               </Text>
             )
@@ -150,10 +157,10 @@ class PublishAds extends Component {
         country: this.state.country,
         tags: this.state.tags
       }),
-      bannerUrl: this.state.bannerUrl
+      bannerUrl: this.state.bannerUrl,
+      name: this.state.adName,
+      redirectURL: this.state.redirectURL,
     };
-
-    console.log(body)
 
     this.setState({ loading: true });
     var auth = localStorage.getItem(LS_KEY) ? localStorage.getItem(LS_KEY).replace(/\"/g, "") : "";
@@ -189,7 +196,6 @@ class PublishAds extends Component {
 
   hideAlert() {
     this.setState({ publish: false });
-    this.props.history.push(`/`);
   }
 
   hideLoginAlert() {
@@ -255,6 +261,30 @@ class PublishAds extends Component {
             <Grid.Col lg={12}>
               <Form>
                 <Grid.Row>
+                  <Grid.Col xs={12} sm={6} md={6}>
+                    <Form.Group>
+                      <Form.Label>Name</Form.Label>
+                      <Form.Input
+                        type="text"
+                        placeholder="Name"
+                        onChange={evt => {
+                          this.setState({ adName: evt.target.value });
+                        }}
+                      />
+                    </Form.Group>
+                  </Grid.Col>
+                  <Grid.Col xs={12} sm={6} md={6}>
+                    <Form.Group>
+                      <Form.Label>Redirect URL</Form.Label>
+                      <Form.Input
+                        type="text"
+                        placeholder="Redirect URL"
+                        onChange={evt => {
+                          this.setState({ redirectURL: evt.target.value });
+                        }}
+                      />
+                    </Form.Group>
+                  </Grid.Col>
                   <Grid.Col xs={12} sm={6} md={6}>
                     <Form.Group>
                       <Form.Label>From Age</Form.Label>
@@ -340,6 +370,7 @@ class PublishAds extends Component {
                 responsive
                 className="card-table table-vcenter text-nowrap"
                 headerItems={[
+                  { content: "Name"},
                   { content: "ID." },
                   { content: "Views" },
                   /*{ content: "Total Debit($)" },

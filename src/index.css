@@ -10,7 +10,7 @@ body {
   height: auto;
   position: relative;
   overflow: hidden;
-  padding: 43.37% 0 0 0; /* 34.37% = 100 / (w / h) = 100 / (640 / 220) */
+  padding: 53.37% 0 0 0; /* 34.37% = 100 / (w / h) = 100 / (640 / 220) */
 }
 
 .image-gallery-image img {
@@ -62,11 +62,30 @@ div[class*="coverflow__container"] {
   height: 250px;
 }
 
-/*div[class*="coverflow__right"] {
-  right: 0px !important;
+.videos .card a {
+  display: block;
+  position: relative;
+  padding: 53.37% 0 0 0;
+
 }
 
-div[class*="coverflow__left"] {
-  left: 0px !important;
-}*/
+.videos .card a img {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 100%;
 
+}
+
+
+.player_cover {
+  position: relative;
+  padding: 53.37% 0 0 0;
+}
+
+.player_cover iframe {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+}

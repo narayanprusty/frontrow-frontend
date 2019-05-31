@@ -198,6 +198,7 @@ class SiteWrapper extends React.Component<Props, State> {
   handleLoggedOut = () => {
     localStorage.removeItem(LS_KEY);
     this.setState({ auth: null });
+    window.location = "/"
   };
 
   handleSignup = async publicAddress => {
@@ -270,7 +271,6 @@ class SiteWrapper extends React.Component<Props, State> {
     }
     window.web3 = new Web3(window.ethereum);
     add = await window.ethereum.enable();
-    console.log(add);
     await this.setState({ address: add[0] });
   };
 
@@ -313,7 +313,7 @@ class SiteWrapper extends React.Component<Props, State> {
         4000
       );
     } catch (e) {
-      window.alert(e);
+      console.log(e);
       this.setState({ loading: false });
     }
   };

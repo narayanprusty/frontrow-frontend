@@ -29,91 +29,19 @@ class Home extends Component {
       location: "",
       interests: [],
       ok: false,
-      videos: [],
-      loadedVideos: false,
       active: 0
     };
     this.hideAlert = this.hideAlert.bind(this);
-    this.VideoRead = this.VideoRead.bind(this);
   }
 
-  VideoRead() {
-    this.setState({ loadedVideos: false });
-    fetch(config.api.serverUrl + "/video/get/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        authorization: localStorage.getItem("jwt")
-      }
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        this.setState({
-          videos: json.data,
-          loadedVideos: true
-        });
-      });
-  }
-
+  
   componentWillMount() {
     var accesstoken = this.state.auth;
-    this.VideoRead();
     if (accesstoken == undefined) return;
     accesstoken = accesstoken.replace(/\"/g, "");
     const {
       payload: { id }
     } = jwtDecode(accesstoken);
-    fetch(`${config.api.serverUrl}/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${accesstoken}`
-      }
-    })
-      .then(response => response.json())
-      .then(json => {
-        let user = Object.assign({}, this.state.user);
-        user.publicAddress = json.data.publicAddress;
-        user.nonce = json.data.nonce;
-
-        fetch(config.api.serverUrl + "/user/get/" + json.data.publicAddress, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            authorization: localStorage.getItem("jwt")
-          }
-        })
-          .then(response => {
-            return response.json();
-          })
-          .then(json => {
-            if (json.data[0] == undefined) return;
-            {
-              json.data[0].username == undefined
-                ? this.setState({ username: null })
-                : this.setState({ username: json.data[0].username });
-            }
-            {
-              json.data[0].age == undefined
-                ? this.setState({ age: null })
-                : this.setState({ age: json.data[0].age });
-            }
-            {
-              json.data[0].location == undefined
-                ? this.setState({ location: null })
-                : this.setState({ location: json.data[0].location });
-            }
-            {
-              json.data[0].interests == undefined
-                ? this.setState({ interests: null })
-                : this.setState({ interests: json.data[0].interests });
-            }
-            this.setState({ ok: true });
-          });
-      })
-      .catch(window.alert);
   }
 
   hideAlert() {
@@ -239,87 +167,78 @@ class Home extends Component {
     return (
       <div>
         <Page.Content className="homepage">
-          {this.state.loadedVideos ? (
-            <div>
-              <ImageGallery items={images} autoPlay={false} showFullscreenButton={false} showPlayButton={true} onPlay={(index) => {alert(index)}}  />
-              
-              <Header.H3 className="mt-4">Live TV </Header.H3> <a className="seemore" href="">View More</a> 
-              {/*<Videos data={this.state.videos} />*/}
-              <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
-                <ItemsCarousel
-                  gutter={12}
-                  activePosition={'center'}
-                  chevronWidth={60}
-                  numberOfCards={3}
-                  slidesToScroll={3}
-                  outsideChevron={false}
-                  showSlither={false}
-                  firstAndLastGutter={false}
-                  activeItemIndex={this.state.activeItemIndexA}
-                  requestToChangeActive={value => this.setState({ activeItemIndexA: value })}
-                  rightChevron={<div class="image-gallery-right-nav"></div>}
-                  leftChevron={<div class="image-gallery-left-nav"></div>}
-                >
-                  {Array.from(new Array(10)).map((_, i) =>
-                    <div key={i} style={{
-                      cursor: "pointer"
-                    }}>
-                      <img style={{
-                        width: '100%',
-                      }} src="https://s3.ap-southeast-1.amazonaws.com/images.deccanchronicle.com/dc-Cover-pjnahrr0r83s6i4udepqspdel7-20180906164434.Medi.jpeg" />
-                    </div>
-                  )}
-                </ItemsCarousel>
-              </div>
-              <Header.H3 className="mt-4">Latest Movies </Header.H3> <a className="seemore" href="">View More</a> 
-              <div>
-                <StyleRoot>
-                  <Coverflow
-                    displayQuantityOfSide={2}
-                    navigation
-                    infiniteScroll
-                    enableHeading
-                  >
-                    <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album one' data-action="https://facebook.github.io/react/"/>
-                    <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album two' data-action="http://passer.cc"/>
-                    <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album three' data-action="https://doce.cc/"/>
-                    <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album four' data-action="http://tw.yahoo.com"/>
-                  </Coverflow>
-                </StyleRoot>
-              </div>
-              <Header.H3 className="mt-4">Comedy </Header.H3> <a className="seemore" href="">View More</a> 
-              <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
-                <ItemsCarousel
-                  gutter={12}
-                  activePosition={'center'}
-                  chevronWidth={60}
-                  numberOfCards={3}
-                  slidesToScroll={3}
-                  outsideChevron={false}
-                  showSlither={false}
-                  firstAndLastGutter={false}
-                  activeItemIndex={this.state.activeItemIndexB}
-                  requestToChangeActive={value => this.setState({ activeItemIndexB: value })}
-                  rightChevron={<div class="image-gallery-right-nav"></div>}
-                  leftChevron={<div class="image-gallery-left-nav"></div>}
-                >
-                  {Array.from(new Array(10)).map((_, i) =>
-                    <div key={i} style={{
-                      cursor: "pointer"
-                    }}>
-                      <img style={{
-                        width: '100%',
-                      }} src="https://dc-cdn.s3-ap-southeast-1.amazonaws.com/dc-Cover-34912i42mms3nbcn6ba0dtpad5-20160812130407.Medi.jpeg" />
-                    </div>
-                  )}
-                </ItemsCarousel>
-              </div>
-            </div>
-          ) : (
-            <center>
-              <Loader type="Rings" color="#ff002a" height="100" width="100" />
-            </center>
-          )}
+          <ImageGallery items={images} autoPlay={false} showFullscreenButton={false} showPlayButton={true} onPlay={(index) => {alert(index)}}  />
+          <Header.H3 className="mt-4">Live TV </Header.H3> <a className="seemore" href="">View More</a> 
+          {/*<Videos data={this.state.videos} />*/}
+          <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
+            <ItemsCarousel
+              gutter={12}
+              activePosition={'center'}
+              chevronWidth={60}
+              numberOfCards={3}
+              slidesToScroll={3}
+              outsideChevron={false}
+              showSlither={false}
+              firstAndLastGutter={false}
+              activeItemIndex={this.state.activeItemIndexA}
+              requestToChangeActive={value => this.setState({ activeItemIndexA: value })}
+              rightChevron={<div class="image-gallery-right-nav"></div>}
+              leftChevron={<div class="image-gallery-left-nav"></div>}
+            >
+              {Array.from(new Array(10)).map((_, i) =>
+                <div key={i} style={{
+                  cursor: "pointer"
+                }}>
+                  <img style={{
+                    width: '100%',
+                  }} src="https://s3.ap-southeast-1.amazonaws.com/images.deccanchronicle.com/dc-Cover-pjnahrr0r83s6i4udepqspdel7-20180906164434.Medi.jpeg" />
+                </div>
+              )}
+            </ItemsCarousel>
+          </div>
+          <Header.H3 className="mt-4">Latest Movies </Header.H3> <a className="seemore" href="">View More</a> 
+          <div>
+            <StyleRoot>
+              <Coverflow
+                displayQuantityOfSide={2}
+                navigation
+                infiniteScroll
+                enableHeading
+              >
+                <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album one' data-action="https://facebook.github.io/react/"/>
+                <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album two' data-action="http://passer.cc"/>
+                <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album three' data-action="https://doce.cc/"/>
+                <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album four' data-action="http://tw.yahoo.com"/>
+              </Coverflow>
+            </StyleRoot>
+          </div>
+          <Header.H3 className="mt-4">Comedy </Header.H3> <a className="seemore" href="">View More</a> 
+          <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
+            <ItemsCarousel
+              gutter={12}
+              activePosition={'center'}
+              chevronWidth={60}
+              numberOfCards={3}
+              slidesToScroll={3}
+              outsideChevron={false}
+              showSlither={false}
+              firstAndLastGutter={false}
+              activeItemIndex={this.state.activeItemIndexB}
+              requestToChangeActive={value => this.setState({ activeItemIndexB: value })}
+              rightChevron={<div class="image-gallery-right-nav"></div>}
+              leftChevron={<div class="image-gallery-left-nav"></div>}
+            >
+              {Array.from(new Array(10)).map((_, i) =>
+                <div key={i} style={{
+                  cursor: "pointer"
+                }}>
+                  <img style={{
+                    width: '100%',
+                  }} src="https://dc-cdn.s3-ap-southeast-1.amazonaws.com/dc-Cover-34912i42mms3nbcn6ba0dtpad5-20160812130407.Medi.jpeg" />
+                </div>
+              )}
+            </ItemsCarousel>
+          </div>
         </Page.Content>
       </div>
     );

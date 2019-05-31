@@ -114,7 +114,9 @@ class Videos extends Component {
           return (
             <Grid.Col xs={12} sm={12} lg={3}>
               <div
-                style={{ cursor: "pointer" }}
+                style={{ 
+                  cursor: "pointer"
+                }}
                 onClick={() => window.goToVideo(link)}
               >
                 <GalleryCard key={i}>
