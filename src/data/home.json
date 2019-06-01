@@ -1,0 +1,128 @@
+{
+  "section_one": [
+    {
+      "original": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "videoId": "BDe-WbGBl"
+    },
+    {
+      "original": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "videoId": "BDe-WbGBl"
+    },
+    {
+      "original": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "videoId": "BDe-WbGBl"
+    },
+    {
+      "original": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "videoId": "BDe-WbGBl"
+    },
+    {
+      "original": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "videoId": "BDe-WbGBl"
+    },
+    {
+      "original": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "videoId": "BDe-WbGBl"
+    },
+    {
+      "original": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "videoId": "BDe-WbGBl"
+    },
+    {
+      "original": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+      "videoId": "BDe-WbGBl"
+    }
+  ],
+  "section_two": {
+    "name": "Live TV",
+    "data": [
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      }
+    ]
+  },
+  "section_three": { 
+    "name": "Latest Movies",
+    "data": [
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      }
+    ]
+  },
+  "section_four": {
+    "name": "Most Popular",
+    "data": [
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      }
+    ]
+  },
+  "section_five": {
+    "name": "Most Shared",
+    "data": [
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      },
+      {
+        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+        "videoId": "BDe-WbGBl"
+      }
+    ]
+  } 
+}

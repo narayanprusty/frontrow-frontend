@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from "react";
 import { Page, GalleryCard, Container, Grid, Header } from "tabler-react";
 import jwtDecode from "jwt-decode";
@@ -12,6 +10,8 @@ import ImageGallery from 'react-image-gallery';
 import ItemsCarousel from 'react-items-carousel';
 import Coverflow from 'react-coverflow';
 import { StyleRoot } from 'radium';
+import homeData from './data/home.json';
+import { Link } from 'react-router-dom';
 
 import "react-image-gallery/styles/css/image-gallery.css";
 
@@ -29,7 +29,8 @@ class Home extends Component {
       location: "",
       interests: [],
       ok: false,
-      active: 0
+      active: 0,
+      redirect: false
     };
     this.hideAlert = this.hideAlert.bind(this);
   }
@@ -56,73 +57,6 @@ class Home extends Component {
   }
 
   render() {
-
-    const images = [
-      {
-        original: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg',
-        thumbnail: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg',
-      },
-      {
-        original: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/raw-john-poster_d.jpeg?Zg1lIHIC5OvXz._2NAzAlBo9x3NVesYD',
-        thumbnail: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/raw-john-poster_d.jpeg?Zg1lIHIC5OvXz._2NAzAlBo9x3NVesYD'
-      },
-      {
-        original: 'http://www.dssc.co/delhi/wp-content/uploads/sites/2/2018/05/Featured-Image-Raazi-3-zeenewsIndiaCom.gif',
-        thumbnail: 'http://www.dssc.co/delhi/wp-content/uploads/sites/2/2018/05/Featured-Image-Raazi-3-zeenewsIndiaCom.gif'
-      },
-      {
-        original: 'https://d1u4oo4rb13yy8.cloudfront.net/article/51551-zbxsfewbrl-1487192073.jpg',
-        thumbnail: 'https://d1u4oo4rb13yy8.cloudfront.net/article/51551-zbxsfewbrl-1487192073.jpg'
-      },
-      {
-        original: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg',
-        thumbnail: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg',
-      },
-      {
-        original: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/raw-john-poster_d.jpeg?Zg1lIHIC5OvXz._2NAzAlBo9x3NVesYD',
-        thumbnail: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/raw-john-poster_d.jpeg?Zg1lIHIC5OvXz._2NAzAlBo9x3NVesYD'
-      },
-      {
-        original: 'http://www.dssc.co/delhi/wp-content/uploads/sites/2/2018/05/Featured-Image-Raazi-3-zeenewsIndiaCom.gif',
-        thumbnail: 'http://www.dssc.co/delhi/wp-content/uploads/sites/2/2018/05/Featured-Image-Raazi-3-zeenewsIndiaCom.gif'
-      },
-      {
-        original: 'https://d1u4oo4rb13yy8.cloudfront.net/article/51551-zbxsfewbrl-1487192073.jpg',
-        thumbnail: 'https://d1u4oo4rb13yy8.cloudfront.net/article/51551-zbxsfewbrl-1487192073.jpg'
-      },
-      {
-        original: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg',
-        thumbnail: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg',
-      },
-      {
-        original: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/raw-john-poster_d.jpeg?Zg1lIHIC5OvXz._2NAzAlBo9x3NVesYD',
-        thumbnail: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/raw-john-poster_d.jpeg?Zg1lIHIC5OvXz._2NAzAlBo9x3NVesYD'
-      },
-      {
-        original: 'http://www.dssc.co/delhi/wp-content/uploads/sites/2/2018/05/Featured-Image-Raazi-3-zeenewsIndiaCom.gif',
-        thumbnail: 'http://www.dssc.co/delhi/wp-content/uploads/sites/2/2018/05/Featured-Image-Raazi-3-zeenewsIndiaCom.gif'
-      },
-      {
-        original: 'https://d1u4oo4rb13yy8.cloudfront.net/article/51551-zbxsfewbrl-1487192073.jpg',
-        thumbnail: 'https://d1u4oo4rb13yy8.cloudfront.net/article/51551-zbxsfewbrl-1487192073.jpg'
-      },
-      {
-        original: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg',
-        thumbnail: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg',
-      },
-      {
-        original: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/raw-john-poster_d.jpeg?Zg1lIHIC5OvXz._2NAzAlBo9x3NVesYD',
-        thumbnail: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/raw-john-poster_d.jpeg?Zg1lIHIC5OvXz._2NAzAlBo9x3NVesYD'
-      },
-      {
-        original: 'http://www.dssc.co/delhi/wp-content/uploads/sites/2/2018/05/Featured-Image-Raazi-3-zeenewsIndiaCom.gif',
-        thumbnail: 'http://www.dssc.co/delhi/wp-content/uploads/sites/2/2018/05/Featured-Image-Raazi-3-zeenewsIndiaCom.gif'
-      },
-      {
-        original: 'https://d1u4oo4rb13yy8.cloudfront.net/article/51551-zbxsfewbrl-1487192073.jpg',
-        thumbnail: 'https://d1u4oo4rb13yy8.cloudfront.net/article/51551-zbxsfewbrl-1487192073.jpg'
-      }
-    ]
 
     //<GalleryCard.IconItem name="heart" label={} right />
     const Videos = ({ data }) => (
@@ -167,8 +101,13 @@ class Home extends Component {
     return (
       <div>
         <Page.Content className="homepage">
-          <ImageGallery items={images} autoPlay={false} showFullscreenButton={false} showPlayButton={true} onPlay={(index) => {alert(index)}}  />
-          <Header.H3 className="mt-4">Live TV </Header.H3> <a className="seemore" href="">View More</a> 
+          <ImageGallery items={homeData.section_one} autoPlay={false} showFullscreenButton={false} showPlayButton={true} onPlay={(index) => {
+            console.log(this.props.history)
+            this.setState({
+              redirect: `/video/${homeData.section_one[index].videoId}`
+            })
+          }}  />
+          <Header.H3 className="mt-4">{homeData.section_two.name}</Header.H3> 
           {/*<Videos data={this.state.videos} />*/}
           <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
             <ItemsCarousel
@@ -185,18 +124,20 @@ class Home extends Component {
               rightChevron={<div class="image-gallery-right-nav"></div>}
               leftChevron={<div class="image-gallery-left-nav"></div>}
             >
-              {Array.from(new Array(10)).map((_, i) =>
-                <div key={i} style={{
+              {homeData.section_two.data.map((_, i) => 
+                <div key={_.videoId} style={{
                   cursor: "pointer"
                 }}>
-                  <img style={{
-                    width: '100%',
-                  }} src="https://s3.ap-southeast-1.amazonaws.com/images.deccanchronicle.com/dc-Cover-pjnahrr0r83s6i4udepqspdel7-20180906164434.Medi.jpeg" />
+                  <Link to={`/video/${_.videoId}`}>
+                    <img style={{
+                      width: '100%',
+                    }} src={_.thumbnail} />
+                  </Link>
                 </div>
               )}
             </ItemsCarousel>
           </div>
-          <Header.H3 className="mt-4">Latest Movies </Header.H3> <a className="seemore" href="">View More</a> 
+          <Header.H3 className="mt-4">{homeData.section_three.name} </Header.H3>
           <div>
             <StyleRoot>
               <Coverflow
@@ -205,14 +146,21 @@ class Home extends Component {
                 infiniteScroll
                 enableHeading
               >
-                <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album one' data-action="https://facebook.github.io/react/"/>
-                <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album two' data-action="http://passer.cc"/>
-                <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album three' data-action="https://doce.cc/"/>
-                <img src='https://ichef.bbci.co.uk/news/660/media/images/69420000/jpg/_69420006__mg_0209.jpg' alt='Album four' data-action="http://tw.yahoo.com"/>
+                {homeData.section_three.data.map((_, i) => 
+                  <div key={_.videoId} style={{
+                    cursor: "pointer"
+                  }}>
+                    <Link to={`/video/${_.videoId}`}>
+                      <img style={{
+                        width: '100%',
+                      }} src={_.thumbnail} />
+                    </Link>
+                  </div>
+                )}
               </Coverflow>
             </StyleRoot>
           </div>
-          <Header.H3 className="mt-4">Comedy </Header.H3> <a className="seemore" href="">View More</a> 
+          <Header.H3 className="mt-4">{homeData.section_four.name}</Header.H3>
           <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
             <ItemsCarousel
               gutter={12}
@@ -223,23 +171,57 @@ class Home extends Component {
               outsideChevron={false}
               showSlither={false}
               firstAndLastGutter={false}
-              activeItemIndex={this.state.activeItemIndexB}
-              requestToChangeActive={value => this.setState({ activeItemIndexB: value })}
+              activeItemIndex={this.state.activeItemIndexA}
+              requestToChangeActive={value => this.setState({ activeItemIndexA: value })}
               rightChevron={<div class="image-gallery-right-nav"></div>}
               leftChevron={<div class="image-gallery-left-nav"></div>}
             >
-              {Array.from(new Array(10)).map((_, i) =>
-                <div key={i} style={{
+              {homeData.section_four.data.map((_, i) => 
+                <div key={_.videoId} style={{
                   cursor: "pointer"
                 }}>
-                  <img style={{
-                    width: '100%',
-                  }} src="https://dc-cdn.s3-ap-southeast-1.amazonaws.com/dc-Cover-34912i42mms3nbcn6ba0dtpad5-20160812130407.Medi.jpeg" />
+                  <Link to={`/video/${_.videoId}`}>
+                    <img style={{
+                      width: '100%',
+                    }} src={_.thumbnail} />
+                  </Link>
+                </div>
+              )}
+            </ItemsCarousel>
+          </div>
+          <Header.H3 className="mt-4">{homeData.section_five.name}</Header.H3>
+          <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
+            <ItemsCarousel
+              gutter={12}
+              activePosition={'center'}
+              chevronWidth={60}
+              numberOfCards={3}
+              slidesToScroll={3}
+              outsideChevron={false}
+              showSlither={false}
+              firstAndLastGutter={false}
+              activeItemIndex={this.state.activeItemIndexA}
+              requestToChangeActive={value => this.setState({ activeItemIndexA: value })}
+              rightChevron={<div class="image-gallery-right-nav"></div>}
+              leftChevron={<div class="image-gallery-left-nav"></div>}
+            >
+              {homeData.section_five.data.map((_, i) => 
+                <div key={_.videoId} style={{
+                  cursor: "pointer"
+                }}>
+                  <Link to={`/video/${_.videoId}`}>
+                    <img style={{
+                      width: '100%',
+                    }} src={_.thumbnail} />
+                  </Link>
                 </div>
               )}
             </ItemsCarousel>
           </div>
         </Page.Content>
+        {this.state.redirect &&
+          <Redirect to={this.state.redirect} />
+        }
       </div>
     );
   }

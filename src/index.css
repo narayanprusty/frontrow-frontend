@@ -89,3 +89,7 @@ div[class*="coverflow__container"] {
   height: 100%;
   width: 100%;
 }
+
+div[class*="coverflow__text__"] {
+  display: none
+}
