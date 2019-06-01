@@ -117,7 +117,9 @@ class Videos extends Component {
                 style={{ 
                   cursor: "pointer"
                 }}
-                onClick={() => window.goToVideo(link)}
+                onClick={() => this.setState({
+                  redirect: link
+                })}
               >
                 <GalleryCard key={i}>
                   <GalleryCard.Image src={video.imageURL} />
@@ -236,13 +238,12 @@ class Videos extends Component {
             </center>
           )}
         </Page.Content>
+        {this.state.redirect &&
+          <Redirect to={this.state.redirect} />
+        }
       </div>
     );
   }
 }
-
-window.goToVideo = l => {
-  window.location = l;
-};
 
 export default Videos;

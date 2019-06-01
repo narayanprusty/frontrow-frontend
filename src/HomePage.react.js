@@ -102,7 +102,6 @@ class Home extends Component {
       <div>
         <Page.Content className="homepage">
           <ImageGallery items={homeData.section_one} autoPlay={false} showFullscreenButton={false} showPlayButton={true} onPlay={(index) => {
-            console.log(this.props.history)
             this.setState({
               redirect: `/video/${homeData.section_one[index].videoId}`
             })

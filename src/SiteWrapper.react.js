@@ -358,8 +358,7 @@ class SiteWrapper extends React.Component<Props, State> {
     return (
       <Site.Wrapper
         headerProps={{
-          href: window.location.protocol + "//" + window.location.hostname,
-          alt: "Tabler React",
+          href: '/',
           imageURL: "/demo/logo.png",
           accountDropdown: accountDropdownProps
         }}
@@ -376,11 +375,11 @@ class SiteWrapper extends React.Component<Props, State> {
             <a href="#">Media</a>
           ],
           note:
-            "Frontrow a decentralized video sharing app where you earn money for viewing ads.",
+            "Neott a decentralized video sharing app where you earn money for viewing ads.",
           copyright: (
             <React.Fragment>
               Copyright © 2018
-              <a href="."> Frontrow</a>. All rights reserved.
+              <a href="."> Neott</a>. All rights reserved.
             </React.Fragment>
           )
         }}
