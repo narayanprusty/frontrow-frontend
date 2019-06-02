@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+.page-content, .page-main {
+  background: white;
+}
+
 .image-gallery-image {
   display: block;
   width: 100%;

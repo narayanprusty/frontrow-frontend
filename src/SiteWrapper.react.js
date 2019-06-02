@@ -379,7 +379,7 @@ class SiteWrapper extends React.Component<Props, State> {
             <a href="mailto:hello@neott.in">Contact Us</a>,
           ],
           note:
-            "Neott a decentralized video sharing app where you earn money for viewing ads.",
+            "Neott #HarHathMeinTV",
           copyright: (
             <React.Fragment>
               Copyright © 2018
