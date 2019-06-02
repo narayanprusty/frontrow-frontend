@@ -1,0 +1,256 @@
+[
+  {
+    "child": true,
+    "name": "Movies",
+    "subcategories": [
+      {
+        "id": "movies_drama",
+        "name": "Drama"
+      },
+      {
+        "id": "movies_romantic",
+        "name": "Romantic"
+      },
+      {
+        "id": "movies_thriller",
+        "name": "Thriller"
+      },
+      {
+        "id": "movies_family",
+        "name": "Family"
+      },
+      {
+        "id": "movies_animation",
+        "name": "Animation"
+      },
+      {
+        "id": "movies_horror",
+        "name": "Horror"
+      },
+      {
+        "id": "movies_crime",
+        "name": "Crime"
+      },
+      {
+        "id": "movies_fiction",
+        "name": "Fiction"
+      },
+      {
+        "id": "movies_fantasy",
+        "name": "Fantasy"
+      }
+    ] 
+  },
+  {
+    "child": true,
+    "name": "Music",
+    "subcategories": [
+      {
+        "id": "music_classical",
+        "name": "Classical"
+      },
+      {
+        "id": "music_pop",
+        "name": "Pop"
+      },
+      {
+        "id": "music_hip hop",
+        "name": "Hip Hop"
+      },
+      {
+        "id": "music_fusion",
+        "name": "Fusion"
+      },
+      {
+        "id": "music_instrumental",
+        "name": "Instrumental"
+      },
+      {
+        "id": "movies_jazz",
+        "name": "Jazz"
+      },
+      {
+        "id": "music_popular",
+        "name": "Popular"
+      },
+      {
+        "id": "music_remix",
+        "name": "Remix"
+      },
+      {
+        "id": "music_rap",
+        "name": "Rap"
+      },
+      {
+        "id": "music_dance",
+        "name": "Dance"
+      }
+    ]
+  },
+  {
+    "child": true,
+    "name": "Shows",
+    "subcategories": [
+      {
+        "id": "shows_classic",
+        "name": "Classic"
+      },
+      {
+        "id": "shows_crime",
+        "name": "Crime"
+      },
+      {
+        "id": "shows_comedy",
+        "name": "Comedy"
+      },
+      {
+        "id": "shows_history",
+        "name": "History"
+      },
+      {
+        "id": "shows_drama",
+        "name": "Drama"
+      },
+      {
+        "id": "shows_romance",
+        "name": "Romance"
+      },
+      {
+        "id": "shows_family",
+        "name": "Family"
+      },
+      {
+        "id": "shows_entertainment",
+        "name": "Entertainment"
+      },
+      {
+        "id": "shows_thriller",
+        "name": "Thriller"
+      },
+      {
+        "id": "shows_religious",
+        "name": "Religious"
+      },
+      {
+        "id": "shows_travel",
+        "name": "Travel"
+      },
+      {
+        "id": "shows_animation",
+        "name": "Animation"
+      },
+      {
+        "id": "shows_horror",
+        "name": "Horror"
+      },
+      {
+        "id": "shows_musical",
+        "name": "Musical"
+      },
+      {
+        "id": "shows_talkshow",
+        "name": "Talkshow"
+      },
+      {
+        "id": "shows_documentary",
+        "name": "Documentary"
+      },
+      {
+        "id": "shows_action",
+        "name": "Action"
+      },
+      {
+        "id": "shows_reality tv",
+        "name": "Reality TV"
+      },
+      {
+        "id": "shows_kids",
+        "name": "Kids"
+      },
+      {
+        "id": "shows_sports",
+        "name": "Sports"
+      },
+      {
+        "id": "shows_satire",
+        "name": "Satire"
+      },
+      {
+        "id": "shows_political",
+        "name": "Political"
+      },
+      {
+        "id": "shows_poetry",
+        "name": "Poetry"
+      },
+      {
+        "id": "shows_mystery",
+        "name": "Mystery"
+      },
+      {
+        "id": "shows_science_fiction",
+        "name": "Science fiction"
+      }
+    ]
+  },
+  {
+    "child": true,
+    "name": "Devotional",
+    "subcategories": [
+      {
+        "id": "devotional_yoga",
+        "name": "Yoga"
+      },
+      {
+        "id": "devotional_speech",
+        "name": "Speech"
+      },
+      {
+        "id": "devotional_bhajan",
+        "name": "Bhajan"
+      },
+      {
+        "id": "devotional_songs",
+        "name": "Songs"
+      },
+      {
+        "id": "devotional_katha",
+        "name": "Katha"
+      }
+    ]
+  },
+  {
+    "child": true,
+    "name": "Videos",
+    "subcategories": [
+      {
+        "id": "videos_biography",
+        "name": "biography"
+      },
+      {
+        "id": "videos_trailers",
+        "name": "Trailers"
+      },
+      {
+        "id": "videos_travel",
+        "name": "Travel"
+      },
+      {
+        "id": "videos_devotional",
+        "name": "Devotional"
+      },
+      {
+        "id": "videos_shows",
+        "name": "Shows"
+      },
+      {
+        "id": "videos_music",
+        "name": "Music"
+      },
+      {
+        "id": "videos_movies",
+        "name": "Movies"
+      }
+    ]
+  }
+]

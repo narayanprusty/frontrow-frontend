@@ -7,13 +7,13 @@ import Moment from "react-moment";
 import { Redirect } from "react-router";
 import Loader from "react-loader-spinner";
 import config from "../config/config";
-import categories from "../data/videos_categories.json"
+import categories from "../data/livetv_categories.json"
 import "react-image-gallery/styles/css/image-gallery.css";
 import languages from "../data/languages.json"
 
 const LS_KEY = "frontrow";
 
-class Videos extends Component {
+class LiveTv extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +43,7 @@ class Videos extends Component {
   VideoRead() {
     let data = {
       skip: this.skip,
-      videoType: ['youtube_video', 'youtube_playlist', 'file']
+      videoType: ['live']
     }
 
     if(this.category !== 'all') {
@@ -71,7 +71,6 @@ class Videos extends Component {
       return response.json();
     })
     .then(json => {
-      json = json || []
       if(json) {
         let videos = this.state.videos 
         this.setState({
@@ -199,14 +198,14 @@ class Videos extends Component {
     let displayDash = this.state.videos.length > 0 ? '-' : ''
     let displayTill = this.state.videos.length > 0 ? this.state.videos.length : ''
     let displayOf = this.state.videos.length > 0 ? 'of' : ''
-    let totalVideos = `${this.state.totalCount} videos`
+    let totalVideos = `${this.state.totalCount} channels`
 
     let paginationText = `${start} ${displayDash} ${displayTill} ${displayOf} ${totalVideos}`
     return (
       <div>
         <Page.Content className="videos">
           <Page.Header
-            title="Videos"
+            title="Live TV"
             subTitle={paginationText}
             options={options}
           />
@@ -248,4 +247,4 @@ class Videos extends Component {
   }
 }
 
-export default Videos;
+export default LiveTv;

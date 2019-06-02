@@ -6,6 +6,7 @@ import AddVideo from "./AddVideo.react";
 import Videos from "./Videos.react";
 import TOS from "./TOS.react"
 import Privacy from "./Privacy.react"
+import LiveTv from "./LiveTv.react"
 
 export {
   Error404,
@@ -15,5 +16,6 @@ export {
   AddVideo,
   Videos,
   TOS,
-  Privacy
+  Privacy,
+  LiveTv
 };

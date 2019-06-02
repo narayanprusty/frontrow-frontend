@@ -5,7 +5,8 @@ import { Page, Card, Grid, Form, Button, Dropdown } from "tabler-react";
 import SiteWrapper from "../SiteWrapper.react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import config from "../config/config";
-import categories from "../data/categories.json"
+import videos_categories from "../data/videos_categories.json"
+import livetv_categories from "../data/livetv_categories.json"
 import languages from "../data/languages.json"
 
 const LS_KEY = "frontrow";
@@ -86,7 +87,6 @@ class AddVideo extends Component {
               if (json1.success == true) {
                 this.setState({ send: "true", loading: false });
               } else {
-                  console.log(json1);
                 this.setState({
                   send: "false",
                   loading: false,
@@ -202,7 +202,10 @@ class AddVideo extends Component {
                           Youtube Playlist
                         </option>
                         <option value="file">
-                          Live Stream or Video File
+                          Video File
+                        </option>
+                        <option value="live">
+                          Live Stream
                         </option>
                       </Form.Select>
                     </Form.Group>
@@ -241,23 +244,44 @@ class AddVideo extends Component {
                   <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
                       <Form.Label>Category</Form.Label>
-                      <Form.Select name='category' onChange={evt => {
+                      {this.state.videoType !== 'live' &&
+                        <Form.Select name='category' onChange={evt => {
                           this.setState({ category: evt.target.value });
                         }}>
-                        {categories.map((item, i) => {
-                          if(item.child) {
-                            return (
-                              <optgroup label="Movies">
-                                {item.subcategories.map((child) => {
-                                  return <option value={child.id}>{child.name}</option>                    
-                                })}
-                              </optgroup>
-                            )
-                          } else {
-                            return <option value={item.id}>{item.name}</option>
-                          }
-                        })}
-                      </Form.Select>
+                          {videos_categories.map((item, i) => {
+                            if(item.child) {
+                              return (
+                                <optgroup label="Movies">
+                                  {item.subcategories.map((child) => {
+                                    return <option value={child.id}>{child.name}</option>                    
+                                  })}
+                                </optgroup>
+                              )
+                            } else {
+                              return <option value={item.id}>{item.name}</option>
+                            }
+                          })}
+                        </Form.Select>
+                      }
+                      {this.state.videoType === 'live' &&
+                        <Form.Select name='category' onChange={evt => {
+                          this.setState({ category: evt.target.value });
+                        }}>
+                          {livetv_categories.map((item, i) => {
+                            if(item.child) {
+                              return (
+                                <optgroup label="Movies">
+                                  {item.subcategories.map((child) => {
+                                    return <option value={child.id}>{child.name}</option>                    
+                                  })}
+                                </optgroup>
+                              )
+                            } else {
+                              return <option value={item.id}>{item.name}</option>
+                            }
+                          })}
+                        </Form.Select>
+                      }
                     </Form.Group>
                   </Grid.Col>
                 </Grid.Row>

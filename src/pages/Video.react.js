@@ -270,7 +270,7 @@ class Video extends Component {
                     this.div = div;
                   }}
                 >
-                  {this.state.type === 'file' &&
+                  {(this.state.type === 'file' || this.state.type === 'live') &&
                     <ReactPlayer
                       playing={this.state.playing}
                       onDuration={this.onDuration}

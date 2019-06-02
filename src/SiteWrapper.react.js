@@ -27,9 +27,16 @@ const navBarItems: Array<navItem> = [
       useExact: true
     },
     {
-      value: "Live TV and Videos",
-      to: "/videos",
+      value: "Live TV",
+      to: "/live-tv",
       icon: "video",
+      LinkComponent: withRouter(NavLink),
+      useExact: true
+    },
+    {
+      value: "Videos",
+      to: "/videos",
+      icon: "film",
       LinkComponent: withRouter(NavLink),
       useExact: true
     }

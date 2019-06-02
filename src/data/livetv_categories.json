@@ -1,0 +1,47 @@
+[
+  {
+    "child": false,
+    "name": "News",
+    "id": "news"
+  },
+  {
+    "child": false,
+    "name": "Music",
+    "id": "music"
+  },
+  {
+    "child": false,
+    "name": "Movies",
+    "id": "movies"
+  },
+  {
+    "child": false,
+    "name": "Devotional",
+    "id": "devotional"
+  },
+  {
+    "child": false,
+    "name": "Travel",
+    "id": "travel"
+  },
+  {
+    "child": false,
+    "name": "Shopping",
+    "id": "shopping"
+  },
+  {
+    "child": false,
+    "name": "Lifestyle",
+    "id": "lifestyle"
+  },
+  {
+    "child": false,
+    "name": "Education",
+    "id": "education"
+  },
+  {
+    "child": false,
+    "name": "Entertainment",
+    "id": "entertainment"
+  }
+]
