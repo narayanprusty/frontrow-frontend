@@ -12,6 +12,10 @@
         "name": "Romantic"
       },
       {
+        "id": "movies_comedy",
+        "name": "Comedy"
+      },
+      {
         "id": "movies_thriller",
         "name": "Thriller"
       },
