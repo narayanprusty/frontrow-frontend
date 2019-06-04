@@ -207,6 +207,9 @@ class AddVideo extends Component {
                         <option value="live">
                           Live Stream
                         </option>
+                        <option value="youtube_live">
+                          Youtube Live
+                        </option>
                       </Form.Select>
                     </Form.Group>
                   </Grid.Col>
@@ -244,7 +247,7 @@ class AddVideo extends Component {
                   <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
                       <Form.Label>Category</Form.Label>
-                      {this.state.videoType !== 'live' &&
+                      {(this.state.videoType !== 'live' || this.state.videoType !== 'youtube_live') &&
                         <Form.Select name='category' onChange={evt => {
                           this.setState({ category: evt.target.value });
                         }}>
@@ -263,7 +266,7 @@ class AddVideo extends Component {
                           })}
                         </Form.Select>
                       }
-                      {this.state.videoType === 'live' &&
+                      {(this.state.videoType === 'live' || this.state.videoType === 'youtube_live') &&
                         <Form.Select name='category' onChange={evt => {
                           this.setState({ category: evt.target.value });
                         }}>

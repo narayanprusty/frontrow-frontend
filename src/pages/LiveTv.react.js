@@ -43,7 +43,7 @@ class LiveTv extends Component {
   VideoRead() {
     let data = {
       skip: this.skip,
-      videoType: ['live']
+      videoType: ['live', 'youtube_live']
     }
 
     if(this.category !== 'all') {

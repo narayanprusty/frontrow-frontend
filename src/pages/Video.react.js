@@ -298,6 +298,21 @@ class Video extends Component {
                     </div>
                   }
 
+                  {this.state.type === 'youtube_live' &&
+                    <div class="player_cover">
+                      <YouTube
+                        videoId={this.state.videoURL}
+                        opts={{
+                          width: "100%",
+                          height: "100%",
+                          playerVars: { 
+                            autoplay: 1
+                          }
+                        }}
+                      />
+                    </div>
+                  }
+
                   {this.state.type === 'youtube_playlist' &&
                     <div class="player_cover">
                       <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/videoseries?list=${this.state.videoURL}`} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
