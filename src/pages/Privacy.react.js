@@ -102,7 +102,6 @@ class PrivacyPolicy extends Component {
               </ol>
               <p>We may revise this Privacy Policy from time to time. The most current version of the policy will govern our use of your information and will always be at&nbsp;<a href="https://www.neott.in/privacy-policy&nbsp;"><strong>https://www.neott.in/privacy-policy&nbsp;</strong></a>. If we make a change to this policy that, in our sole discretion, is material, we will notify you via an email to the email address associated with your account or through the Services. By continuing to access or use the Services after those changes become effective, you agree to be bound by the revised Privacy Policy.</p>
               <p><strong>NEOTT </strong>makes all endeavors, so that the personal data is not unnecessary exposed and subjected to any misuse of any kind. If then also you find any such violation or unauthorized usage of your Data you may report to us, so that immediate steps could be taken to prevent any such breach in future.</p>
-              <p>The best <a href="https://html-online.com/articles/" target="_blank">HTML related articles</a> are available on our blog. Browse them to get interesting content.</p>
               </Grid.Col>
             </Grid.Row>
           </Card.Body>

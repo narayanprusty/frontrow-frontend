@@ -97,3 +97,7 @@ div[class*="coverflow__container"] {
 div[class*="coverflow__text__"] {
   display: none
 }
+
+div[class*="coverflow__container"] {
+  height: 12rem;
+}

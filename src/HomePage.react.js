@@ -159,7 +159,8 @@ class Home extends Component {
               </Coverflow>
             </StyleRoot>
           </div>
-          <Header.H3 className="mt-4">{homeData.section_four.name}</Header.H3>
+
+          {/*<Header.H3 className="mt-4">{homeData.section_four.name}</Header.H3>
           <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
             <ItemsCarousel
               gutter={12}
@@ -216,7 +217,7 @@ class Home extends Component {
                 </div>
               )}
             </ItemsCarousel>
-          </div>
+          </div>*/}
         </Page.Content>
         {this.state.redirect &&
           <Redirect to={this.state.redirect} />
