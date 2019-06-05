@@ -108,7 +108,7 @@ class Home extends Component {
           }}  />
           <Header.H3 className="mt-4">{homeData.section_two.name}</Header.H3> 
           {/*<Videos data={this.state.videos} />*/}
-          <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
+          <div class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
             <ItemsCarousel
               gutter={12}
               activePosition={'center'}
@@ -137,31 +137,7 @@ class Home extends Component {
             </ItemsCarousel>
           </div>
           <Header.H3 className="mt-4">{homeData.section_three.name} </Header.H3>
-          <div>
-            <StyleRoot>
-              <Coverflow
-                displayQuantityOfSide={2}
-                navigation
-                infiniteScroll
-                enableHeading
-              >
-                {homeData.section_three.data.map((_, i) => 
-                  <div key={_.videoId} style={{
-                    cursor: "pointer"
-                  }}>
-                    <Link to={`/video/${_.videoId}`}>
-                      <img style={{
-                        width: '100%',
-                      }} src={_.thumbnail} />
-                    </Link>
-                  </div>
-                )}
-              </Coverflow>
-            </StyleRoot>
-          </div>
-
-          {/*<Header.H3 className="mt-4">{homeData.section_four.name}</Header.H3>
-          <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
+          <div  class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
             <ItemsCarousel
               gutter={12}
               activePosition={'center'}
@@ -171,8 +147,38 @@ class Home extends Component {
               outsideChevron={false}
               showSlither={false}
               firstAndLastGutter={false}
-              activeItemIndex={this.state.activeItemIndexA}
-              requestToChangeActive={value => this.setState({ activeItemIndexA: value })}
+              activeItemIndex={this.state.activeItemIndexB}
+              requestToChangeActive={value => this.setState({ activeItemIndexB: value })}
+              rightChevron={<div class="image-gallery-right-nav"></div>}
+              leftChevron={<div class="image-gallery-left-nav"></div>}
+            >
+              {homeData.section_three.data.map((_, i) => 
+                <div key={_.videoId} style={{
+                  cursor: "pointer"
+                }}>
+                  <Link to={`/video/${_.videoId}`}>
+                    <img style={{
+                      width: '100%',
+                    }} src={_.thumbnail} />
+                  </Link>
+                </div>
+              )}
+            </ItemsCarousel>
+          </div>
+
+          {/*<Header.H3 className="mt-4">{homeData.section_four.name}</Header.H3>
+          <div class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
+            <ItemsCarousel
+              gutter={12}
+              activePosition={'center'}
+              chevronWidth={60}
+              numberOfCards={3}
+              slidesToScroll={3}
+              outsideChevron={false}
+              showSlither={false}
+              firstAndLastGutter={false}
+              activeItemIndex={this.state.activeItemIndexC}
+              requestToChangeActive={value => this.setState({ activeItemIndexC: value })}
               rightChevron={<div class="image-gallery-right-nav"></div>}
               leftChevron={<div class="image-gallery-left-nav"></div>}
             >
@@ -190,7 +196,7 @@ class Home extends Component {
             </ItemsCarousel>
           </div>
           <Header.H3 className="mt-4">{homeData.section_five.name}</Header.H3>
-          <div style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
+          <div  class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
             <ItemsCarousel
               gutter={12}
               activePosition={'center'}
@@ -200,8 +206,8 @@ class Home extends Component {
               outsideChevron={false}
               showSlither={false}
               firstAndLastGutter={false}
-              activeItemIndex={this.state.activeItemIndexA}
-              requestToChangeActive={value => this.setState({ activeItemIndexA: value })}
+              activeItemIndex={this.state.activeItemIndexD}
+              requestToChangeActive={value => this.setState({ activeItemIndexD: value })}
               rightChevron={<div class="image-gallery-right-nav"></div>}
               leftChevron={<div class="image-gallery-left-nav"></div>}
             >

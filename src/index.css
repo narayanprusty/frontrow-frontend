@@ -101,3 +101,18 @@ div[class*="coverflow__text__"] {
 div[class*="coverflow__container"] {
   height: 12rem;
 }
+
+.home-slider a {
+  display: block;
+  position: relative;
+  padding: 53.37% 0 0 0;
+
+}
+
+.home-slider a img {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+
+}
