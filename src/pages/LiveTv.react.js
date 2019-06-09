@@ -113,7 +113,7 @@ class LiveTv extends Component {
           var p = <Moment fromNow>{video.publishedOn}</Moment>;
           var link = "/video/" + video.uniqueIdentifier;
           return (
-            <Grid.Col xs={12} sm={12} lg={3}>
+            <Grid.Col xl={3} lg={3} md={12} sm={12} xs={12}>
               <div
                 style={{ 
                   cursor: "pointer"

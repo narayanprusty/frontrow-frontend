@@ -14,6 +14,7 @@ import {
   Icon
 } from "tabler-react";
 import config from "./config/config";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 import type { NotificationProps } from "tabler-react";
 
@@ -285,7 +286,10 @@ class SiteWrapper extends React.Component<Props, State> {
     await this.Init();
 
     if (!window.web3) {
-      return alert("Please install Metamask!");
+      this.setState({
+        installMetamask: true
+      })
+      return;
     }
     if (!web3) {
       web3 = new Web3(window.web3.currentProvider);
@@ -382,13 +386,26 @@ class SiteWrapper extends React.Component<Props, State> {
             "Neott #HarHathMeinTV",
           copyright: (
             <React.Fragment>
-              Copyright © 2018
+              Copyright © 2019
               <a href="."> Neott</a>. All rights reserved.
             </React.Fragment>
           )
         }}
       >
         {this.props.children}
+        <span>
+          {this.state.installMetamask ? (
+            <SweetAlert title="Install Metamask!" onConfirm={() => {
+              this.setState({
+                installMetamask: false
+              })
+            }}>
+              Please <a href="https://metamask.io/" target="_blank">install Metamask</a>
+            </SweetAlert>
+          ) : (
+            <p />
+          )}
+        </span>
       </Site.Wrapper>
     );
   }

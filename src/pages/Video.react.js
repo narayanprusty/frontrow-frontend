@@ -8,6 +8,7 @@ import Moment from "react-moment";
 import Disqus from "disqus-react";
 import config from "../config/config";
 import YouTube from "react-youtube";
+import { FacebookProvider, Comments } from 'react-facebook';
 
 const LS_KEY = "frontrow";
 
@@ -315,7 +316,7 @@ class Video extends Component {
 
                   {this.state.type === 'youtube_playlist' &&
                     <div class="player_cover">
-                      <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/videoseries?list=${this.state.videoURL}`} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                      <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/videoseries?list=${this.state.videoURL}&autoplay=1`} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                   }
                 </div>
@@ -352,10 +353,6 @@ class Video extends Component {
                 </GalleryCard.Footer>
               </GalleryCard>
             </div>
-            <Disqus.DiscussionEmbed
-              shortname={disqusShortname}
-              config={disqusConfig}
-            />
           </Grid.Col>
         </Page.Content>
       </div>

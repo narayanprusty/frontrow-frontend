@@ -12,8 +12,10 @@ import Coverflow from 'react-coverflow';
 import { StyleRoot } from 'radium';
 import homeData from './data/home.json';
 import { Link } from 'react-router-dom';
-
 import "react-image-gallery/styles/css/image-gallery.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import { Carousel } from 'react-responsive-carousel';
 
 const LS_KEY = "frontrow";
 
@@ -58,54 +60,22 @@ class Home extends Component {
 
   render() {
 
-    //<GalleryCard.IconItem name="heart" label={} right />
-    const Videos = ({ data }) => (
-      <Container className="row row-cards">
-        {data.map(function(video, i) {
-          var p = <Moment fromNow>{video.publishedOn}</Moment>;
-          var link = "/video/" + video.uniqueIdentifier;
-          return (
-            <Grid.Col sm={12} md={4} lg={3} key={i}>
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => window.goToVideo(link)}
-              >
-                <GalleryCard key={i}>
-                  <GalleryCard.Image src={video.imageURL} />
-                  <GalleryCard.Footer>
-                    <GalleryCard.Details
-                      //avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
-                      fullName={
-                        video.title /*+
-                        (video.username
-                          ? " uploaded by " + video.username.toString()
-                          : "")*/
-                      }
-                      dateString={p}
-                    />
-                    <GalleryCard.IconGroup>
-                      <GalleryCard.IconItem
-                        name="eye"
-                        label={video.totalViews}
-                      />
-                    </GalleryCard.IconGroup>
-                  </GalleryCard.Footer>
-                </GalleryCard>
-              </div>
-            </Grid.Col>
-          );
-        })}
-      </Container>
-    );
-
     return (
       <div>
         <Page.Content className="homepage">
-          <ImageGallery items={homeData.section_one} autoPlay={false} showFullscreenButton={false} showPlayButton={true} onPlay={(index) => {
+          <Carousel autoPlay="true" interval="3000" showArrows={true} onChange={() => {}} onClickItem={(index) => {
             this.setState({
               redirect: `/video/${homeData.section_one[index].videoId}`
             })
-          }}  />
+          }} onClickThumb={() => {}}>
+            {homeData.section_one.map((_, i) => 
+              <div key={_.videoId}>
+                <img src={_.thumbnail} style={{
+                  cursor: "pointer"
+                }} />
+              </div>
+            )}
+          </Carousel>
           <Header.H3 className="mt-4">{homeData.section_two.name}</Header.H3> 
           {/*<Videos data={this.state.videos} />*/}
           <div class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
