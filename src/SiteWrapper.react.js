@@ -377,7 +377,7 @@ class SiteWrapper extends React.Component<Props, State> {
         routerContextComponentType={withRouter(RouterContextProvider)}
         footerProps={{
           links: [
-            <a href="http://about.neott.com">About Us</a>,
+            <a href="http://about.neott.in">About Us</a>,
             <a href="/terms-of-use">Terms of Use</a>,
             <a href="/privacy-policy">Privacy Policy</a>,
             <a href="mailto:hello@neott.in">Contact Us</a>,
