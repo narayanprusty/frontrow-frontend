@@ -280,7 +280,7 @@ class Video extends Component {
                       progressInterval={1000}
                       controls={true}
                       width="100%"
-                      height="50%"
+                      height="100%"
                     />
                   }
                   

@@ -254,7 +254,7 @@ class AddVideo extends Component {
                           {videos_categories.map((item, i) => {
                             if(item.child) {
                               return (
-                                <optgroup label="Movies">
+                                <optgroup label={item.name}>
                                   {item.subcategories.map((child) => {
                                     return <option value={child.id}>{child.name}</option>                    
                                   })}
@@ -274,7 +274,7 @@ class AddVideo extends Component {
                           {livetv_categories.map((item, i) => {
                             if(item.child) {
                               return (
-                                <optgroup label="Movies">
+                                <optgroup label={item.name}>
                                   {item.subcategories.map((child) => {
                                     return <option value={child.id}>{child.name}</option>                    
                                   })}
