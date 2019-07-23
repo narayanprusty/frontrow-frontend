@@ -19,6 +19,7 @@
     "react-coverflow": "^0.2.20",
     "react-dom": "^16.2.0",
     "react-facebook": "^8.0.4",
+    "react-ga": "^2.6.0",
     "react-google-maps": "^9.4.5",
     "react-id-swiper": "^2.1.2",
     "react-image-gallery": "^0.8.17",

@@ -18,6 +18,7 @@ import SweetAlert from "react-bootstrap-sweetalert";
 
 import type { NotificationProps } from "tabler-react";
 
+import ReactGA from 'react-ga';
 
 const navBarItems: Array<navItem> = [
     {
@@ -122,6 +123,11 @@ var add = "";
 class SiteWrapper extends React.Component<Props, State> {
   constructor(props) {
     super(props);
+    
+    ReactGA.initialize('UA-144337743-2'); // Here we should use our GA id
+    this.props.history.listen(location => ReactGA.pageview(location.pathname));
+
+
     this.state = {
       loading: false,
       auth: localStorage.getItem(LS_KEY) || undefined,
@@ -411,4 +417,4 @@ class SiteWrapper extends React.Component<Props, State> {
   }
 }
 
-export default SiteWrapper;
+export default withRouter(SiteWrapper);
