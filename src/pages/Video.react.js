@@ -9,6 +9,7 @@ import Disqus from "disqus-react";
 import config from "../config/config";
 import YouTube from "react-youtube";
 import { FacebookProvider, Comments } from 'react-facebook';
+import { ResponsiveImage, ResponsiveImageSize } from 'react-responsive-image';
 
 const LS_KEY = "frontrow";
 
@@ -261,99 +262,114 @@ class Video extends Component {
 
     return (
       <div>
+        
         <Page.Content>
-          <Grid.Col sm={12} lg={12}>
-            <div>
-              <GalleryCard>
-                <div
-                  style={{ display: this.state.showingAd ? "none" : "block" }}
-                  ref={div => {
-                    this.div = div;
-                  }}
-                >
-                  {(this.state.type === 'file' || this.state.type === 'live') &&
-                    <ReactPlayer
-                      playing={this.state.playing}
-                      onDuration={this.onDuration}
-                      onProgress={this.onProgress}
-                      url={this.state.videoURL}
-                      progressInterval={1000}
-                      controls={true}
-                      width="100%"
-                      height="100%"
-                    />
-                  }
-                  
-                  {this.state.type === 'youtube_video' &&
-                    <div class="player_cover">
-                      <YouTube
-                        videoId={this.state.videoURL}
-                        opts={{
-                          width: "100%",
-                          height: "100%",
-                          playerVars: { 
-                            autoplay: 1
-                          }
-                        }}
+          <Grid.Row>
+            <Grid.Col md={12}>
+              <ResponsiveImage>
+                <ResponsiveImageSize
+                  default
+                  minWidth={0}
+                  path={'https://www.gaslamp.org/wp-content/uploads/2016/02/2016-FAAS-Banner-Ad-Horizontal-728x90.png'}
+                />
+                <ResponsiveImageSize
+                  minWidth={768}
+                  path={'https://www.gaslamp.org/wp-content/uploads/2016/02/2016-FAAS-Banner-Ad-Horizontal-728x90.png'}
+                />
+              </ResponsiveImage>
+              <br></br>
+              <div>
+                <GalleryCard>
+                  <div
+                    style={{ display: this.state.showingAd ? "none" : "block" }}
+                    ref={div => {
+                      this.div = div;
+                    }}
+                  >
+                    {(this.state.type === 'file' || this.state.type === 'live') &&
+                      <ReactPlayer
+                        playing={this.state.playing}
+                        onDuration={this.onDuration}
+                        onProgress={this.onProgress}
+                        url={this.state.videoURL}
+                        progressInterval={1000}
+                        controls={true}
+                        width="100%"
+                        height="100%"
                       />
-                    </div>
-                  }
-
-                  {this.state.type === 'youtube_live' &&
-                    <div class="player_cover">
-                      <YouTube
-                        videoId={this.state.videoURL}
-                        opts={{
-                          width: "100%",
-                          height: "100%",
-                          playerVars: { 
-                            autoplay: 1
-                          }
-                        }}
-                      />
-                    </div>
-                  }
-
-                  {this.state.type === 'youtube_playlist' &&
-                    <div class="player_cover">
-                      <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/videoseries?list=${this.state.videoURL}&autoplay=1`} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                  }
-                </div>
-                <div
-                  style={{ display: this.state.showingAd ? "block" : "none" }}
-                >
-                  <a href={this.state.redirectURL} target="_blank">
-                    <img
-                      width="100%"
-                      height={this.state.height}
-                      src={this.state.bannerURL}
-                      onLoad={this.handleImageLoaded.bind(this)}
-                      onError={this.handleImageErrored.bind(this)}
-                    />
-                  </a>
-                  
-                </div>
-                <div className="pt-2" />
-                <GalleryCard.Footer>
-                  <GalleryCard.Details
-                    //avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
-                    fullName={
-                      this.state
-                        .title /*+
-                      (this.state.username
-                        ? " uploaded by " + this.state.username.toString()
-                        : "")*/
                     }
-                    dateString={p}
-                  />
-                  <GalleryCard.IconGroup>
-                    <GalleryCard.IconItem name="eye" label={this.state.views} />
-                  </GalleryCard.IconGroup>
-                </GalleryCard.Footer>
-              </GalleryCard>
-            </div>
-          </Grid.Col>
+                    
+                    {this.state.type === 'youtube_video' &&
+                      <div class="player_cover">
+                        <YouTube
+                          videoId={this.state.videoURL}
+                          opts={{
+                            width: "100%",
+                            height: "100%",
+                            playerVars: { 
+                              autoplay: 1
+                            }
+                          }}
+                        />
+                      </div>
+                    }
+
+                    {this.state.type === 'youtube_live' &&
+                      <div class="player_cover">
+                        <YouTube
+                          videoId={this.state.videoURL}
+                          opts={{
+                            width: "100%",
+                            height: "100%",
+                            playerVars: { 
+                              autoplay: 1
+                            }
+                          }}
+                        />
+                      </div>
+                    }
+
+                    {this.state.type === 'youtube_playlist' &&
+                      <div class="player_cover">
+                        <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/videoseries?list=${this.state.videoURL}&autoplay=1`} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                      </div>
+                    }
+                  </div>
+                  <div
+                    style={{ display: this.state.showingAd ? "block" : "none" }}
+                  >
+                    <a href={this.state.redirectURL} target="_blank">
+                      <img
+                        width="100%"
+                        height={this.state.height}
+                        src={this.state.bannerURL}
+                        onLoad={this.handleImageLoaded.bind(this)}
+                        onError={this.handleImageErrored.bind(this)}
+                      />
+                    </a>
+                    
+                  </div>
+                  <div className="pt-2" />
+                  <GalleryCard.Footer>
+                    <GalleryCard.Details
+                      //avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
+                      fullName={
+                        this.state
+                          .title /*+
+                        (this.state.username
+                          ? " uploaded by " + this.state.username.toString()
+                          : "")*/
+                      }
+                      dateString={p}
+                    />
+                    <GalleryCard.IconGroup>
+                      <GalleryCard.IconItem name="eye" label={this.state.views} />
+                    </GalleryCard.IconGroup>
+                  </GalleryCard.Footer>
+                </GalleryCard>
+              </div>
+            </Grid.Col>
+          </Grid.Row>
         </Page.Content>
       </div>
     );
