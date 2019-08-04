@@ -10,7 +10,9 @@ import {
   Videos,
   TOS,
   Privacy,
-  LiveTv
+  LiveTv,
+  Music, 
+  Movies
 } from "./pages";
 import SiteWrapper from "./SiteWrapper.react";
 
@@ -31,6 +33,8 @@ function App(props: Props): React.Node {
             <Route exact path="/add-video" component={AddVideo} />
             <Route exact path="/live-tv" component={LiveTv} />
             <Route exact path="/videos" component={Videos} />
+            <Route exact path="/music" component={Music} />
+            <Route exact path="/movies" component={Movies} />
             <Route exact path="/publish-ads" component={PublishAds} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/terms-of-use" component={TOS} />

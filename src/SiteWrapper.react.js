@@ -36,9 +36,23 @@ const navBarItems: Array<navItem> = [
       useExact: true
     },
     {
+      value: "Movies",
+      to: "/movies",
+      icon: "film",
+      LinkComponent: withRouter(NavLink),
+      useExact: true
+    },
+    {
+      value: "Music",
+      to: "/music",
+      icon: "music",
+      LinkComponent: withRouter(NavLink),
+      useExact: true
+    },
+    {
       value: "Videos",
       to: "/videos",
-      icon: "film",
+      icon: "file",
       LinkComponent: withRouter(NavLink),
       useExact: true
     }

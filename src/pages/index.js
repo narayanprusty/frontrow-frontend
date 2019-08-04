@@ -8,6 +8,9 @@ import TOS from "./TOS.react"
 import Privacy from "./Privacy.react"
 import LiveTv from "./LiveTv.react"
 
+import Music from "./Music.react"
+import Movies from "./Movies.react"
+
 export {
   Error404,
   Profile,
@@ -17,5 +20,7 @@ export {
   Videos,
   TOS,
   Privacy,
-  LiveTv
+  LiveTv,
+  Music,
+  Movies
 };

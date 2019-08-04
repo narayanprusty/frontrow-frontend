@@ -1,0 +1,52 @@
+[
+  {
+    "child": false,
+    "id": "drama",
+    "name": "Drama"
+  },
+  {
+    "child": false,
+    "id": "romantic",
+    "name": "Romantic"
+  },
+  {
+    "child": false,
+    "id": "comedy",
+    "name": "Comedy"
+  },
+  {
+    "child": false,
+    "id": "thriller",
+    "name": "Thriller"
+  },
+  {
+    "child": false,
+    "id": "family",
+    "name": "Family"
+  },
+  {
+    "child": false,
+    "id": "animation",
+    "name": "Animation"
+  },
+  {
+    "child": false,
+    "id": "horror",
+    "name": "Horror"
+  },
+  {
+    "child": false,
+    "id": "crime",
+    "name": "Crime"
+  },
+  {
+    "child": false,
+    "id": "fiction",
+    "name": "Fiction"
+  },
+  {
+    "child": false,
+    "id": "fantasy",
+    "name": "Fantasy"
+  }
+] 

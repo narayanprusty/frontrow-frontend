@@ -1,0 +1,52 @@
+[
+  {
+    "child": false,
+    "id": "classical",
+    "name": "Classical"
+  },
+  {
+    "child": false,
+    "id": "pop",
+    "name": "Pop"
+  },
+  {
+    "child": false,
+    "id": "hip_hop",
+    "name": "Hip Hop"
+  },
+  {
+    "child": false,
+    "id": "fusion",
+    "name": "Fusion"
+  },
+  {
+    "child": false,
+    "id": "instrumental",
+    "name": "Instrumental"
+  },
+  {
+    "child": false,
+    "id": "movies_jazz",
+    "name": "Jazz"
+  },
+  {
+    "child": false,
+    "id": "popular",
+    "name": "Popular"
+  },
+  {
+    "child": false,
+    "id": "remix",
+    "name": "Remix"
+  },
+  {
+    "child": false,
+    "id": "rap",
+    "name": "Rap"
+  },
+  {
+    "child": false,
+    "id": "dance",
+    "name": "Dance"
+  }
+]

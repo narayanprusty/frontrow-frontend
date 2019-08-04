@@ -7,13 +7,13 @@ import Moment from "react-moment";
 import { Redirect } from "react-router";
 import Loader from "react-loader-spinner";
 import config from "../config/config";
-import categories from "../data/videos_categories.json"
+import categories from "../data/music_categories.json"
 import "react-image-gallery/styles/css/image-gallery.css";
 import languages from "../data/languages.json"
 
 const LS_KEY = "frontrow";
 
-class Videos extends Component {
+class Music extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ class Videos extends Component {
     let data = {
       skip: this.skip,
       videoType: ['youtube_video', 'youtube_playlist', 'file'],
-      main_category: 'videos'
+      main_category: 'music'
     }
 
     if(this.category !== 'all') {
@@ -200,14 +200,14 @@ class Videos extends Component {
     let displayDash = this.state.videos.length > 0 ? '-' : ''
     let displayTill = this.state.videos.length > 0 ? this.state.videos.length : ''
     let displayOf = this.state.videos.length > 0 ? 'of' : ''
-    let totalVideos = `${this.state.totalCount} videos`
+    let totalVideos = `${this.state.totalCount} music`
 
     let paginationText = `${start} ${displayDash} ${displayTill} ${displayOf} ${totalVideos}`
     return (
       <div>
         <Page.Content className="videos">
           <Page.Header
-            title="Videos"
+            title="Music"
             subTitle={paginationText}
             options={options}
           />
@@ -249,4 +249,4 @@ class Videos extends Component {
   }
 }
 
-export default Videos;
+export default Music;

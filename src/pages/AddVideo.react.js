@@ -7,7 +7,16 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import config from "../config/config";
 import videos_categories from "../data/videos_categories.json"
 import livetv_categories from "../data/livetv_categories.json"
+import movies_categories from "../data/movies_categories.json"
+import music_categories from "../data/music_categories.json"
 import languages from "../data/languages.json"
+
+let main_categories = {
+  'livetv_categories': livetv_categories,
+  'movies_categories': movies_categories,
+  'videos_categories': videos_categories,
+  'music_categories': music_categories
+}
 
 const LS_KEY = "frontrow";
 
@@ -25,6 +34,7 @@ class AddVideo extends Component {
       auth: localStorage.getItem(LS_KEY) || undefined,
       notLoggedIn: false,
       language: 'hindi',
+      main_category: 'livetv',
       category: 'movies_action',
       videoType: 'youtube_video'
     };
@@ -76,7 +86,8 @@ class AddVideo extends Component {
               videoURL: this.state.videoURL,
               id: json.vid,
               language: this.state.language,
-              category: this.state.category,
+              main_category: this.state.main_category,
+              sub_category: this.state.sub_category,
               videoType: this.state.videoType
             })
           })
@@ -232,6 +243,46 @@ class AddVideo extends Component {
                 <Grid.Row>
                   <Grid.Col xs={12} sm={12} md={12}>
                     <Form.Group>
+                      <Form.Label>Main Category</Form.Label>
+                      <Form.Select name='main_category' onChange={evt => {
+                          this.setState({ main_category: evt.target.value });
+                        }}>
+                        <option value={'livetv'}>Live TV</option>
+                        <option value={'movies'}>Movies</option>
+                        <option value={'music'}>Music</option>
+                        <option value={'videos'}>Videos</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Grid.Col>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Col xs={12} sm={12} md={12}>
+                    <Form.Group>
+                      <Form.Label>Sub Category</Form.Label>
+                      <Form.Select name='sub_category' onChange={evt => {
+                          this.setState({ sub_category: evt.target.value });
+                        }}>
+                          {main_categories[this.state.main_category + '_categories'].map((item, i) => {
+                            if(item.child) {
+                              return (
+                                <optgroup label={item.name}>
+                                  {item.subcategories.map((child) => {
+                                    return <option value={child.id}>{child.name}</option>                    
+                                  })}
+                                </optgroup>
+                              )
+                            } else {
+                              return <option value={item.id}>{item.name}</option>
+                            }
+                          })}
+                      </Form.Select>
+                    </Form.Group>
+                  </Grid.Col>
+                </Grid.Row>
+
+                <Grid.Row>
+                  <Grid.Col xs={12} sm={12} md={12}>
+                    <Form.Group>
                       <Form.Label>Language</Form.Label>
                       <Form.Select name='language' onChange={evt => {
                           this.setState({ language: evt.target.value });
@@ -240,52 +291,6 @@ class AddVideo extends Component {
                           return <option value={item.toLowerCase()}>{item}</option>
                         })}
                       </Form.Select>
-                    </Form.Group>
-                  </Grid.Col>
-                </Grid.Row>
-                <Grid.Row>
-                  <Grid.Col xs={12} sm={12} md={12}>
-                    <Form.Group>
-                      <Form.Label>Category</Form.Label>
-                      {(this.state.videoType !== 'live' && this.state.videoType !== 'youtube_live') &&
-                        <Form.Select name='category' onChange={evt => {
-                          this.setState({ category: evt.target.value });
-                        }}>
-                          {videos_categories.map((item, i) => {
-                            if(item.child) {
-                              return (
-                                <optgroup label={item.name}>
-                                  {item.subcategories.map((child) => {
-                                    return <option value={child.id}>{child.name}</option>                    
-                                  })}
-                                </optgroup>
-                              )
-                            } else {
-                              return <option value={item.id}>{item.name}</option>
-                            }
-                          })}
-                        </Form.Select>
-                      }
-
-                      {(this.state.videoType === 'live' || this.state.videoType === 'youtube_live') &&
-                        <Form.Select name='category' onChange={evt => {
-                          this.setState({ category: evt.target.value });
-                        }}>
-                          {livetv_categories.map((item, i) => {
-                            if(item.child) {
-                              return (
-                                <optgroup label={item.name}>
-                                  {item.subcategories.map((child) => {
-                                    return <option value={child.id}>{child.name}</option>                    
-                                  })}
-                                </optgroup>
-                              )
-                            } else {
-                              return <option value={item.id}>{item.name}</option>
-                            }
-                          })}
-                        </Form.Select>
-                      }
                     </Form.Group>
                   </Grid.Col>
                 </Grid.Row>
