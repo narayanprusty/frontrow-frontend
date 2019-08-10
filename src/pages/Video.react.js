@@ -40,7 +40,8 @@ class Video extends Component {
       bannerURL: "",
       height: "",
       bannerImageLoaded: false,
-      type: ""
+      type: "",
+      videos: []
     };
     this.OnVideoRead = this.OnVideoRead.bind(this);
     this.updateView = this.updateView.bind(this);
@@ -135,7 +136,7 @@ class Video extends Component {
       .then(json => {
         console.log("Video Read", json);
         if (json.success == true) {
-          console.log(json.data[0])
+          
           this.setState({
             title: json.data[0].title,
             views: json.data[0].totalViews + 1,
@@ -146,6 +147,43 @@ class Video extends Component {
           });
           this.updateView(json.data[0].totalViews + 1);
           this.getuploader("0x" + json.data[0].uploader);
+
+
+          fetch(config.api.serverUrl + "/video/get/", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              authorization: localStorage.getItem("jwt")
+            },
+            body: JSON.stringify({
+              main_category: json.data[0].main_category,  
+              sub_category: json.data[0].sub_category,
+              language: json.data[0].language,
+              sort: {
+                totalViews: -1
+              }
+            })
+          })
+          .then(response => {
+            return response.json();
+          })
+          .then(json => {
+            json = json || []
+            if(json) {
+              //remove same video
+              for(let count = 0; count < json.data.length; count++) {
+                if(json.data[count].uniqueIdentifier === this.state.vid) {
+                  json.data.splice(count, 1);
+                  break;
+                }
+              }
+              this.setState({
+                videos: json.data,
+              });
+            } 
+          });
+
         } else {
           alert("Error");
         }
@@ -260,10 +298,55 @@ class Video extends Component {
       fullName = fullName + " by " + this.state.uploadername;
     }
 
+    const Videos = ({ data }) => (
+      <Grid.Row>
+        {data.map((video, i) => {
+          var p = <Moment fromNow>{video.publishedOn}</Moment>;
+          var link = "/video/" + video.uniqueIdentifier;
+
+          if(i < 8) {
+            return (
+              <Grid.Col xl={3} lg={3} md={12} sm={12} xs={12}>
+                <div
+                  style={{ 
+                    cursor: "pointer"
+                  }}
+                  onClick={() => this.setState({
+                    redirect: link
+                  })}
+                >
+                  <GalleryCard key={i}>
+                    <GalleryCard.Image src={video.imageURL} />
+                    <GalleryCard.Footer>
+                      <GalleryCard.Details
+                        //avatarURL="https://cdn0.iconfinder.com/data/icons/linkedin-ui-colored/48/JD-07-512.png"
+                        fullName={
+                          video.title /*+
+                          (video.username
+                            ? " uploaded by " + video.username.toString()
+                            : "")*/
+                        }
+                        dateString={p}
+                      />
+                      <GalleryCard.IconGroup>
+                        <GalleryCard.IconItem
+                          name="eye"
+                          label={video.totalViews}
+                        />
+                      </GalleryCard.IconGroup>
+                    </GalleryCard.Footer>
+                  </GalleryCard>
+                </div>
+              </Grid.Col>
+            );
+          }
+        })}
+      </Grid.Row>
+    );
+
     return (
       <div>
-        
-        <Page.Content>
+        <Page.Content className="videos">
           <Grid.Row>
             <Grid.Col md={12}>
               <ResponsiveImage>
@@ -367,6 +450,12 @@ class Video extends Component {
                     </GalleryCard.IconGroup>
                   </GalleryCard.Footer>
                 </GalleryCard>
+              </div>
+              <div>
+                <Page.Header
+                  title="You May Like"
+                />
+                <Videos data={this.state.videos} />
               </div>
             </Grid.Col>
           </Grid.Row>

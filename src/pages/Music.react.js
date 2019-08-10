@@ -43,7 +43,6 @@ class Music extends Component {
   VideoRead() {
     let data = {
       skip: this.skip,
-      videoType: ['youtube_video', 'youtube_playlist', 'file'],
       main_category: 'music'
     }
 
