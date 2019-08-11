@@ -17,7 +17,7 @@ class Video extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vid: JSON.stringify(this.props.location.pathname.split("/")[2]),
+      vid: this.props.location.pathname.split("/")[2],
       adId: "",
       loading: false,
       title: "",
@@ -134,7 +134,6 @@ class Video extends Component {
         return response.json();
       })
       .then(json => {
-        console.log("Video Read", json);
         if (json.success == true) {
           
           this.setState({
@@ -148,7 +147,6 @@ class Video extends Component {
           this.updateView(json.data[0].totalViews + 1);
           this.getuploader("0x" + json.data[0].uploader);
 
-
           fetch(config.api.serverUrl + "/video/get/", {
             method: "POST",
             headers: {
@@ -159,6 +157,7 @@ class Video extends Component {
             body: JSON.stringify({
               main_category: json.data[0].main_category,  
               sub_category: json.data[0].sub_category,
+              uniqueIdentifierList: [this.state.vid],
               language: json.data[0].language,
               sort: {
                 totalViews: -1
@@ -168,19 +167,92 @@ class Video extends Component {
           .then(response => {
             return response.json();
           })
-          .then(json => {
-            json = json || []
-            if(json) {
-              //remove same video
-              for(let count = 0; count < json.data.length; count++) {
-                if(json.data[count].uniqueIdentifier === this.state.vid) {
-                  json.data.splice(count, 1);
-                  break;
+          .then(json1 => {
+            json1 = json1 || []
+            if(json1) {
+
+              if(json1.data.length < 8) {
+                let uniqueIdentifierList = [this.state.vid];
+
+                for(let iii = 0; iii < json1.data.length; iii++) {
+                  uniqueIdentifierList.push(json1.data[iii].uniqueIdentifier)
                 }
+                
+                fetch(config.api.serverUrl + "/video/get/", {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    authorization: localStorage.getItem("jwt")
+                  },
+                  body: JSON.stringify({
+                    main_category: json.data[0].main_category,  
+                    language: json.data[0].language,
+                    uniqueIdentifierList,
+                    sort: {
+                      totalViews: -1
+                    }
+                  })
+                })
+                .then(response => {
+                  return response.json();
+                })
+                .then(json2 => {
+                  json2 = json2 || []
+                  if(json2) {
+                    if(json2.data.length < 8) {
+
+                      let uniqueIdentifierList = [this.state.vid];
+
+                      for(let iii = 0; iii < json1.data.length; iii++) {
+                        uniqueIdentifierList.push(json1.data[iii].uniqueIdentifier)
+                      }
+
+                      
+                      for(let iii = 0; iii < json2.data.length; iii++) {
+                        uniqueIdentifierList.push(json2.data[iii].uniqueIdentifier)
+                      }
+
+                      fetch(config.api.serverUrl + "/video/get/", {
+                        method: "POST",
+                        headers: {
+                          Accept: "application/json",
+                          "Content-Type": "application/json",
+                          authorization: localStorage.getItem("jwt")
+                        },
+                        body: JSON.stringify({
+                          main_category: json.data[0].main_category,  
+                          uniqueIdentifierList,
+                          sort: {
+                            totalViews: -1
+                          }
+                        })
+                      })
+                      .then(response => {
+                        return response.json();
+                      })
+                      .then(json3 => {
+                        json3 = json3 || []
+                        if(json3) {
+                          this.setState({
+                            videos: json1.data.concat(json2.data).concat(json3.data),
+                          });
+                        } 
+                      });
+                    } else {
+                      this.setState({
+                        videos: json1.data.concat(json2.data),
+                      });
+                    }
+
+                    
+                  } 
+                });
+              } else {
+                this.setState({
+                  videos: json1.data,
+                });
               }
-              this.setState({
-                videos: json.data,
-              });
             } 
           });
 
@@ -390,7 +462,7 @@ class Video extends Component {
                             width: "100%",
                             height: "100%",
                             playerVars: { 
-                              autoplay: 1
+                              autoplay: 0
                             }
                           }}
                         />
@@ -405,7 +477,7 @@ class Video extends Component {
                             width: "100%",
                             height: "100%",
                             playerVars: { 
-                              autoplay: 1
+                              autoplay: 0
                             }
                           }}
                         />
