@@ -50,6 +50,11 @@
     ]
   },
   {
+    "image": "http://www.bookmice.net/darkchilde/coke/horizontal/2.jpg",
+    "ads": true,
+    "url": "https://www.coca-cola.com/"
+  },
+  {
     "name": "Most Popular",
     "data": [
       {
@@ -94,5 +99,10 @@
         "videoId": "BDe-WbGBl"
       }
     ]
-  } 
+  } ,
+  {
+    "image": "http://www.rohitwalia.com/main/wp-content/uploads/2013/09/2_horizontal.jpg",
+    "ads": true,
+    "url": "https://scene.vividseats.com/"
+  }
 ]

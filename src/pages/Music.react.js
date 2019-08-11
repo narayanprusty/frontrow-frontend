@@ -262,35 +262,50 @@ class Music extends Component {
               <div>
                 {staticData.map((section, i) => 
                   <div>
-                    <Header.H3 className="mt-4">{section.name}</Header.H3> 
-                    <div class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0","scroll": "overflow-y"}}>
-                      <ItemsCarousel
-                        gutter={12}
-                        activePosition={'center'}
-                        chevronWidth={60}
-                        numberOfCards={3}
-                        slidesToScroll={3}
-                        outsideChevron={false}
-                        showSlither={false}
-                        firstAndLastGutter={false}
-                        activeItemIndex={this.state['activeItemIndex' + i]}
-                        requestToChangeActive={value => this.setState({ ['activeItemIndex' + i]: value })}
-                        rightChevron={<div class="image-gallery-right-nav"></div>}
-                        leftChevron={<div class="image-gallery-left-nav"></div>}
-                      >
-                        {section.data.map((_, i) => 
-                          <div key={_.videoId} style={{
-                            cursor: "pointer"
-                          }}>
-                            <Link to={`/video/${_.videoId}`}>
-                              <img style={{
-                                width: '100%',
-                              }} src={_.thumbnail} />
-                            </Link>
-                          </div>
-                        )}
-                      </ItemsCarousel>
-                    </div>
+                    {section.ads === true &&
+                      <div className="mt-4" style={{
+                        textAlign: 'center'
+                      }}>
+                        <a target="_blank" href={section.url}>
+                          <img src={section.image} />
+                        </a>
+                      </div>
+                    }
+
+                    {section.ads !== true &&
+                      <div>
+                        <Header.H3 className="mt-4">{section.name}</Header.H3> 
+                        <div class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0","scroll": "overflow-y"}}>
+                          <ItemsCarousel
+                            gutter={12}
+                            activePosition={'center'}
+                            chevronWidth={60}
+                            numberOfCards={3}
+                            slidesToScroll={3}
+                            outsideChevron={false}
+                            showSlither={false}
+                            firstAndLastGutter={false}
+                            activeItemIndex={this.state['activeItemIndex' + i]}
+                            requestToChangeActive={value => this.setState({ ['activeItemIndex' + i]: value })}
+                            rightChevron={<div class="image-gallery-right-nav"></div>}
+                            leftChevron={<div class="image-gallery-left-nav"></div>}
+                          >
+                            {section.data.map((_, i) => 
+                              <div key={_.videoId} style={{
+                                cursor: "pointer"
+                              }}>
+                                <Link to={`/video/${_.videoId}`}>
+                                  <img style={{
+                                    width: '100%',
+                                  }} src={_.thumbnail} />
+                                </Link>
+                              </div>
+                            )}
+                          </ItemsCarousel>
+                        </div>
+                      </div>
+                    }
+                    
                   </div>
                 )}
               </div>
