@@ -159,5 +159,5 @@ div[class*="coverflow__container"] {
 }
 
 .home-slider div div {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }

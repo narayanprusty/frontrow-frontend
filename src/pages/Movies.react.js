@@ -260,9 +260,9 @@ class Movies extends Component {
           <div>
             {!this.state.customSearch &&
               <div>
-                {staticData.section_two &&
+                {staticData.map((section, i) => 
                   <div>
-                    <Header.H3 className="mt-4">{staticData.section_two.name}</Header.H3> 
+                    <Header.H3 className="mt-4">{section.name}</Header.H3> 
                     <div class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0","scroll": "overflow-y"}}>
                       <ItemsCarousel
                         gutter={12}
@@ -273,12 +273,12 @@ class Movies extends Component {
                         outsideChevron={false}
                         showSlither={false}
                         firstAndLastGutter={false}
-                        activeItemIndex={this.state.activeItemIndexA}
-                        requestToChangeActive={value => this.setState({ activeItemIndexA: value })}
+                        activeItemIndex={this.state['activeItemIndex' + i]}
+                        requestToChangeActive={value => this.setState({ ['activeItemIndex' + i]: value })}
                         rightChevron={<div class="image-gallery-right-nav"></div>}
                         leftChevron={<div class="image-gallery-left-nav"></div>}
                       >
-                        {staticData.section_two.data.map((_, i) => 
+                        {section.data.map((_, i) => 
                           <div key={_.videoId} style={{
                             cursor: "pointer"
                           }}>
@@ -292,106 +292,7 @@ class Movies extends Component {
                       </ItemsCarousel>
                     </div>
                   </div>
-                }
-                {staticData.section_three &&
-                  <div>
-                    <Header.H3 className="mt-4">{staticData.section_three.name} </Header.H3>
-                    <div  class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
-                      <ItemsCarousel
-                        gutter={12}
-                        activePosition={'center'}
-                        chevronWidth={60}
-                        numberOfCards={3}
-                        slidesToScroll={3}
-                        outsideChevron={false}
-                        showSlither={false}
-                        firstAndLastGutter={false}
-                        activeItemIndex={this.state.activeItemIndexB}
-                        requestToChangeActive={value => this.setState({ activeItemIndexB: value })}
-                        rightChevron={<div class="image-gallery-right-nav"></div>}
-                        leftChevron={<div class="image-gallery-left-nav"></div>}
-                      >
-                        {staticData.section_three.data.map((_, i) => 
-                          <div key={_.videoId} style={{
-                            cursor: "pointer"
-                          }}>
-                            <Link to={`/video/${_.videoId}`}>
-                              <img style={{
-                                width: '100%',
-                              }} src={_.thumbnail} />
-                            </Link>
-                          </div>
-                        )}
-                      </ItemsCarousel>
-                    </div>
-                  </div> 
-                }
-                {staticData.section_four &&
-                  <div>
-                    <Header.H3 className="mt-4">{staticData.section_four.name}</Header.H3>
-                    <div class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
-                      <ItemsCarousel
-                        gutter={12}
-                        activePosition={'center'}
-                        chevronWidth={60}
-                        numberOfCards={3}
-                        slidesToScroll={3}
-                        outsideChevron={false}
-                        showSlither={false}
-                        firstAndLastGutter={false}
-                        activeItemIndex={this.state.activeItemIndexC}
-                        requestToChangeActive={value => this.setState({ activeItemIndexC: value })}
-                        rightChevron={<div class="image-gallery-right-nav"></div>}
-                        leftChevron={<div class="image-gallery-left-nav"></div>}
-                      >
-                        {staticData.section_four.data.map((_, i) => 
-                          <div key={_.videoId} style={{
-                            cursor: "pointer"
-                          }}>
-                            <Link to={`/video/${_.videoId}`}>
-                              <img style={{
-                                width: '100%',
-                              }} src={_.thumbnail} />
-                            </Link>
-                          </div>
-                        )}
-                      </ItemsCarousel>
-                    </div>
-                  </div>
-                }
-                {staticData.section_five &&
-                  <div>
-                    <Header.H3 className="mt-4">{staticData.section_five.name}</Header.H3>
-                    <div  class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0"}}>
-                      <ItemsCarousel
-                        gutter={12}
-                        activePosition={'center'}
-                        chevronWidth={60}
-                        numberOfCards={3}
-                        slidesToScroll={3}
-                        outsideChevron={false}
-                        showSlither={false}
-                        firstAndLastGutter={false}
-                        activeItemIndex={this.state.activeItemIndexD}
-                        requestToChangeActive={value => this.setState({ activeItemIndexD: value })}
-                        rightChevron={<div class="image-gallery-right-nav"></div>}
-                        leftChevron={<div class="image-gallery-left-nav"></div>}
-                      >
-                        {staticData.section_five.data.map((_, i) => 
-                          <div key={_.videoId} style={{
-                            cursor: "pointer"
-                          }}>
-                            <Link to={`/video/${_.videoId}`}>
-                              <img style={{
-                                width: '100%',
-                              }} src={_.thumbnail} />
-                            </Link>
-                          </div>
-                        )}
-                      </ItemsCarousel>
-                    </div>
-                  </div>
-                }
+                )}
               </div>
             }
           </div>

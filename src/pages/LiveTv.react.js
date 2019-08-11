@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Page, Button, Form, GalleryCard, Container, Grid, Header } from "tabler-react";
 import jwtDecode from "jwt-decode";
@@ -10,10 +9,16 @@ import config from "../config/config";
 import categories from "../data/livetv_categories.json"
 import "react-image-gallery/styles/css/image-gallery.css";
 import languages from "../data/languages.json"
+import staticData from '../data/livetv.json';
+import ItemsCarousel from 'react-items-carousel';
+import { Link } from 'react-router-dom';
+
+import "react-image-gallery/styles/css/image-gallery.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const LS_KEY = "frontrow";
 
-class LiveTv extends Component {
+class LiveTV extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,12 +29,13 @@ class LiveTv extends Component {
       send: "",
       ok: false,
       videos: [],
-      loadedVideos: false,
+      loadedVideos: true,
       active: 0,
       totalCount: 0,
       skip: 0,
       disableLoadMore: false,
-      loadMoreText: 'Load More'
+      loadMoreText: 'Load More',
+      customSearch: false
     };
     this.hideAlert = this.hideAlert.bind(this);
     this.VideoRead = this.VideoRead.bind(this);
@@ -71,6 +77,7 @@ class LiveTv extends Component {
       return response.json();
     })
     .then(json => {
+      json = json || []
       if(json) {
         let videos = this.state.videos 
         this.setState({
@@ -186,7 +193,8 @@ class LiveTv extends Component {
           this.setState({
             videos: [],
             totalCount: 0,
-            loadedVideos: false
+            loadedVideos: false,
+            customSearch: true
           })
 
           this.VideoRead()
@@ -198,9 +206,14 @@ class LiveTv extends Component {
     let displayDash = this.state.videos.length > 0 ? '-' : ''
     let displayTill = this.state.videos.length > 0 ? this.state.videos.length : ''
     let displayOf = this.state.videos.length > 0 ? 'of' : ''
-    let totalVideos = `${this.state.totalCount} channels`
+    let totalVideos = `${this.state.totalCount} movies`
 
     let paginationText = `${start} ${displayDash} ${displayTill} ${displayOf} ${totalVideos}`
+
+    if(!this.state.customSearch) {
+      paginationText = totalVideos
+    }
+
     return (
       <div>
         <Page.Content className="videos">
@@ -209,28 +222,33 @@ class LiveTv extends Component {
             subTitle={paginationText}
             options={options}
           />
-          {this.state.loadedVideos ? (
+          
+          { (this.state.loadedVideos) ? (
             <div>
-              <Header.H2 className="mt-4"></Header.H2>
-              <Videos data={this.state.videos} />
-              {this.state.videos.length < this.state.totalCount &&
-                <center>
-                  <Button icon="plus" color="primary" disabled={this.state.disableLoadMore} outline onClick={() => {
-                    let skip = this.skip;
-                    skip = skip + 12
+              {this.state.customSearch &&
+                <div>
+                  <Header.H2 className="mt-4"></Header.H2>
+                  <Videos data={this.state.videos} />
+                  {this.state.videos.length < this.state.totalCount &&
+                    <center>
+                      <Button icon="plus" color="primary" disabled={this.state.disableLoadMore} outline onClick={() => {
+                        let skip = this.skip;
+                        skip = skip + 12
 
-                    this.skip = skip
-                    
-                    this.setState({
-                      disableLoadMore: true,
-                      loadMoreText: "Loading..."
-                    })
+                        this.skip = skip
+                        
+                        this.setState({
+                          disableLoadMore: true,
+                          loadMoreText: "Loading..."
+                        })
 
-                    this.VideoRead()
-                  }}>
-                    {this.state.loadMoreText}
-                  </Button>
-                </center>
+                        this.VideoRead()
+                      }}>
+                        {this.state.loadMoreText}
+                      </Button>
+                    </center>
+                  }
+                </div>
               }
             </div>
           ) : (
@@ -238,6 +256,45 @@ class LiveTv extends Component {
               <Loader type="Rings" color="#ff002a" height="100" width="100" />
             </center>
           )}
+          <div>
+            {!this.state.customSearch &&
+              <div>
+                {staticData.map((section, i) => 
+                  <div>
+                    <Header.H3 className="mt-4">{section.name}</Header.H3> 
+                    <div class="home-slider" style={{"padding":0,"maxWidth":"100%","margin":"0","scroll": "overflow-y"}}>
+                      <ItemsCarousel
+                        gutter={12}
+                        activePosition={'center'}
+                        chevronWidth={60}
+                        numberOfCards={3}
+                        slidesToScroll={3}
+                        outsideChevron={false}
+                        showSlither={false}
+                        firstAndLastGutter={false}
+                        activeItemIndex={this.state['activeItemIndex' + i]}
+                        requestToChangeActive={value => this.setState({ ['activeItemIndex' + i]: value })}
+                        rightChevron={<div class="image-gallery-right-nav"></div>}
+                        leftChevron={<div class="image-gallery-left-nav"></div>}
+                      >
+                        {section.data.map((_, i) => 
+                          <div key={_.videoId} style={{
+                            cursor: "pointer"
+                          }}>
+                            <Link to={`/video/${_.videoId}`}>
+                              <img style={{
+                                width: '100%',
+                              }} src={_.thumbnail} />
+                            </Link>
+                          </div>
+                        )}
+                      </ItemsCarousel>
+                    </div>
+                  </div>
+                )}
+              </div>
+            }
+          </div>
         </Page.Content>
         {this.state.redirect &&
           <Redirect to={this.state.redirect} />
@@ -247,4 +304,4 @@ class LiveTv extends Component {
   }
 }
 
-export default LiveTv;
+export default LiveTV;
