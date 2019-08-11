@@ -10,6 +10,7 @@ import config from "../config/config";
 import YouTube from "react-youtube";
 import { FacebookProvider, Comments } from 'react-facebook';
 import { ResponsiveImage, ResponsiveImageSize } from 'react-responsive-image';
+import data from '../data/video'
 
 const LS_KEY = "frontrow";
 
@@ -421,17 +422,13 @@ class Video extends Component {
         <Page.Content className="videos">
           <Grid.Row>
             <Grid.Col md={12}>
-              <ResponsiveImage>
-                <ResponsiveImageSize
-                  default
-                  minWidth={0}
-                  path={'https://www.gaslamp.org/wp-content/uploads/2016/02/2016-FAAS-Banner-Ad-Horizontal-728x90.png'}
-                />
-                <ResponsiveImageSize
-                  minWidth={768}
-                  path={'https://www.gaslamp.org/wp-content/uploads/2016/02/2016-FAAS-Banner-Ad-Horizontal-728x90.png'}
-                />
-              </ResponsiveImage>
+              <div style={{
+                textAlign: 'center'
+              }}>
+                <a target="_blank" href={data.header_ad.url}>
+                  <img src={data.header_ad.image} />
+                </a>
+              </div>
               <br></br>
               <div>
                 <GalleryCard>
@@ -529,9 +526,17 @@ class Video extends Component {
                 />
                 <Videos data={this.state.videos} />
               </div>
+              <div style={{
+                textAlign: 'center'
+              }}>
+                <a target="_blank" href={data.footer_ad.url}>
+                  <img src={data.footer_ad.image} />
+                </a>
+              </div>
             </Grid.Col>
           </Grid.Row>
         </Page.Content>
+        
       </div>
     );
   }
