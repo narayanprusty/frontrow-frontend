@@ -44,7 +44,7 @@
   ],
   "small_scroll": [
     {
-      "name": "Live TVs",
+      "name": "Live TV",
       "data": [
         {
           "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
@@ -133,30 +133,9 @@
       ]
     },
     {
-      "name": "Most Shareds",
-      "data": [
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        },
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        },
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        },
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        }
-      ]
-    },
-    {
       "image": "http://www.rohitwalia.com/main/wp-content/uploads/2013/09/2_horizontal.jpg",
       "ads": true,
-      "url": "https://scene.vividseats.com/"
+      "url": "https://facebook.com/"
     }
   ]
 }
