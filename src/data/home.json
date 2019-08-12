@@ -44,7 +44,7 @@
   ],
   "small_scroll": [
     {
-      "name": "Live TV",
+      "name": "Live TVs",
       "data": [
         {
           "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
@@ -118,6 +118,27 @@
     {
       "name": "Most Shared",
       "data": [
+        {
+          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+          "videoId": "BDe-WbGBl"
+        },
+        {
+          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+          "videoId": "BDe-WbGBl"
+        },
+        {
+          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+          "videoId": "BDe-WbGBl"
+        }
+      ]
+    },
+    {
+      "name": "Most Shareds",
+      "data": [
+        {
+          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+          "videoId": "BDe-WbGBl"
+        },
         {
           "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
           "videoId": "BDe-WbGBl"
