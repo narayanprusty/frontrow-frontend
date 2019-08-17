@@ -11,6 +11,7 @@ import YouTube from "react-youtube";
 import { FacebookProvider, Comments } from 'react-facebook';
 import { ResponsiveImage, ResponsiveImageSize } from 'react-responsive-image';
 import data from '../data/video'
+import { Redirect } from "react-router";
 
 const LS_KEY = "frontrow";
 
@@ -384,9 +385,7 @@ class Video extends Component {
                   style={{ 
                     cursor: "pointer"
                   }}
-                  onClick={() => this.setState({
-                    redirect: link
-                  })}
+                  onClick={() => window.location.href = link}
                 >
                   <GalleryCard key={i}>
                     <GalleryCard.Image src={video.imageURL} />
@@ -459,7 +458,7 @@ class Video extends Component {
                             width: "100%",
                             height: "100%",
                             playerVars: { 
-                              autoplay: 0
+                              autoplay: 1
                             }
                           }}
                         />
@@ -474,7 +473,7 @@ class Video extends Component {
                             width: "100%",
                             height: "100%",
                             playerVars: { 
-                              autoplay: 0
+                              autoplay: 1
                             }
                           }}
                         />
@@ -536,7 +535,9 @@ class Video extends Component {
             </Grid.Col>
           </Grid.Row>
         </Page.Content>
-        
+        {this.state.redirect &&
+          <Redirect to={this.state.redirect} />
+        }
       </div>
     );
   }

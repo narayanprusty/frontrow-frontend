@@ -186,7 +186,19 @@ class Music extends Component {
             }
           })}
         </Form.Select>
-        <Form.Input className="w-auto mr-2" icon="search" placeholder="Search Title" onChange={evt => {
+        <Form.Input className="w-auto mr-2" icon="search" placeholder="Search Title" onKeyUp={(evt) => {
+          if(evt.keyCode === 13) {
+            this.skip = 0
+            this.setState({
+              videos: [],
+              totalCount: 0,
+              loadedVideos: false,
+              customSearch: true
+            })
+
+            this.VideoRead()
+          }
+        }} onChange={evt => {
           this.search = evt.target.value
         }} />
         <Button color="primary" icon="search" onClick={() => {
@@ -207,7 +219,7 @@ class Music extends Component {
     let displayDash = this.state.videos.length > 0 ? '-' : ''
     let displayTill = this.state.videos.length > 0 ? this.state.videos.length : ''
     let displayOf = this.state.videos.length > 0 ? 'of' : ''
-    let totalVideos = `${this.state.totalCount} movies`
+    let totalVideos = `${this.state.totalCount} music`
 
     let paginationText = `${start} ${displayDash} ${displayTill} ${displayOf} ${totalVideos}`
 

@@ -186,7 +186,19 @@ class Movies extends Component {
             }
           })}
         </Form.Select>
-        <Form.Input className="w-auto mr-2" icon="search" placeholder="Search Title" onChange={evt => {
+        <Form.Input className="w-auto mr-2" icon="search" placeholder="Search Title" onKeyUp={(evt) => {
+          if(evt.keyCode === 13) {
+            this.skip = 0
+            this.setState({
+              videos: [],
+              totalCount: 0,
+              loadedVideos: false,
+              customSearch: true
+            })
+
+            this.VideoRead()
+          }
+        }} onChange={evt => {
           this.search = evt.target.value
         }} />
         <Button color="primary" icon="search" onClick={() => {
