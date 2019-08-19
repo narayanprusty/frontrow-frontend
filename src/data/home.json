@@ -1,136 +1,135 @@
 {
-  "large_scroll": [
-    {
-      "original": "https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/11/02/750568-srk-cover.jpg",
-      "thumbnail": "https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/11/02/750568-srk-cover.jpg",
-      "videoId": "2AlAJvLfN"
-    },
-    {
-      "original": "https://media.pitchfork.com/photos/592c55445e6ef95969326b55/2:1/w_790/4e9fe179.jpg",
-      "thumbnail": "https://media.pitchfork.com/photos/592c55445e6ef95969326b55/2:1/w_790/4e9fe179.jpg",
-      "videoId": "I8XmGKYeE"
-    },
-    {
-      "original": "https://static.adweek.com/adweek.com-prod/wp-content/uploads/2019/01/pepsi-atlanta-super-bowl-hed-page-2019.jpg",
-      "thumbnail": "https://static.adweek.com/adweek.com-prod/wp-content/uploads/2019/01/pepsi-atlanta-super-bowl-hed-page-2019.jpg",
-      "ads": true,
-      "url": "https://www.adweek.com/creativity/pepsi-is-blanketing-cokes-hometown-with-ads-as-atlanta-prepares-for-the-super-bowl/"
-    },
-    {
-      "original": "https://images.indianexpress.com/2019/01/neha-kakkar-759.jpg?w=759&h=422&imflag=true",
-      "thumbnail": "https://images.indianexpress.com/2019/01/neha-kakkar-759.jpg?w=759&h=422&imflag=true",
-      "videoId": "PzxiEFnW-"
-    },
-    {
-      "original": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
-      "thumbnail": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
-      "videoId": "0E7kExoxI"
-    },
-    {
-      "original": "https://resize.indiatvnews.com/en/resize/oldbucket/715_-/entertainmentbollywood/IndiaTv23a32e_phantom_poster.jpg",
-      "thumbnail": "https://resize.indiatvnews.com/en/resize/oldbucket/715_-/entertainmentbollywood/IndiaTv23a32e_phantom_poster.jpg",
-      "videoId": "tsu96gcmb"
-    },
-    {
-      "original": "https://lh3.googleusercontent.com/fVDi-cKgYwLUaIgM2rx_XnXfDILV6DqKR0gqlab000E6IGse5kw3GjRnlB7PHLtiDuw",
-      "thumbnail": "https://lh3.googleusercontent.com/fVDi-cKgYwLUaIgM2rx_XnXfDILV6DqKR0gqlab000E6IGse5kw3GjRnlB7PHLtiDuw",
-      "videoId": "BThlX9ojG"
-    },
-    {
-      "original": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
-      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
-      "videoId": "mlDGRHGgk"
-    }
-  ],
-  "small_scroll": [
-    {
-      "name": "Live TV",
-      "data": [
-        {
-          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
-          "videoId": "mlDGRHGgk"
-        },
-        {
-          "thumbnail": "https://lh3.googleusercontent.com/fVDi-cKgYwLUaIgM2rx_XnXfDILV6DqKR0gqlab000E6IGse5kw3GjRnlB7PHLtiDuw",
-          "videoId": "BThlX9ojG"
-        },
-        {
-          "thumbnail": "https://www.medianews4u.com/wp-content/uploads/2017/10/9x-media-logo-2-2.jpg",
-          "videoId": "LZ9_EH6vQ"
-        },
-        {
-          "thumbnail": "https://mastiii.com/images/mastiii-logo-mew.png",
-          "videoId": "y5LGX3Yz6"
-        },
-        {
-          "thumbnail": "https://d2t86ruphax0oa.cloudfront.net/sites/default/files/styles/large/public/field/image/Republic%20TV.png?itok=VxxcwWhr",
-          "videoId": "dl_NmXJ-u"
-        },
-        {
-          "thumbnail": "http://www.ethnicchannels.com/images/channeldetail/aaj-talk/aaj-tak-final.jpg",
-          "videoId": "QC0RrAQqU"
-        }
-      ]
-    },
-    { 
-      "name": "Latest Movies",
-      "data": [
-        {
-          "thumbnail": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
-          "videoId": "0E7kExoxI"
-        },
-        {
-          "thumbnail": "https://i1.wp.com/images.mapsofindia.com/my-india/2015/08/phantom-movie-image.jpg?resize=665%2C348&ssl=1",
-          "videoId": "tsu96gcmb"
-        },
-        {
-          "thumbnail": "http://www.baiscopelk.com/wp-content/uploads/2016/12/Shootout-at-Lokhandwala-2007.jpg",
-          "videoId": "CH4QKZUNK"
-        },
-      ]
-    {
-      "image": "http://www.bookmice.net/darkchilde/coke/horizontal/2.jpg",
-      "ads": true,
-      "url": "https://www.coca-cola.com/"
-    },
-    {
-      "name": "Most Popular",
-      "data": [
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        },
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        },
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        }
-      ]
-    },
-    {
-      "name": "Most Shared",
-      "data": [
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        },
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        },
-        {
-          "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-          "videoId": "BDe-WbGBl"
-        }
-      ]
-    },
-    {
-      "image": "http://www.rohitwalia.com/main/wp-content/uploads/2013/09/2_horizontal.jpg",
-      "ads": true,
-      "url": "https://facebook.com/"
-    }
-  ]
+	"large_scroll": [
+		{
+			"original": "https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/11/02/750568-srk-cover.jpg",
+			"thumbnail": "https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/11/02/750568-srk-cover.jpg",
+			"videoId": "2AlAJvLfN"
+		},
+		{
+			"original": "https://media.pitchfork.com/photos/592c55445e6ef95969326b55/2:1/w_790/4e9fe179.jpg",
+			"thumbnail": "https://media.pitchfork.com/photos/592c55445e6ef95969326b55/2:1/w_790/4e9fe179.jpg",
+			"videoId": "I8XmGKYeE"
+		},
+		{
+			"original": "https://static.adweek.com/adweek.com-prod/wp-content/uploads/2019/01/pepsi-atlanta-super-bowl-hed-page-2019.jpg",
+			"thumbnail": "https://static.adweek.com/adweek.com-prod/wp-content/uploads/2019/01/pepsi-atlanta-super-bowl-hed-page-2019.jpg",
+			"ads": true,
+			"url": "https://www.adweek.com/creativity/pepsi-is-blanketing-cokes-hometown-with-ads-as-atlanta-prepares-for-the-super-bowl/"
+		},
+		{
+			"original": "https://images.indianexpress.com/2019/01/neha-kakkar-759.jpg?w=759&h=422&imflag=true",
+			"thumbnail": "https://images.indianexpress.com/2019/01/neha-kakkar-759.jpg?w=759&h=422&imflag=true",
+			"videoId": "PzxiEFnW-"
+		},
+		{
+			"original": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
+			"thumbnail": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
+			"videoId": "0E7kExoxI"
+		},
+		{
+			"original": "https://resize.indiatvnews.com/en/resize/oldbucket/715_-/entertainmentbollywood/IndiaTv23a32e_phantom_poster.jpg",
+			"thumbnail": "https://resize.indiatvnews.com/en/resize/oldbucket/715_-/entertainmentbollywood/IndiaTv23a32e_phantom_poster.jpg",
+			"videoId": "tsu96gcmb"
+		},
+		{
+			"original": "https://lh3.googleusercontent.com/fVDi-cKgYwLUaIgM2rx_XnXfDILV6DqKR0gqlab000E6IGse5kw3GjRnlB7PHLtiDuw",
+			"thumbnail": "https://lh3.googleusercontent.com/fVDi-cKgYwLUaIgM2rx_XnXfDILV6DqKR0gqlab000E6IGse5kw3GjRnlB7PHLtiDuw",
+			"videoId": "BThlX9ojG"
+		},
+		{
+			"original": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
+			"thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
+			"videoId": "mlDGRHGgk"
+		}
+	],
+	"small_scroll": [
+		{
+			"name": "Live TV",
+			"data": [
+				{
+					"thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
+					"videoId": "mlDGRHGgk"
+				},
+				{
+					"thumbnail": "https://lh3.googleusercontent.com/fVDi-cKgYwLUaIgM2rx_XnXfDILV6DqKR0gqlab000E6IGse5kw3GjRnlB7PHLtiDuw",
+					"videoId": "BThlX9ojG"
+				},
+				{
+					"thumbnail": "https://www.medianews4u.com/wp-content/uploads/2017/10/9x-media-logo-2-2.jpg",
+					"videoId": "LZ9_EH6vQ"
+				},
+				{
+					"thumbnail": "https://mastiii.com/images/mastiii-logo-mew.png",
+					"videoId": "y5LGX3Yz6"
+				},
+				{
+					"thumbnail": "https://d2t86ruphax0oa.cloudfront.net/sites/default/files/styles/large/public/field/image/Republic%20TV.png?itok=VxxcwWhr",
+					"videoId": "dl_NmXJ-u"
+				},
+				{
+					"thumbnail": "http://www.ethnicchannels.com/images/channeldetail/aaj-talk/aaj-tak-final.jpg",
+					"videoId": "QC0RrAQqU"
+				}
+			]
+		},
+		{
+			"name": "Latest Movies",
+			"data": [
+			{
+					"thumbnail": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
+					"videoId": "0E7kExoxI"
+				},
+				{
+					"thumbnail": "https://i1.wp.com/images.mapsofindia.com/my-india/2015/08/phantom-movie-image.jpg?resize=665%2C348&ssl=1",
+					"videoId": "tsu96gcmb"
+				},
+				{
+					"thumbnail": "http://www.baiscopelk.com/wp-content/uploads/2016/12/Shootout-at-Lokhandwala-2007.jpg",
+					"videoId": "CH4QKZUNK"
+				}
+			] 
+		},
+		{
+			"image": "http://www.bookmice.net/darkchilde/coke/horizontal/2.jpg",
+			"ads": true,
+			"url": "https://www.coca-cola.com/"
+		},
+		{
+			"name": "Most Popular",
+			"data": [{
+					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+					"videoId": "BDe-WbGBl"
+				},
+				{
+					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+					"videoId": "BDe-WbGBl"
+				},
+				{
+					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+					"videoId": "BDe-WbGBl"
+				}
+			]
+		},
+		{
+			"name": "Most Shared",
+			"data": [{
+					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+					"videoId": "BDe-WbGBl"
+				},
+				{
+					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+					"videoId": "BDe-WbGBl"
+				},
+				{
+					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
+					"videoId": "BDe-WbGBl"
+				}
+			]
+		},
+		{
+			"image": "http://www.rohitwalia.com/main/wp-content/uploads/2013/09/2_horizontal.jpg",
+			"ads": true,
+			"url": "https://facebook.com/"
+		}
+	]
 }
