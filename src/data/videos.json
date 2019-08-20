@@ -25,24 +25,20 @@
     ]
   },
   { 
-    "name": "Latest Movies",
+    "name": "Pun Intended",
     "data": [
       {
-        "thumbnail": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
-        "videoId": "0E7kExoxI"
+        "thumbnail": "https://i.ytimg.com/vi/ajxyYf3PENo/maxresdefault.jpg",
+        "videoId": "EepMnkkKw"
       },
       {
-        "thumbnail": "https://i1.wp.com/images.mapsofindia.com/my-india/2015/08/phantom-movie-image.jpg?resize=665%2C348&ssl=1",
-        "videoId": "tsu96gcmb"
+        "thumbnail": "https://i.ytimg.com/vi/kr8Qs8diWdY/maxresdefault.jpg",
+        "videoId": "5xe1rRthU"
       },
       {
-        "thumbnail": "http://www.baiscopelk.com/wp-content/uploads/2016/12/Shootout-at-Lokhandwala-2007.jpg",
-        "videoId": "CH4QKZUNK"
-      },
-      {
-        "thumbnail": "https://www.filmfestivals.com/files/images/u1236/Singh%20is%20Bling%2C%20Poster.jpg",
-        "videoId": "5vvb8LIe3"
-      }
+        "thumbnail": "https://www.iwmbuzz.com/wp-content/uploads/2019/06/dice-media-series-what-the-folks-season-3-goes-on-floor-920x518.jpg",
+        "videoId": "yA-YiKBNQ"
+      }     
     ]
   },
   {
