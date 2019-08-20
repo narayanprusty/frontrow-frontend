@@ -105,9 +105,17 @@
 					"thumbnail": "http://www.greendiary.com/wp-content/uploads/2012/07/chemical-pollution-during-the-first-world-war_9.jpg",
 					"videoId": "SGge5RzK1"
 				},
-				{
+				 {
 					"thumbnail": "https://i.ytimg.com/vi/4DieXcbUyhI/maxresdefault.jpg",
 					"videoId": "a6dL_fPMo"
+				},
+				 {
+					"thumbnail": "https://i.ytimg.com/vi/kr8Qs8diWdY/maxresdefault.jpg",
+					"videoId": "5xe1rRthU"
+				},
+				{
+					"thumbnail": "https://i.ytimg.com/vi/vMozgmzvejE/maxresdefault.jpg",
+					"videoId": "SQXh3Gzju"
 				}
 			]
 		},
