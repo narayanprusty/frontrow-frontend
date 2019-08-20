@@ -91,23 +91,23 @@
 			"url": "https://rebekahwisniewski.wordpress.com/2015/07/31/food-as-it-should-be/"
 		},
 		{
-			"name": "Most Popular",
+			"name": "Web Series",
 			"data": [{
-					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-					"videoId": "BDe-WbGBl"
+					"thumbnail": "https://res.cloudinary.com/arre/image/upload/c_scale,w_380,h_221,e_sharpen:100,f_auto,q_auto/v1495262873/REal-High-1_ct3erd.jpg",
+					"videoId": "FDEJbRBC8"
 				},
 				{
-					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-					"videoId": "BDe-WbGBl"
+					"thumbnail": "http://www.greendiary.com/wp-content/uploads/2012/07/chemical-pollution-during-the-first-world-war_9.jpg",
+					"videoId": "SGge5RzK1"
 				},
 				{
-					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-					"videoId": "BDe-WbGBl"
+					"thumbnail": "https://i.ytimg.com/vi/4DieXcbUyhI/maxresdefault.jpg",
+					"videoId": "a6dL_fPMo"
 				}
 			]
 		},
 		{
-			"name": "Most Shared",
+			"name": "Most Popular",
 			"data": [{
 					"thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
 					"videoId": "BDe-WbGBl"
