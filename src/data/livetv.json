@@ -1,6 +1,6 @@
 [
   {
-    "name": "Live TV",
+    "name": "NEWS",
     "data": [
       {
         "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
@@ -29,7 +29,7 @@
     ]
   },
   { 
-    "name": "Latest Movies",
+    "name": "Music",
     "data": [
       {
         "thumbnail": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
@@ -55,7 +55,7 @@
     "url": "https://www.coca-cola.com/"
   },
   {
-    "name": "Most Popular",
+    "name": "Devotional",
     "data": [
       {
         "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
@@ -72,7 +72,7 @@
     ]
   },
   {
-    "name": "Most Shared",
+    "name": "Sports",
     "data": [
       {
         "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
