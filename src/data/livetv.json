@@ -55,7 +55,7 @@
     "url": "https://www.coca-cola.com/"
   },
   {
-    "name": "Devotional",
+    "name": "Movies",
     "data": [
       {
         "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
@@ -86,6 +86,9 @@
         "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
         "videoId": "BDe-WbGBl"
       },
+      {
+    "name": "Devotional",
+    "data": [
       {
         "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
         "videoId": "BDe-WbGBl"
