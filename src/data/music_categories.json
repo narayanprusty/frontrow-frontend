@@ -51,13 +51,13 @@
   },
   {
     "child": false,
-    "id": "IndiPop",
-    "name": "Dance"
+    "id": "indiPop",
+    "name": "IndiPop"
   },
   {
     "child": false,
-    "id": "Hollywood",
-    "name": "Dance"
+    "id": "hollywood",
+    "name": "Hollywood"
   },
   {
     "child": false,
