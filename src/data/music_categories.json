@@ -51,6 +51,16 @@
   },
   {
     "child": false,
+    "id": "IndiPop",
+    "name": "Dance"
+  },
+  {
+    "child": false,
+    "id": "Hollywood",
+    "name": "Dance"
+  },
+  {
+    "child": false,
     "id": "bollywood",
     "name": "Bollywood"
   }
