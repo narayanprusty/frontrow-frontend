@@ -1,6 +1,6 @@
 [
   {
-    "name": "Live TV",
+    "name": "Bollywood",
     "data": [
       {
         "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/1200px-Fashion_TV_logo.svg.png",
@@ -29,7 +29,7 @@
     ]
   },
   { 
-    "name": "Latest Movies",
+    "name": "Hollywood",
     "data": [
       {
         "thumbnail": "http://www.bhmpics.com/walls/aamir_khan_in_pk_movie_2014-wide.jpg",
@@ -55,37 +55,8 @@
     "url": "https://www.coca-cola.com/"
   },
   {
-    "name": "Most Popular",
+    "name": "Indi Pop",
     "data": [
-      {
-        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-        "videoId": "BDe-WbGBl"
-      },
-      {
-        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-        "videoId": "BDe-WbGBl"
-      },
-      {
-        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-        "videoId": "BDe-WbGBl"
-      }
-    ]
-  },
-  {
-    "name": "Most Shared",
-    "data": [
-      {
-        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-        "videoId": "BDe-WbGBl"
-      },
-      {
-        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-        "videoId": "BDe-WbGBl"
-      },
-      {
-        "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
-        "videoId": "BDe-WbGBl"
-      },
       {
         "thumbnail": "https://s01.sgp1.cdn.digitaloceanspaces.com/article/115327-vkjgezdcuh-1552657284.jpeg",
         "videoId": "BDe-WbGBl"
@@ -101,8 +72,8 @@
     ]
   } ,
   {
-    "image": "http://www.rohitwalia.com/main/wp-content/uploads/2013/09/2_horizontal.jpg",
+    "image": "https://assets.pcmag.com/media/images/639957-colorware-new-airpods.png?thumb=y&width=810&height=456",
     "ads": true,
-    "url": "https://scene.vividseats.com/"
+    "url": "https://www.pcmag.com/news/367654/how-to-get-airpods-2-in-black-or-any-other-color"
   }
 ]
