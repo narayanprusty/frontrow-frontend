@@ -21,6 +21,11 @@
   },
   {
     "child": false,
+    "name": "Sports",
+    "id": "sports"
+  },
+  {
+    "child": false,
     "name": "Travel",
     "id": "travel"
   },
