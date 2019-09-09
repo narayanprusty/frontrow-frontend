@@ -138,7 +138,7 @@ class SiteWrapper extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     
-    ReactGA.initialize('G-N1GGYJZ15R'); // Here we should use our GA id
+    ReactGA.initialize('UA-147446400-1'); // Here we should use our GA id
     this.props.history.listen(location => ReactGA.pageview(location.pathname));
 
 
