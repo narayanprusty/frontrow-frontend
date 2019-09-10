@@ -16,6 +16,11 @@
   },
   {
     "child": false,
+    "id": "action",
+    "name": "Action"
+  },
+  {
+    "child": false,
     "id": "thriller",
     "name": "Thriller"
   },
