@@ -53,5 +53,10 @@
     "child": false,
     "id": "fantasy",
     "name": "Fantasy"
+  },
+  {
+    "child": false,
+    "id": "kids",
+    "name": "Kids"
   }
 ] 
