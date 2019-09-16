@@ -44,6 +44,10 @@
         "name": "Religious"
       },
       {
+        "id": "shows_inspirational",
+        "name": "Inspirational"
+      },
+      {
         "id": "shows_travel",
         "name": "Travel"
       },
