@@ -292,8 +292,8 @@ class Videos extends Component {
                             gutter={12}
                             activePosition={'center'}
                             chevronWidth={60}
-                            numberOfCards={3}
-                            slidesToScroll={3}
+                            numberOfCards={6}
+                            slidesToScroll={6}
                             outsideChevron={false}
                             showSlither={false}
                             firstAndLastGutter={false}
