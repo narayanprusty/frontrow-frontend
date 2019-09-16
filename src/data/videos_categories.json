@@ -48,6 +48,18 @@
         "name": "Inspirational"
       },
       {
+        "id": "shows_short films",
+        "name": "Short Films"
+      },
+      {
+        "id": "shows_events",
+        "name": "Events"
+      },
+      {
+        "id": "shows_infotainment",
+        "name": "Infotainment"
+      },
+      {
         "id": "shows_travel",
         "name": "Travel"
       },
