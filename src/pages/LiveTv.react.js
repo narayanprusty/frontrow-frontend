@@ -291,8 +291,8 @@ class LiveTV extends Component {
                             gutter={12}
                             activePosition={'center'}
                             chevronWidth={60}
-                            numberOfCards={3}
-                            slidesToScroll={3}
+                            numberOfCards={5}
+                            slidesToScroll={5}
                             outsideChevron={false}
                             showSlither={false}
                             firstAndLastGutter={false}
