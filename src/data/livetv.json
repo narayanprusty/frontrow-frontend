@@ -1,6 +1,6 @@
 [
 	{
-		"name": "NEWS",
+		"name": "News",
 		"data": [
 			{
 				"thumbnail": "https://bestmediainfo.com/timthumb.php?src=/wp-content/uploads/2018/04/Republic-TV_10.jpg&w=620&h=350&zc=1&q=100",
@@ -237,7 +237,7 @@
 			]
 	},
 	{
-		"name": "Devotioal",
+		"name": "Devotional",
 		"data": [{
 				"thumbnail": "http://mediawing.org/mediawing/wp-content/uploads/2019/02/Peace-of-Mind-TV-Logo-New.jpg",
 				"videoId": "oEOO-0FqU"
