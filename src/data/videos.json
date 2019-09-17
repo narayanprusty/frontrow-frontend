@@ -144,27 +144,47 @@
     ]
   },
   {
-    "name": "College Ke Din",
+    "name": "WWE",
     "data": [
       {
-        "thumbnail": "https://i.ytimg.com/vi/T6aPJVuON40/maxresdefault.jpg",
-        "videoId": "Yg6UxiLeW"
+        "thumbnail": "https://i.ytimg.com/vi/AxR1h6jG2Aw/maxresdefault.jpg",
+        "videoId": "MvBoZ8IV_"
       },
-      {
-        "thumbnail": "https://i.ytimg.com/vi/7bg8ijbNjMU/maxresdefault.jpg",
-        "videoId": "dMZtk3IA4"
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/YGmrQYc97cI/maxresdefault.jpg",
+        "videoId": "raAKh69Pp"
       },
-      {
-        "thumbnail": "https://mediaassets.wxyz.com/photo/2018/08/27/Back_To_School_16x9_Monitor_1535397918198_95841135_ver1.0_640_480.png",
-        "videoId": "bvT1pWcEy"
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/L2uneW6tcyI/maxresdefault.jpg",
+        "videoId": "Z5FB0GfBs"
       },
-      {
-        "thumbnail": "https://d2rgi4g6h400px.cloudfront.net/Yeh%20Hai%20Aashiqui%20Sun%20Yaar%20Try%20Maar.563283.thumb.w780.jpg",
-        "videoId": "hwOcoqL6P"
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/0yNDx1AxNYA/hqdefault.jpg",
+        "videoId": "BzT2yxsGR"
       },
-      {
-        "thumbnail": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c3b56e58869471.5a0c6687659bf.jpg",
-        "videoId": "NqhfVDnVU"
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/LKXKkPB7GN4/maxresdefault.jpg",
+        "videoId": "bAZTTU5i9"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/6kC4lzb1L9s/maxresdefault.jpg",
+        "videoId": "0nSl0CEh0"
+      },
+	  {
+        "thumbnail": "https://gmsrp.cachefly.net/images/17/10/01/a247215c354b4e70471c8e257b15f0ae/960.jpg",
+        "videoId": "A68fmohdc"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/_TT7PlX5PCQ/maxresdefault.jpg",
+        "videoId": "GBRNgyszl"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/YItTmGzmvK4/maxresdefault.jpg",
+        "videoId": "R4J0ILkBJ"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/NlQTV2pi0Bg/maxresdefault.jpg",
+        "videoId": "ULPqGiHhy"
       }
     ]
   },
