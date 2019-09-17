@@ -434,6 +434,31 @@
       }
 	    ]
 		    },
+	{
+	  "name": "Film Events",
+    "data": [
+      {
+        "thumbnail": "https://images.indianexpress.com/2019/09/kapil-sharma-759.jpg?w=759",
+        "videoId": "KPNzu-xTu"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/vToRu0ssp-w/maxresdefault.jpg",
+        "videoId": "zTt780r-9"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/PaZeRCI_Gtk/maxresdefault.jpg",
+        "videoId": "ZU_DGsgER"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/8k6H49x5wwU/maxresdefault.jpg",
+        "videoId": "gw3DZNKtF"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/s5HUul5vrKk/maxresdefault.jpg",
+        "videoId": "S8qwuZRxP"
+      }
+	    ]
+		    },
   {
     "image": "https://i.vimeocdn.com/video/617143660_1280x720.jpg?r=pad",
     "ads": true,
