@@ -534,6 +534,82 @@
       }
 	  ]
 		    },
+	{
+	  "name": "Documentries",
+    "data": [
+      {
+        "thumbnail": "https://i.ytimg.com/vi/S5S-aLeC6Rg/maxresdefault.jpg",
+        "videoId": "ywMUtwcSp"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/NL0ULvXZRyA/hqdefault.jpg",
+        "videoId": "2RH1AdoBa"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/QB0WRz0aB54/maxresdefault.jpg",
+        "videoId": "YiJOB56dm"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/hkIqPkGuCvg/maxresdefault.jpg",
+        "videoId": "aEj-WxgoE"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/jyIy4OGa-iQ/maxresdefault.jpg",
+        "videoId": "Y6xN53sEs"
+      }
+	  ]
+		    },
+	  
+	  {
+	  "name": "Travel",
+    "data": [
+      {
+        "thumbnail": "https://steemitimages.com/640x0/https://s32.postimg.org/yw92h8c2t/150425_nepal_earthquake_2p_546e3677b684a3c6971b8.jpg",
+        "videoId": "A7QNptF0j"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/E0ORO1cDris/maxresdefault.jpg",
+        "videoId": "euxStAaGK"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/beKMQ_Ovk5w/maxresdefault.jpg",
+        "videoId": "i6LIiTD1y"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/mo613FSQUFM/maxresdefault.jpg",
+        "videoId": "Yr2SWANXh"
+      },
+	  {
+        "thumbnail": "https://imgmedia.lbb.in/media/2019/02/5c6a6d1523330e034ec7fa6d_1550478613330.jpg",
+        "videoId": "9xvcPDJWH"
+      },
+	  ]
+		    },
+			 {
+	  "name": "Infotainment",
+    "data": [
+      {
+        "thumbnail": "https://i.ytimg.com/vi/_9YMpuLDnwo/maxresdefault.jpg",
+        "videoId": "Xz2FGEDKQ"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/YAjzcignrLU/maxresdefault.jpg",
+        "videoId": "-U0RbQ8h2"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/jySrwZc4sZo/maxresdefault.jpg",
+        "videoId": "OtxZzXSs2"
+      },
+	  {
+        "thumbnail": "https://www.the-wau.com/timthumb.php?src=uploads/15531005224.jpg&h=523&w=1000&zc=1",
+        "videoId": "x3O2c_lUL"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/ZqhwLRrszUU/maxresdefault.jpg",
+        "videoId": "2KTDPb2h6"
+      }
+	  ]
+		    },
   {
     "image": "https://i.vimeocdn.com/video/617143660_1280x720.jpg?r=pad",
     "ads": true,
