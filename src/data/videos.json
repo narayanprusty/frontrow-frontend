@@ -559,7 +559,6 @@
       }
 	  ]
 		    },
-	  
 	  {
 	  "name": "Travel",
     "data": [
@@ -582,7 +581,7 @@
 	  {
         "thumbnail": "https://imgmedia.lbb.in/media/2019/02/5c6a6d1523330e034ec7fa6d_1550478613330.jpg",
         "videoId": "9xvcPDJWH"
-      },
+      }
 	  ]
 		    },
 			 {
