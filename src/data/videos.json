@@ -435,7 +435,7 @@
 	    ]
 		    },
 	{
-	  "name": "Film Events",
+	  "name": "Events",
     "data": [
       {
         "thumbnail": "https://images.indianexpress.com/2019/09/kapil-sharma-759.jpg?w=759",
@@ -458,6 +458,56 @@
         "videoId": "S8qwuZRxP"
       }
 	    ]
+		    },
+	{
+	  "name": "Interviews",
+    "data": [
+      {
+        "thumbnail": "https://i.ytimg.com/vi/5RRIQvViQw0/hqdefault.jpg",
+        "videoId": "Fw4qKYhol"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/b_MD9e-eqpU/maxresdefault.jpg",
+        "videoId": "MAcoklHuv"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/Ffkf3tosmKw/maxresdefault.jpg",
+        "videoId": "XmBze3rLy"
+      },
+	  {
+        "thumbnail": "https://i.pinimg.com/originals/e1/19/b9/e119b91d892c725ec5c9fa2ce2919e93.jpg",
+        "videoId": "JxaW2pHqU"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/jer_oZQELno/maxresdefault.jpg",
+        "videoId": "IFPDdI5an"
+      }
+	    ]
+		    },
+	{
+	  "name": "Narendra Modi",
+    "data": [
+      {
+        "thumbnail": "https://i.ytimg.com/vi/-6tb2e8o9P4/maxresdefault.jpg",
+        "videoId": "yypx4gInZ"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/XO2gFqkhj5s/maxresdefault.jpg",
+        "videoId": "U8mWgVpdK"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/tn38vrD-lQo/maxresdefault.jpg",
+        "videoId": "2yISge9qP"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/zIenIufkEdY/maxresdefault.jpg",
+        "videoId": "NiFHN4WK0"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/uVtS1lH9XXg/maxresdefault.jpg",
+        "videoId": "M7nahh-1w"
+      }
+	  ]
 		    },
   {
     "image": "https://i.vimeocdn.com/video/617143660_1280x720.jpg?r=pad",
