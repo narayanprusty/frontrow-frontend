@@ -509,6 +509,31 @@
       }
 	  ]
 		    },
+	{
+	  "name": "Documentries",
+    "data": [
+      {
+        "thumbnail": "https://i.ytimg.com/vi/S5S-aLeC6Rg/maxresdefault.jpg",
+        "videoId": "ywMUtwcSp"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/NL0ULvXZRyA/hqdefault.jpg",
+        "videoId": "2RH1AdoBa"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/QB0WRz0aB54/maxresdefault.jpg",
+        "videoId": "YiJOB56dm"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/hkIqPkGuCvg/maxresdefault.jpg",
+        "videoId": "aEj-WxgoE"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/jyIy4OGa-iQ/maxresdefault.jpg",
+        "videoId": "Y6xN53sEs"
+      }
+	  ]
+		    },
   {
     "image": "https://i.vimeocdn.com/video/617143660_1280x720.jpg?r=pad",
     "ads": true,
