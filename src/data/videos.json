@@ -233,24 +233,7 @@
       }
 	    ]
   },
-  {
-    "name": "Halke Phulke",
-    "data": [
-      {
-        "thumbnail": "https://i.ytimg.com/vi/xmzkbtxrE-A/maxresdefault.jpg",
-        "videoId": "akl-nU7-U"
-      },
-      {
-        "thumbnail": "https://www.thedigitalhash.com/wp-content/uploads/2019/02/xhome2-1.jpg.pagespeed.ic.8mCMeZvmoT.jpg",
-        "videoId": "npDGADWPH"
-      },
-      {
-        "thumbnail": "https://i.ytimg.com/vi/QYiyAxjChhE/maxresdefault.jpg",
-        "videoId": "6_WPNwBtH"
-      }
-   ]
-  },
-	{
+ {
 	  "name": "Horror Stories",
     "data": [
       {
@@ -294,6 +277,64 @@
         "videoId": "LmCoQ2Jz5"
       }
 	    ]
+  },
+	{
+	  "name": "College ke Din",
+    "data": [
+      {
+        "thumbnail": "https://i.ytimg.com/vi/T6aPJVuON40/maxresdefault.jpg",
+        "videoId": "Yg6UxiLeW"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/7bg8ijbNjMU/maxresdefault.jpg",
+        "videoId": "dMZtk3IA4"
+      },
+	  {
+        "thumbnail": "https://mediaassets.wxyz.com/photo/2018/08/27/Back_To_School_16x9_Monitor_1535397918198_95841135_ver1.0_640_480.png",
+        "videoId": "bvT1pWcEy"
+      },
+	  {
+        "thumbnail": "https://d2rgi4g6h400px.cloudfront.net/Yeh%20Hai%20Aashiqui%20Sun%20Yaar%20Try%20Maar.563283.thumb.w780.jpg",
+        "videoId": "hwOcoqL6P"
+      },
+	  {
+        "thumbnail": "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c3b56e58869471.5a0c6687659bf.jpg",
+        "videoId": "NqhfVDnVU"
+      },
+	  {
+        "thumbnail": "https://buzzhawker.com/wp-content/uploads/2018/07/popular-webseries-990x600.jpg",
+        "videoId": "WXWDOxoWx"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/EyPXz6hKa_s/maxresdefault.jpg",
+        "videoId": "ZcB8PEoIH"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/v8TrLtRLqWc/maxresdefault.jpg",
+        "videoId": "P7OHLZQ-B"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/qpRm8eLK880/maxresdefault.jpg",
+        "videoId": "c97CFyPx8"
+      }
+	    ]
+  },
+	    {
+    "name": "Halke Phulke",
+    "data": [
+      {
+        "thumbnail": "https://i.ytimg.com/vi/xmzkbtxrE-A/maxresdefault.jpg",
+        "videoId": "akl-nU7-U"
+      },
+      {
+        "thumbnail": "https://www.thedigitalhash.com/wp-content/uploads/2019/02/xhome2-1.jpg.pagespeed.ic.8mCMeZvmoT.jpg",
+        "videoId": "npDGADWPH"
+      },
+      {
+        "thumbnail": "https://i.ytimg.com/vi/QYiyAxjChhE/maxresdefault.jpg",
+        "videoId": "6_WPNwBtH"
+      }
+   ]
   },
   {
     "image": "https://i.vimeocdn.com/video/617143660_1280x720.jpg?r=pad",
