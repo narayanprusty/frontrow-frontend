@@ -406,7 +406,9 @@
 	  {
         "thumbnail": "https://i.ytimg.com/vi/EdKjmV5JOPo/maxresdefault.jpg",
         "videoId": "Mc0V799FY"
-      },
+      }
+	    ]
+		    },
   {
     "image": "https://i.vimeocdn.com/video/617143660_1280x720.jpg?r=pad",
     "ads": true,
