@@ -363,6 +363,50 @@
         "videoId": "QXB98FD36"
       }
    ]
+		    },
+		    {
+	  "name": "Inspirational",
+    "data": [
+      {
+        "thumbnail": "https://i.ytimg.com/vi/64ZrkQi549I/hqdefault.jpg",
+        "videoId": "8Sp7GrOO1"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/SxITOCRLIdQ/maxresdefault.jpg",
+        "videoId": "dulry228c"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/XRQuZfvAHPw/maxresdefault.jpg",
+        "videoId": "d7MuhUBZM"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/0uLLuodEFhE/hqdefault.jpg",
+        "videoId": "yzPETyZVR"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/aiOwXYRpKnc/maxresdefault.jpg",
+        "videoId": "DnvFXtM9Y"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/CqcqRQ94mYw/maxresdefault.jpg",
+        "videoId": "deGoVbIcD"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/EDoD6K-xPro/hqdefault.jpg",
+        "videoId": "iVMEyYaYo"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/CJjPOGQKwf0/maxresdefault.jpg",
+        "videoId": "VFTPBCPw7"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/80IYkn5MORY/maxresdefault.jpg",
+        "videoId": "FkKGspug4"
+      },
+	  {
+        "thumbnail": "https://i.ytimg.com/vi/EdKjmV5JOPo/maxresdefault.jpg",
+        "videoId": "Mc0V799FY"
+      },
   },
   {
     "image": "https://i.vimeocdn.com/video/617143660_1280x720.jpg?r=pad",
