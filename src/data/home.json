@@ -160,6 +160,11 @@
 			] 
 		},
 		{
+			"image": "https://i.imgur.com/j6iBafa.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		},
+		{
 	  "name": "Movies",
     "data": [
       {
@@ -192,12 +197,7 @@
       }
 			] 
 		},
-		{
-			"image": "https://i.imgur.com/j6iBafa.jpg",
-			"ads": true,
-			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
-		},
-		{
+	 {
 	  "name": "Laughter Dose",
     "data": [
       {
@@ -299,6 +299,11 @@
       }
 	    ]
 		},
+		{
+			"image": "https://i.imgur.com/8Lmrb7H.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		}
 		{
 	  "name": "Devotional",
     "data": [
@@ -403,9 +408,9 @@
 			]
 		},
 		{
-			"image": "http://www.rummywebsites.com/wp-content/uploads/2016/02/book-my-show.jpg",
+			"image": "https://appcdn.goqii.com/storeimg/38972_1565262463.jpg",
 			"ads": true,
-			"url": "http://www.rummywebsites.com/2016/02/"
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
 		}
 	]
 }
