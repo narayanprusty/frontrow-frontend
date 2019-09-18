@@ -279,7 +279,7 @@
 	    ]
   },
 	{
-			"image": "https://i.imgur.com/j6iBafa.jpg",
+			"image": "https://i.imgur.com/GScGNQn.png",
 			"ads": true,
 			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
 		},
@@ -495,6 +495,11 @@
 	    ]
 		    },
 	{
+			"image": "https://i.imgur.com/8Lmrb7H.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		},
+	{
 	  "name": "Narendra Modi",
     "data": [
       {
@@ -595,8 +600,8 @@
 	  ]
 		    },
   {
-			"image": "https://appcdn.goqii.com/storeimg/38972_1565262463.jpg",
+			"image": "https://goqii.com/blog/wp-content/uploads/How-to-win-a-GOQii-Stride-in-13-Days-1-1024x576.jpg",
 			"ads": true,
 			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
-		}
+		},
 ]
