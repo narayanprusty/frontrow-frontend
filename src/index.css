@@ -35,7 +35,7 @@ body {
   height: auto;
   position: relative;
   overflow: hidden;
-  padding: 22.37% 0 0 0; /* 34.37% = 100 / (w / h) = 100 / (640 / 220) */
+  padding: 53.37% 0 0 0; /* 34.37% = 100 / (w / h) = 100 / (640 / 220) */
 }
 
 .slide div img {
