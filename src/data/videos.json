@@ -90,10 +90,10 @@
     ]
   },
   {
-    "image": "https://smedia.webcollage.net/rwvfp/wc/cp/27603531_legacycode/module/wrigley/_cp/products/1520015569211/tab-50d6aae4-a9e6-4d63-928d-0df28f818618/0de8eac7-8a6c-489d-8ab7-8ce46a15769c.jpg.w960.jpg",
-    "ads": true,
-    "url": "https://www.walmart.com/ip/Snickers-Full-Size-Chocolate-Candy-Bars-Pack-1-86-Ounce-6-Count/33282383"
-  },
+			"image": "https://i.imgur.com/j6iBafa.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		},
   {
     "name": "Laughter Dose",
     "data": [
@@ -279,6 +279,11 @@
 	    ]
   },
 	{
+			"image": "https://i.imgur.com/j6iBafa.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		},
+	{
 	  "name": "College ke Din",
     "data": [
       {
@@ -364,6 +369,11 @@
       }
    ]
 		    },
+	{
+			"image": "https://i.imgur.com/j6iBafa.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		},
 		    {
 	  "name": "Inspirational",
     "data": [
@@ -585,8 +595,8 @@
 	  ]
 		    },
   {
-    "image": "https://i.vimeocdn.com/video/617143660_1280x720.jpg?r=pad",
-    "ads": true,
-    "url": "https://www.rga.com/pt/work/case-studies/nike-on-demand-2"
-  }
+			"image": "https://appcdn.goqii.com/storeimg/38972_1565262463.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		}
 ]
