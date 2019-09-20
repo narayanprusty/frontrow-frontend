@@ -130,6 +130,11 @@
       }
     ]
   },
+  {
+			"image": "https://i.imgur.com/j6iBafa.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		},
   { 
     "name": "Indian Beats",
     "data": [
@@ -295,10 +300,10 @@
     ]
   },
       {
-    "image": "https://www.americanmusical.com/ss-client/images/bose_4x4_slider_headphone.jpg",
-    "ads": true,
-    "url": "https://www.bose.com/en_us/index.html"
-  },
+			"image": "https://i.imgur.com/GScGNQn.png",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		},
   {
     "name": "Dance ",
     "data": [
@@ -482,8 +487,8 @@
     ]
   },
       {
-    "image": "https://assets.pcmag.com/media/images/639957-colorware-new-airpods.png?thumb=y&width=810&height=456",
-    "ads": true,
-    "url": "https://www.pcmag.com/news/367654/how-to-get-airpods-2-in-black-or-any-other-color"
-  }
+			"image": "https://goqii.com/blog/wp-content/uploads/How-to-win-a-GOQii-Stride-in-13-Days-1-1024x576.jpg",
+			"ads": true,
+			"url": "https://pro.pointific.in/5d81efbdb6920d15ea53c522?url_id=17&p1=clickid&p2=publisherid"
+		}
 ]
